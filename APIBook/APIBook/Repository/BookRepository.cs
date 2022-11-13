@@ -41,13 +41,17 @@ namespace APIBook.Repository
         async Task<IEnumerable<Book>> IBookRepository.GetByName(string title)
         {
             var books = await _ctx.Books.ToListAsync();
+            List<Book> books_ = new List<Book>();
             foreach (var b in books)
             {
-                if (!b.Title.Contains(title))
-                    books.Remove(b);
+                if (b.Title == null)
+                    continue;
+
+                if (b.Title.Contains(title))
+                    books_.Add(b);
             }
         
-            return books;
+            return books_;
         }
 
         async Task<Book?> IBookRepository.GetById(int id)
