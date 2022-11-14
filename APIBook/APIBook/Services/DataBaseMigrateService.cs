@@ -12,8 +12,8 @@ namespace APIBook.Services
             {
                 var service_db = service_scope.ServiceProvider.GetService<BookContext>();
           
-
-                service_db.Database.Migrate(); //migrar o banco de dados caso não exista
+                if(service_db != null)
+                    service_db.Database.Migrate(); //migrar o banco de dados caso não exista
             }
         }
     }

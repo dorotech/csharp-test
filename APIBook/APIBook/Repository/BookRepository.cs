@@ -12,7 +12,7 @@ namespace APIBook.Repository
         }
 
         //Metodos asyncronos
-        async Task<Book> IBookRepository.Create(Book book)
+        async Task<Book?> IBookRepository.Create(Book book)
         {
             if (_ctx.Books == null)
                 return book;
@@ -22,24 +22,19 @@ namespace APIBook.Repository
             return book;
         }
 
-        async Task IBookRepository.Delete(int id)
+        async Task<IEnumerable<Book>?> IBookRepository.Get()
         {
-
-            Book? book_for_delete = await _ctx.Books.FindAsync(id);
-            if (book_for_delete != null)
-            {
-                _ = _ctx.Remove(book_for_delete);
-                await _ctx.SaveChangesAsync();
-            }
+            if(_ctx.Books == null)
+                return null;
+            
+            return await _ctx.Books.ToListAsync(); 
         }
 
-        async Task<IEnumerable<Book>> IBookRepository.Get()
+        async Task<IEnumerable<Book>?> IBookRepository.GetByName(string title)
         {
-            return await _ctx.Books.ToListAsync();
-        }
+            if(_ctx.Books == null)
+                return null;
 
-        async Task<IEnumerable<Book>> IBookRepository.GetByName(string title)
-        {
             var books = await _ctx.Books.ToListAsync();
             List<Book> books_ = new List<Book>();
             foreach (var b in books)
@@ -56,13 +51,37 @@ namespace APIBook.Repository
 
         async Task<Book?> IBookRepository.GetById(int id)
         {
+            if(_ctx.Books == null)
+                return null;
+
             return await _ctx.Books.FindAsync(id);
         }
 
-        async Task IBookRepository.Update(Book book)
+
+        async Task<bool> IBookRepository.Delete(int id)
         {
+            if(_ctx.Books == null)
+                return false;
+
+             Book? book_for_delete = await _ctx.Books.FindAsync(id);
+
+            if(book_for_delete == null)
+                return false;
+
+            _ = _ctx.Remove(book_for_delete);
+            await _ctx.SaveChangesAsync();
+            return true;
+        }
+
+
+        async Task<bool> IBookRepository.Update(Book book)
+        {
+            if(_ctx.Books == null)
+                return false;
+                
             _ctx.Entry(book).State = EntityState.Modified;
             await _ctx.SaveChangesAsync();
+            return true;
         }
     }
 }
