@@ -1,4 +1,5 @@
 using BookManager.Data;
+using BookManager.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services.AddEntityFrameworkNpgsql()
 
 // builder.Configuration.GetConnectionString("DefaultConnection")
 //"Host=localhost;Port=5432;Pooling=true;Database=book_maneger;User Id=postgres;Password=1234;"
+
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 

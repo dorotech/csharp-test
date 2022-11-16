@@ -23,17 +23,17 @@ namespace BookManager.Controllers
             return Ok("ok");
         }
 
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetById(int id)
-        // {
-        //     var book = await _repository.GetBooksByIdAsync(id);
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var book = await _repository.GetBooksByIdAsync(id);
 
-        //     // var pacienteRetorno = _mapper.Map<PacienteDetalhesDto>(paciente);
+            // var pacienteRetorno = _mapper.Map<PacienteDetalhesDto>(paciente);
 
-        //     return book != null
-        //             ? Ok(book)
-        //             : BadRequest("Book not found");
-        // }
+            return book != null
+                    ? Ok(book)
+                    : BadRequest("Book not found");
+        }
         [HttpPut]
         public IActionResult put(int id)
         {

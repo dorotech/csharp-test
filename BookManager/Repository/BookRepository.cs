@@ -33,7 +33,7 @@ namespace BookManager.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Book>> GetBookAsync()
+        public async Task<IEnumerable<Book>> GetBooksAsync()
         {
             return await _dataContext.Books
                 .Select(x => new Book { id = x.id, title = x.title })
@@ -51,10 +51,6 @@ namespace BookManager.Repository
 
         }
 
-        Task IBookRepository.GetBooksByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
 
         // public async Task<Book> GetBooksByIdAsync(int id)
