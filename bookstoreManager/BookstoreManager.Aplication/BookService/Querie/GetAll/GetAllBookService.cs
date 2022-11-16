@@ -17,7 +17,7 @@ namespace BookstoreManager.Application.BookService.Querie.GetAll
             return await Task.Run(() =>
             {
                 var books = _bookRepository.GetAll()
-                                           .Where(e => ((!string.IsNullOrEmpty(request.Search) ||
+                                           .Where(e => ((string.IsNullOrEmpty(request.Search) ||
                                                         e.Name.Contains(request.Search) ||
                                                         e.Author.Contains(request.Search) ||
                                                         e.Description.Contains(request.Search)) &&
@@ -33,6 +33,7 @@ namespace BookstoreManager.Application.BookService.Querie.GetAll
                                                UpdateAt = res.UpdateAt
                                            }).Skip((request.Page - 1) * request.PageSize)
                                              .Take(request.PageSize).ToList();
+
                 books.OrderBy(n => n.Name);
 
                 return books;

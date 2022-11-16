@@ -8,8 +8,9 @@ namespace BookstoreManager.Repository.Interface
         void Delete(Book book);
         void Update(Book book);
         IEnumerable<Book> GetAll();
-        Task<Book> GetById(int id);
-       Book GetByName(string name);
+        Task<Book> GetByIdAsync(int id);
+        Book GetById(int id);
+        Book? GetByName(string name);
 
     }
 }

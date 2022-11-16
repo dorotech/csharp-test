@@ -2,11 +2,11 @@
 using BookstoreManager.Application.BookService.Command.Register;
 using BookstoreManager.Application.BookService.Command.Update;
 using BookstoreManager.Application.BookService.Querie.GetAll;
+using BookstoreManager.Application.LogErrorService.Register;
 using BookstoreManager.Domain.dto.GetAll;
 using BookstoreManager.Domain.dto.register;
 using BookstoreManager.Domain.dto.update;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -23,15 +23,18 @@ namespace BookstoreManager.WebApi.Controller
         private readonly IUpdateBookService _updateBookService;
         private readonly IRemoveBookService _removeBookService;
         private readonly IGetAllBookService _getAllBookService;
+        private readonly IRegisterLogErrorService _registerLogErrorService;
         public BookController(IRegisterBookService registerBookService,
                               IUpdateBookService updateBookService,
                               IRemoveBookService removeBookService,
-                              IGetAllBookService getAllBookService)
+                              IGetAllBookService getAllBookService,
+                              IRegisterLogErrorService registerLogErrorService)
         {
             _registerBookService = registerBookService;
             _updateBookService = updateBookService;
             _removeBookService = removeBookService;
             _getAllBookService = getAllBookService;
+            _registerLogErrorService = registerLogErrorService;
         }
 
         /// <summary>
@@ -48,6 +51,8 @@ namespace BookstoreManager.WebApi.Controller
             }
             catch (Exception ex)
             {
+                await _registerLogErrorService.Register(ex.Message);
+
                 return BadRequest(new { message = ex.Message });
             }
 
@@ -57,7 +62,7 @@ namespace BookstoreManager.WebApi.Controller
         /// update books 
         /// </summary>
         [HttpPut("api/[controller]/Update")]
-        [Authorize]
+   //     [Authorize]
         public async Task<IActionResult> Update([FromBody]UpdateRequest request)
         {
             try
@@ -68,6 +73,7 @@ namespace BookstoreManager.WebApi.Controller
             }
             catch (Exception ex)
             {
+                await _registerLogErrorService.Register(ex.Message);
                 return BadRequest(new { message = ex.Message });
             }
 
@@ -88,29 +94,38 @@ namespace BookstoreManager.WebApi.Controller
             }
             catch (Exception ex)
             {
+                await _registerLogErrorService.Register(ex.Message);
+
                 return BadRequest(new { message = ex.Message });
             }
 
         }
+       
         /// <summary>
         /// Get All books 
         /// </summary>
-        /// <param name="request.Page">has default value</param>
-        /// <param name="request.PageSize">has default value</param>
-        /// <param name="request.Search">optional</param>      
-         
+        /// <param name="page">has default value</param>
+        /// <param name="pageSize">value per page</param>
+        /// <param name="search">optional</param>      
         [SwaggerResponse(statusCode: 200,  type: typeof(List<GetAllBookResponse>))]
         [HttpGet("api/[controller]/GetAll")]
-        public async Task<IActionResult> GetAll([FromHeader]GetAllBookRequest request)
+        public async Task<IActionResult> GetAll(string? search ,int page = 1, int pageSize = 10)
         {
             try
             {
-                var result = await _getAllBookService.GetAll(request);
+                var result = await _getAllBookService.GetAll(new GetAllBookRequest 
+                {
+                    Page = page,
+                    PageSize = pageSize,
+                    Search = search
+                });
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
+                await _registerLogErrorService.Register(ex.Message);
+
                 return BadRequest(new { message = ex.Message });
             }
 

@@ -29,7 +29,7 @@ namespace BookstoreManager.Repository.Repositories
             return result;
         }
 
-        public async Task<Book> GetById(int id)
+        public async Task<Book> GetByIdAsync(int id)
         {
             var result = await _dataContext.Books.FindAsync(id);
             
@@ -37,12 +37,21 @@ namespace BookstoreManager.Repository.Repositories
                 return new Book();
             return result;
         }
+        public Book GetById(int id)
+        {
+            var result =  _dataContext.Books.Find(id);
+
+            if (result == null)
+                return new Book();
+            return result;
+        }
 
         public void Update(Book book)
         {
             _dataContext.Books.Update(book);
+            _dataContext.SaveChanges();
         }
-        public  Book GetByName(string name)
+        public  Book? GetByName(string name)
         {
             return  _dataContext.Books.FirstOrDefault(x => x.Name.Equals(name));
            

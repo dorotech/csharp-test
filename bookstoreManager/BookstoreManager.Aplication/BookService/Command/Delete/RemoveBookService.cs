@@ -12,7 +12,7 @@ namespace BookstoreManager.Application.BookService.Command.Delete
         }
         public async Task<UpdateResponse> Remove(int id)
         {
-            var checkHas = await _bookRepository.GetById(id);
+            var checkHas = await _bookRepository.GetByIdAsync(id);
 
             _bookRepository.Delete(checkHas);
 

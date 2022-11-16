@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,11 +43,14 @@ builder.Services.AddSwaggerGen(c =>
              Array.Empty<string>()
         }
     });
+
+   var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFile));
 });
 
-string strConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+string? strConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-var secret = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfigurations:Secret").Value);
+byte[]? secret = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfigurations:Secret").Value);
 
 builder.Services.AddAuthentication(x =>
 {
@@ -63,6 +67,7 @@ builder.Services.AddAuthentication(x =>
          IssuerSigningKey = new SymmetricSecurityKey(secret),
          ValidateIssuer = false,
          ValidateAudience = false
+         
      };
  });
 
@@ -84,8 +89,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseStaticFiles();
 
 app.Run(); 
