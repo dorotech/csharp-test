@@ -1,4 +1,5 @@
 using BookManager.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(options =>
-{
-    //options.useNpgsql();
-});
+builder.Services.AddEntityFrameworkNpgsql()
+    .AddDbContext<DataContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// builder.Configuration.GetConnectionString("DefaultConnection")
+//"Host=localhost;Port=5432;Pooling=true;Database=book_maneger;User Id=postgres;Password=1234;"
 
 var app = builder.Build();
 
