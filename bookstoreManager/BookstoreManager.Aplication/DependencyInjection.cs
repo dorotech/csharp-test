@@ -4,6 +4,8 @@ using BookstoreManager.Application.BookService.Command.Delete;
 using BookstoreManager.Application.BookService.Command.Register;
 using BookstoreManager.Application.BookService.Command.Update;
 using BookstoreManager.Application.BookService.Querie.GetAll;
+using BookstoreManager.Application.LogErrorService.Command.ToView;
+using BookstoreManager.Application.LogErrorService.Register;
 using BookstoreManager.Application.Validator.AuthenticatorValidator;
 using BookstoreManager.Application.Validator.bookValidator;
 using BookstoreManager.Domain.dto.authenticationDto;
@@ -26,6 +28,9 @@ namespace BookstoreManager.Application
             services.AddScoped<IRegisterUserService, RegisterUserService>();
             services.AddScoped<IValidator<RegisterUserRequest>, RegisterCheckRequestValidators>();
             services.AddScoped<ILoginUserService, LoginUserService>();
+            services.AddScoped<IViewLogErrorService, ViewLogErrorService>();
+            services.AddScoped<IValidator<CheckhasId>, UpdateCheckHasIdValidator>();
+            services.AddScoped<IRegisterLogErrorService, RegisterLogErrorService>();
            
 
             return services;

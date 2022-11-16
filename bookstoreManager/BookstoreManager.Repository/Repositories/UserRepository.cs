@@ -36,15 +36,14 @@ namespace BookstoreManager.Repository.Repositories
                 return new User() ;
             return result;
         }
-        public async Task<User> GetByEmail(string email)
+        public  User GetByEmail(string email)
         {
-            return await Task.Run(() =>
-            {
-                var result = _dataContext.Users.FirstOrDefault(e => e.Email.Equals(email));
+           
+                var result = _dataContext.Users.FirstOrDefault(e =>  e.Email.Trim().Equals(email.Trim()));
                 if (result == null)
                     return new User();
                 return result;
-            });
+         
         }
         public void Update(User user)
         {

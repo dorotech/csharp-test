@@ -1,5 +1,10 @@
 ﻿namespace BookstoreManager.Domain.dto.GetAll
 {
-    public  record GetAllBookRequest(string? Search, int Page =1 ,int PageSize = 10);
+    public  class GetAllBookRequest 
+    {
+        public string? Search { get; set; }
+        public int Page { get; set; } 
+        public int PageSize { get; set; } 
+    }
    
 }

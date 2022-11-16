@@ -9,6 +9,6 @@ namespace BookstoreManager.Repository.Interface
         void Update(User user);
         IEnumerable<User> GetAll(User user);
         Task<User> GetById(int id);
-        Task<User> GetByEmail(string email);
+        User GetByEmail(string email);
     }
 }

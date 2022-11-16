@@ -60,6 +60,35 @@ namespace BookststorageManager.Data.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("BookstoreManager.Domain.Entities.LogError", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Visualized")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LogErrors");
+                });
+
             modelBuilder.Entity("BookstoreManager.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")

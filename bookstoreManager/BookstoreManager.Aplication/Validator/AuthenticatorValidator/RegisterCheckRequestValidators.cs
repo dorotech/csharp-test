@@ -27,6 +27,9 @@ namespace BookstoreManager.Application.Validator.AuthenticatorValidator
                 .NotNull().WithMessage("preencha o email ")
                 .NotEmpty().WithMessage("preencha o email ")
                 .Must(CheckEmail).WithMessage("email ja existente");
+
+            RuleFor(e => e.ConfirmPassword)
+                .Equal(e => e.Password);
         }
 
         public bool CheckEmail(string email)
