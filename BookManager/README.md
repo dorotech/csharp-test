@@ -17,3 +17,10 @@
 - Banco Postegre
 - Migrates
 - Seeds - Carga
+
+TODO: FK Migration,seeds
+
+> dotnet ef migrations add MyFirstMigration --context BloggingContext
+> dotnet ef database update --context BloggingContext
+
+//>Base All

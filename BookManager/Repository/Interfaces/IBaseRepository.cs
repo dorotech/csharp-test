@@ -1,4 +1,4 @@
-namespace BookManager.Repository
+namespace BookManager.Repository.Interfaces
 {
     public interface IBaseRepository
     {

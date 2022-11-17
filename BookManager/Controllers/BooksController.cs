@@ -1,5 +1,5 @@
 using BookManager.Model;
-using BookManager.Repository;
+using BookManager.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookManager.Controllers
@@ -18,10 +18,15 @@ namespace BookManager.Controllers
 
         //TODO:Implementar Entity
         [HttpGet]
-        public IActionResult get()
+        public async Task<IActionResult> Get()
         {
-            return Ok("ok");
+            var books = await _repository.GetBooksAsync();
+
+            return books.Any()
+                    ? Ok(books)
+                    : BadRequest("Paciente não encontrado.");
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -49,9 +54,18 @@ namespace BookManager.Controllers
 
 
         [HttpPost]
-        public IActionResult post(Book book)
+        public async Task<IActionResult> Post(Book book)
         {
-            return Ok(book);
+            if (book == null) return BadRequest("Dados Inválidos");
+
+            // var pacienteAdicionar = _mapper.Map<Paciente>(paciente);
+
+            _repository.Add(book);
+
+            return await _repository.SaveChangesAsync()
+                ? Ok("Book adicionado com sucesso")
+                : BadRequest("Erro ao salvar o book");
+
         }
 
     }

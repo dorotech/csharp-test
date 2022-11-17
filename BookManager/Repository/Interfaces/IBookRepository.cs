@@ -1,6 +1,6 @@
 using BookManager.Model;
 
-namespace BookManager.Repository
+namespace BookManager.Repository.Interfaces
 {
     public interface IBookRepository : IBaseRepository
     {

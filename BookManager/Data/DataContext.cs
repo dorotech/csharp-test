@@ -14,11 +14,11 @@ namespace BookManager.Data
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-        }
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     base.OnModelCreating(modelBuilder);
+        //     modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        // }
 
     }
 }
