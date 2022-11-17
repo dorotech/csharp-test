@@ -59,6 +59,7 @@ public class BookService : IBookService
         if (count < 1) throw new ResourceNotFoundException();
 
         List<Book> books = await query
+            .OrderBy(x => x.Name)
             .Skip(filter.Skip)
             .Take(filter.Take)
             .ToListAsync();
