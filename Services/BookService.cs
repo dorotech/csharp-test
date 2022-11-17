@@ -52,15 +52,16 @@ public class BookService : IBookService
         PageFilter filter = new PageFilter(index, size);
 
         IQueryable<Book> query = _context.Books
-            .IgnoreAutoIncludes()
-            .Skip(filter.Skip)
-            .Take(filter.Take);
+            .IgnoreAutoIncludes();
 
         long count = await query.CountAsync();
 
         if (count < 1) throw new ResourceNotFoundException();
 
-        List<Book> books = await query.ToListAsync();
+        List<Book> books = await query
+            .Skip(filter.Skip)
+            .Take(filter.Take)
+            .ToListAsync();
 
         List<BookDTO> bookDTOs = _mapper.Map<List<Book>, List<BookDTO>>(books);
 
