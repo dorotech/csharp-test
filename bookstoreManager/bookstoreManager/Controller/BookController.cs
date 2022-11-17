@@ -62,7 +62,7 @@ namespace BookstoreManager.WebApi.Controller
         /// update books 
         /// </summary>
         [HttpPut("api/[controller]/Update")]
-   //     [Authorize]
+       [Authorize]
         public async Task<IActionResult> Update([FromBody]UpdateRequest request)
         {
             try

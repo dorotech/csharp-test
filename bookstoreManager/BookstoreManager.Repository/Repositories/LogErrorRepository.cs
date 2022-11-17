@@ -25,9 +25,16 @@ namespace BookstoreManager.Repository.Repositories
             return result;
         }
 
-        public async Task<LogError> GetById(int id)
+        public async Task<LogError> GetByIdAsync(int id)
         {
             var result = await _dataContext.LogErrors.FindAsync(id);
+            if (result == null)
+                return new LogError();
+            return result;
+        }
+        public LogError GetById(int id)
+        {
+            var result = _dataContext.LogErrors.Find(id);
             if (result == null)
                 return new LogError();
             return result;

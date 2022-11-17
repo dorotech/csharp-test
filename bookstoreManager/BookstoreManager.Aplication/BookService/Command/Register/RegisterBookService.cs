@@ -20,7 +20,7 @@ namespace BookstoreManager.Application.BookService.Command.Register
             var validator = _validator.Validate(request);
 
             if (!validator.IsValid)
-                throw new Exception(string.Join(",", validator.Errors.Select(x => x.ErrorMessage)));
+                return new RegisterResponse(string.Join(",", validator.Errors.Select(x => x.ErrorMessage)));
             #endregion
 
             var book = new Domain.Entities.Book

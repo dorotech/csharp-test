@@ -13,7 +13,7 @@ namespace BookstoreManager.Application.LogErrorService.Command.ToView
         public async Task<ViewLogErrorResponse> ToView(int id)
         {
 
-            var haslog = await _logErrorRepository.GetById(id);
+            var haslog = await _logErrorRepository.GetByIdAsync(id);
 
             haslog.UpdateAt = DateTime.Now;
 

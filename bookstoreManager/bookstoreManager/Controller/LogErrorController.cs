@@ -1,6 +1,8 @@
-﻿using BookstoreManager.Application.LogErrorService.Command.ToView;
+﻿using BookstoreManager.Application.LogErrorService.Command.Delete;
+using BookstoreManager.Application.LogErrorService.Command.ToView;
 using BookstoreManager.Application.LogErrorService.Querie.GetAll;
 using BookstoreManager.Domain.dto.ErrorDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -15,10 +17,13 @@ namespace BookstoreManager.WebApi.Controller
     {
         private readonly IGetAllLogErrorService _getAllLogErrorService;
         private readonly IViewLogErrorService _viewLogErrorService;
+        private readonly IDeleteErrorService _deleteErrorService;
         public LogErrorController(IGetAllLogErrorService getAllLogErrorService,
-                                  IViewLogErrorService viewLogErrorService)
+                                  IViewLogErrorService viewLogErrorService,
+                                  IDeleteErrorService deleteErrorService)
         {
             _getAllLogErrorService = getAllLogErrorService;
+            _deleteErrorService = deleteErrorService;
             _viewLogErrorService = viewLogErrorService;
         }
 
@@ -57,12 +62,36 @@ namespace BookstoreManager.WebApi.Controller
         /// </summary>   
          /// <param name="Id">get by id</param>  
         [HttpPost("api/[controller]/ToView")]
-
+        [SwaggerResponse(statusCode: 200, type: typeof(ViewLogErrorResponse))]
+        [Authorize]
         public async Task<IActionResult> ToView(int Id)
         {
+            
             try
             {
                 var result = await _viewLogErrorService.ToView(Id);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+
+        }
+
+        /// <summary>
+        /// Delete by id 
+        /// </summary>   
+        /// <param name="Id">get by id</param>  
+        [HttpDelete("api/[controller]/Delete")]
+        [SwaggerResponse(statusCode: 200, type: typeof(DeleteErrorResponse))]
+        [Authorize]
+        public async Task<IActionResult> Delete([FromBody]int Id)
+        {
+            try
+            {
+                var result = await _deleteErrorService.Delete(Id);
 
                 return Ok(result);
             }

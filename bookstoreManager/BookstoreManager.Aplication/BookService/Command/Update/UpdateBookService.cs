@@ -22,7 +22,7 @@ namespace BookstoreManager.Application.BookService.Command.Update
             var validator = _validator.Validate(new CheckhasId { Id = request.Id });
 
             if (!validator.IsValid)
-                throw new Exception(string.Join(",", validator.Errors.Select(x => x.ErrorMessage)));
+                return new UpdateResponse(string.Join(",", validator.Errors.Select(x => x.ErrorMessage)));
             #endregion
 
 
