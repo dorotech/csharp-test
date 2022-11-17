@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace dorotec_backend_test.Models;
 
 [Table("book")]
-[Index(nameof(Name), nameof(Genre), nameof(Edition), nameof(Pages))]
+[Index(nameof(Author), nameof(Name), nameof(Genre), nameof(Edition), IsUnique = true)]
 public class Book
 {
     public Book()

@@ -67,11 +67,9 @@ public class BookService : IBookService
         return new PageResult<BookDTO>(bookDTOs, filter, count);
     }
 
-    public async Task<BookDTO> UpdateOne(BookDTO dto)
+    public async Task<BookDTO> UpdateOne(int id, BookDTO dto)
     {
-        ArgumentNullException.ThrowIfNull(dto.Id);
-
-        await GetOne((int)dto.Id);
+        await GetOne(id);
         Book newBook = _mapper.Map<Book>(dto);
 
         _context.Books.Update(newBook);

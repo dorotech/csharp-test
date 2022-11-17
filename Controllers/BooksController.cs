@@ -64,8 +64,7 @@ public class BooksController : ControllerBase
     [HttpPost(Name = "Book[action]")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status201Created)]
     public async Task<ActionResult> PostOne(
-        [Bind(nameof(BookDTO.Name),nameof(BookDTO.Pages),nameof(BookDTO.Edition),nameof(BookDTO.Genre))]
-        [Required][FromBody] BookDTO dto
+        [FromBody] BookDTO dto
     )
     {
         var created = await _service.Create(dto);
@@ -73,16 +72,17 @@ public class BooksController : ControllerBase
         return Created($"books/{created.Id}", created);
     }
 
-    [HttpPatch(Name = "Book[action]")]
+    [HttpPatch("{id}", Name = "Book[action]")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<BookDTO>> EditOne(
+        [Required][FromRoute] int id,
         [Required][FromBody] BookDTO dto
     )
     {
         try
         {
-            var result = await _service.UpdateOne(dto);
+            var result = await _service.UpdateOne(id, dto);
             return Ok(result);
         }
         catch (ResourceNotFoundException)

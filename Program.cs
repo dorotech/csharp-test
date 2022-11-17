@@ -13,9 +13,11 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<BookstoreDbContext>(options => {
+builder.Services.AddDbContext<BookstoreDbContext>(options =>
+{
     options.UseSqlite("Data Source=test_db.sqlite");
 });
+
 builder.Services.AddScoped<IBookService, BookService>();
 
 builder.Services.AddAutoMapper(typeof(BookProfile));
@@ -24,8 +26,6 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
