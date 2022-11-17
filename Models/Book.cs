@@ -20,7 +20,7 @@ public class Book
 
     [Column("name")]
     [MaxLength(124)]
-    public string Name { get; set; }
+    public string Name { get; set; }// = string.Empty;
 
     [Column("author")]
     [MaxLength(124)]

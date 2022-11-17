@@ -69,12 +69,15 @@ public class BookService : IBookService
 
     public async Task<BookDTO> UpdateOne(int id, BookDTO dto)
     {
-        await GetOne(id);
-        Book newBook = _mapper.Map<Book>(dto);
+        Book? book = await _context.Books.FindAsync(id);
 
-        _context.Books.Update(newBook);
+        if (book is null) throw new ResourceNotFoundException();
+
+        _mapper.Map(dto, book);
+
+        _context.Books.Update(book);
         await _context.SaveChangesAsync();
 
-        return _mapper.Map<BookDTO>(newBook);
+        return _mapper.Map<BookDTO>(book);
     }
 }
