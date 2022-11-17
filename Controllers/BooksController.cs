@@ -28,8 +28,8 @@ public class BooksController : ControllerBase
     [ProducesResponseType(typeof(PageResult<BookDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PageResult<BookDTO>>> GetPage(
-        [Required][FromQuery][Range(1, Int32.MaxValue)] int index,
-        [Required][FromQuery][Range(1, 30)] byte size)
+        [Required][FromQuery][Range(1, Int32.MaxValue)] int index = 1,
+        [Required][FromQuery][Range(1, 30)] byte size = 5)
     {
 
         try
