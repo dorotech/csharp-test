@@ -1,8 +1,23 @@
+using DoroTechChallenge.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Data;
+using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+string connectionString = builder.Configuration.GetConnectionString("DoroTech");
+builder.Services.AddTransient<IDbConnection>(conn => new SqlConnection(connectionString));
+builder.Services.AddDbContext<DoroTechContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+    options.UseLazyLoadingProxies();
+});
+
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
