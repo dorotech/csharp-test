@@ -24,11 +24,11 @@ public class BookMap : IEntityTypeConfiguration<Book>
             .IsRequired();
         builder.Property(x => x.AuthorId)
             .HasColumnName("ID_AUTOR")
-            .HasColumnType("VARCHAR(30)")
+            .HasColumnType("INT")
             .IsRequired();
         builder.Property(x => x.GenreId)
             .HasColumnName("ID_GENERO")
-            .HasColumnType("VARCHAR(30)")
+            .HasColumnType("INT")
             .IsRequired();
 
         builder.HasOne(x => x.Genre)
@@ -37,5 +37,8 @@ public class BookMap : IEntityTypeConfiguration<Book>
         builder.HasOne(x => x.Author)
             .WithMany()
             .HasForeignKey(x => x.AuthorId);
+        builder.HasMany(x => x.PublishingCompanies)
+            .WithMany(x => x.Books)
+            .UsingEntity<BookPublishingCompany>();
     }
 }

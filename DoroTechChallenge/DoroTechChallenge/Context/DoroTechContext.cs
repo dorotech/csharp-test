@@ -1,4 +1,5 @@
 ﻿using DoroTechChallenge.Mapping;
+using DoroTechChallenge.Mappings;
 using DoroTechChallenge.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,6 @@ public class DoroTechContext : DbContext
         builder.ApplyConfiguration(new GenreMap());
         builder.ApplyConfiguration(new AuthorMap());
         builder.ApplyConfiguration(new PublishingCompanyMap());
-        builder.ApplyConfiguration(new AddressMap());
+        builder.ApplyConfiguration(new BookPublishingCompanyMap());
     }
 }

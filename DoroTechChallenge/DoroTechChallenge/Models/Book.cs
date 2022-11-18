@@ -11,4 +11,5 @@ public class Book
     public virtual Author Author { get; set; }
     public virtual Genre Genre { get; set; }
     public virtual List<PublishingCompany> PublishingCompanies { get; set; }
+    public virtual List<BookPublishingCompany> BookPublishingCompany { get; set; }
 }

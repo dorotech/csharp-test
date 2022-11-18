@@ -18,17 +18,5 @@ public class AuthorMap : IEntityTypeConfiguration<Author>
             .HasColumnName("NOME_AUTOR")
             .HasColumnType("VARCHAR(100)")
             .IsRequired();
-        builder.Property(x => x.Nationality)
-            .HasColumnName("NACIONALIDADE")
-            .HasColumnType("VARCHAR(30)")
-            .IsRequired();
-        builder.Property(x => x.Gender)
-            .HasColumnName("GENERO")
-            .HasColumnType("VARCHAR(1)")
-            .IsRequired();
-        builder.Property(x => x.BirthDate)
-            .HasColumnName("DATA_NASCIMENTO")
-            .HasColumnType("VARCHAR(30)")
-            .IsRequired();
     }
 }
