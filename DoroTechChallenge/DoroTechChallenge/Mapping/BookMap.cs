@@ -12,35 +12,30 @@ public class BookMap : IEntityTypeConfiguration<Book>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd()
-            .HasColumnName("ID")
+            .HasColumnName("ID_LIVRO")
             .HasColumnType("INT");
-        builder.Property(x => x.Name)
-            .HasColumnName("NOME")
-            .HasColumnType("VARCHAR(30)")
-            .IsRequired();
         builder.Property(x => x.Description)
             .HasColumnName("DESCRICACO")
             .HasColumnType("VARCHAR(MAX)")
-            .IsRequired();
-        builder.Property(x => x.Genre)
-            .HasColumnName("GENERO")
-            .HasColumnType("VARCHAR(30)")
-            .IsRequired();
-        builder.Property(x => x.Author)
-            .HasColumnName("AUTOR")
-            .HasColumnType("VARCHAR(30)")
-            .IsRequired();
-        builder.Property(x => x.PublishingCompany)
-            .HasColumnName("EDITORA")
-            .HasColumnType("VARCHAR(30)")
-            .IsRequired();
-        builder.Property(x => x.Active)
-            .HasColumnName("ATIVO")
-            .HasColumnType("BIT")
             .IsRequired();
         builder.Property(x => x.PublishedAt)
             .HasColumnName("DATA_PUBLICACAO")
             .HasColumnType("VARCHAR(30)")
             .IsRequired();
+        builder.Property(x => x.AuthorId)
+            .HasColumnName("ID_AUTOR")
+            .HasColumnType("VARCHAR(30)")
+            .IsRequired();
+        builder.Property(x => x.GenreId)
+            .HasColumnName("ID_GENERO")
+            .HasColumnType("VARCHAR(30)")
+            .IsRequired();
+
+        builder.HasOne(x => x.Genre)
+            .WithMany()
+            .HasForeignKey(x => x.GenreId);
+        builder.HasOne(x => x.Author)
+            .WithMany()
+            .HasForeignKey(x => x.AuthorId);
     }
 }
