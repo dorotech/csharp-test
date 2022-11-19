@@ -6,5 +6,6 @@ namespace BookManager.Repository.Interfaces
     {
         public Task<IEnumerable<Book>> GetBooksAsync();
         public Task<Book> GetBooksByIdAsync(int id);
+        public Task<bool> bookCheckExists(Book book);
     }
 }

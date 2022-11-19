@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookManager.Model
 {
@@ -7,20 +8,22 @@ namespace BookManager.Model
 
         public User()
         {
+            name = string.Empty;
             email = string.Empty;
             password = string.Empty;
             role = string.Empty;
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         [Required]
-        public string? name { get; set; }
+        public string name { get; set; }
         [Required]
         public string email { get; set; }
         [Required]
         public string password { get; set; }
         [Required]
-        public string? role { get; set; }
+        public string role { get; set; }
     }
 }

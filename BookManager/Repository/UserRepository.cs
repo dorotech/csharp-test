@@ -18,9 +18,6 @@ namespace BookManager.Repository
 
         public async Task<User> login(Credential credential)
         {
-
-
-
             var ret = await _context.Users.Where(user => user.email.ToLower().Trim().Equals(credential.email.ToLower().Trim()) &&
             user.password.Equals(credential.password)).FirstOrDefaultAsync();
             if (ret != null)
@@ -30,6 +27,14 @@ namespace BookManager.Repository
             }
             return new User();
 
+        }
+
+        public async Task<bool> checkUserExists(User user)
+        {
+            if (user == null || string.IsNullOrWhiteSpace(user.email)) return false;
+            string email = user.email.Trim().ToLower();
+            var ret = await _context.Users.Where(user => user.email.Equals(email)).ToListAsync();
+            return (ret == null || !ret.Any());
         }
 
     }

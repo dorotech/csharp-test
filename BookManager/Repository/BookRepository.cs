@@ -31,5 +31,14 @@ namespace BookManager.Repository
 
         }
 
+
+
+        public async Task<bool> bookCheckExists(Book book)
+        {
+            var ret = await _context.Books.Where(x => x.isnb == book.isnb).ToListAsync();
+            return (ret != null && ret.Any());
+
+        }
+
     }
 }
