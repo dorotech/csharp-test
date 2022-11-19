@@ -19,15 +19,15 @@ public class Book
     public int Price { get; set; }
 
     [Column("name")]
-    [MaxLength(124)]
+    [MaxLength(123)]
     public string Name { get; set; }// = string.Empty;
 
     [Column("author")]
-    [MaxLength(124)]
+    [MaxLength(123)]
     public string Author { get; set; }
 
     [Column("genre")]
-    [MaxLength(64)]
+    [MaxLength(63)]
     public string Genre { get; set; }
 
     [Column("edition")]
