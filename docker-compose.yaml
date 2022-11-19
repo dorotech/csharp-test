@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  
+  backend:
+    container_name: Application
+    depends_on:
+      - database
+    build:  ./Desafio-Backend
+    environment:
+      ASPNETCORE_URLS : http://+:80
+      ASPNETCORE_ENVIRONMENT : Development
+    ports:
+      - 5001:80
+  
+  database:
+    container_name: Database
+    image: postgres:latest
+    environment:
+      POSTGRES_USER : ${POSTGRES_USER:-usuario}
+      POSTGRES_PASSWORD : ${POSTGRES_PASSWORD:-senha123}
+      PGDATA : /data/db
+      POSTGRES_DB : DESAFIO
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgressql/data
+      - ./sql/1-CREATE_TABLES.sql:/docker-entrypoint-initdb.d/1-CREATE_TABLES.sql
+      - ./sql/2-FILL_TABLES.sql:/docker-entrypoint-initdb.d/2-FILL_TABLES.sql
+    restart: unless-stopped
