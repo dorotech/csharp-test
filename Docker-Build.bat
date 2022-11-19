@@ -1,0 +1,1 @@
+docker-compose -p "desafio-backend" up --build 
