@@ -174,7 +174,7 @@ namespace Desafio_Backend.Controllers
         }
 
         /// <summary>
-        /// Cadastro de Novos Livros
+        /// Edição de Livros
         /// </summary>
         /// <param name="livro">DTO para Editar Livro</param>
         /// <param name="id">ID do Livro Cadastrado no Banco</param>
@@ -203,7 +203,7 @@ namespace Desafio_Backend.Controllers
                 }
 
                 livroExistente = serviceLivro.ObterPorNomeAsync(livro.nome).Result;
-                if (livroExistente != null)
+                if (livroExistente != null && livroExistente.id != id)
                 {
                     logger.LogInformation(5, "Resultado : 400");
                     return BadRequest("Livro com mesmo nome já existe.");

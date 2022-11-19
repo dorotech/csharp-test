@@ -6,6 +6,7 @@ namespace Desafio_Backend.Domain.DTO.Livro
 {
     public class LivroListarDto
     {
+        public int id { get; set; }
         public string nome { get; set; }
         public string descricao { get; set; }
         public int edicao { get; set; }
