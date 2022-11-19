@@ -67,8 +67,6 @@ public class BookService : IBookService
             .Select(book => _mapper.Map<BookDTO>(book))
             .ToListAsync();
 
-        // List<BookDTO> bookDTOs = _mapper.Map<List<Book>, List<BookDTO>>(books);
-
         return new PageResult<BookDTO>(books, filter, count);
     }
 

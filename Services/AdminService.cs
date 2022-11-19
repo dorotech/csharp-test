@@ -13,12 +13,15 @@ public class AdminService : IAdminService
 {
     private readonly BookstoreDbContext _context;
     private readonly IMapper _mapper;
+    private readonly ITokenService _tokenService;
     public AdminService(
         BookstoreDbContext context,
-        IMapper mapper)
+        IMapper mapper,
+        ITokenService tokenService)
     {
         _context = context;
         _mapper = mapper;
+        _tokenService = tokenService;
     }
 
     public async Task<AdminDTO> Create(AdminDTO dto)
@@ -50,22 +53,57 @@ public class AdminService : IAdminService
 
         if (!Argon2.Verify(admin.Password, dto.Password)) throw new UnauthorizedRequestException();
 
-        return new LoginResponseDTO(admin.Name, string.Empty);
+        var token = _tokenService.GenerateToken();
+
+        return new LoginResponseDTO(admin.Name, token);
     }
 
-    public Task DeleteOne(int id)
+    public async Task DeleteOne(int id)
     {
-        throw new NotImplementedException();
+        var admin = await _context.Admins.FindAsync(id);
+        
+        if (admin is null) throw new ResourceNotFoundException();
+        
+        var isLastAdmin = !(await _context.Admins
+            .AnyAsync(admin => admin.Id != id));
+
+        if (isLastAdmin) throw new CannotDeleteResourceException("Cannot Delete Resource: only remaining admin");
+
+        _context.Admins.Remove(admin);
+        await _context.SaveChangesAsync();
     }
 
-    public Task<AdminDTO> GetOne(int id)
+    public async Task<AdminDTO> GetOne(int id)
     {
-        throw new NotImplementedException();
+        var admin = await _context.Admins
+            .Where(admin => admin.Id == id)
+            .Select(admin => _mapper.Map<AdminDTO>(admin))
+            .FirstOrDefaultAsync();
+        
+        if (admin is null) throw new ResourceNotFoundException();
+
+        return admin;
     }
 
-    public Task<PageResult<AdminDTO>> GetPage(int index, byte size)
+    public async Task<PageResult<AdminDTO>> GetPage(int index, byte size)
     {
-        throw new NotImplementedException();
+        PageFilter filter = new PageFilter(index, size);
+
+        IQueryable<Admin> query = _context.Admins
+            .IgnoreAutoIncludes();
+
+        long count = await query.CountAsync();
+
+        if (count < 1) throw new ResourceNotFoundException();
+
+        List<AdminDTO> Admins = await query
+            .OrderBy(Admin => Admin.Id)
+            .Skip(filter.Skip)
+            .Take(filter.Take)
+            .Select(Admin => _mapper.Map<AdminDTO>(Admin))
+            .ToListAsync();
+
+        return new PageResult<AdminDTO>(Admins, filter, count);
     }
 
     public Task<AdminDTO> UpdateOne(int id, AdminDTO dto)

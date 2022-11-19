@@ -11,7 +11,8 @@ public class AdminProfile : Profile
         CreateMap<int?, int>()
             .ConvertUsing((source, destination) => source ?? destination);
 
-        CreateMap<Admin, AdminDTO>();
+        CreateMap<Admin, AdminDTO>()
+            .ForMember(dto => dto.Password, options => options.Ignore());
         CreateMap<AdminDTO, Admin>()
             .ForMember(admin => admin.Password, options => options.Ignore());
     }

@@ -4,10 +4,12 @@ using dorotec_backend_test.Classes.DTOs;
 using dorotec_backend_test.Classes.Exceptions;
 using dorotec_backend_test.Classes.Pagination;
 using dorotec_backend_test.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dorotec_backend_test.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
@@ -26,6 +28,7 @@ public class BooksController : ControllerBase
         _service = service;
     }
 
+    [AllowAnonymous]
     [HttpPost("search", Name = "Book[action]")]
     [Consumes("multipart/form-data")]
     [ProducesResponseType(typeof(PageResult<BookDTO>), StatusCodes.Status200OK)]
@@ -47,6 +50,7 @@ public class BooksController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet(Name = "Book[action]")]
     [ProducesResponseType(typeof(PageResult<BookDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -66,6 +70,7 @@ public class BooksController : ControllerBase
         }
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}", Name = "Book[action]")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -87,6 +92,7 @@ public class BooksController : ControllerBase
     [HttpPost(Name = "Book[action]")]
     [Consumes("application/json")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult> PostOne(
         [FromBody] BookDTO dto
     )
@@ -100,6 +106,7 @@ public class BooksController : ControllerBase
     [Consumes("application/json")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<BookDTO>> EditOne(
         [Required][FromRoute] int id,
         [Required][FromBody] BookDTO dto
@@ -119,6 +126,7 @@ public class BooksController : ControllerBase
     [HttpDelete("{id}", Name = "Book[action]")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult> DeleteOne(
         [Required][FromRoute] int id
     )
