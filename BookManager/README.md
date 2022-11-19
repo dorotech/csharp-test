@@ -5,27 +5,20 @@
 - Modelagem DR -OK
 - Swagger - OK
 - Jwt -OK
+- gitignore -OK
+- injeção de dependencia -ok
+- Princípio de responsabilidade única -ok
+- Entity -ok
+- Crud-OK
+- Banco Pstegre -ok
+- Migrates -ok
+- Seeds - Carga
+- Log
 - SOLID
 - Factory
 - Singleton
-- gitignore
-- injeção de dependencia
-- Princípio de responsabilidade única
-- Entity
-- Crud
-- Log
-- Banco Postegre
-- Migrates
-- Seeds - Carga
-
-TODO: FK Migration,seeds,id incremental
+- TDD
+- VIDEO
 
 > dotnet ef migrations add MyFirstMigration --context DataContext
 > dotnet ef database update --context BloggingContext
-
-//>Base All
-
-https://www.youtube.com/watch?v=vAUXU0YIWlU
-https://github.com/renatogroffe/ASPNETCore6-REST_API-JWT-Postman_ContagemAcessos/blob/main/APIContagem/Program.cs
-
-https://www.youtube.com/watch?v=ccVmPgxNE6c

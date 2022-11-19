@@ -3,6 +3,7 @@ using BookManager.Repository.Interfaces;
 using BookManager.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace BookManager.Controllers
 {
@@ -25,9 +26,15 @@ namespace BookManager.Controllers
             if (param == null ||
            string.IsNullOrWhiteSpace(param.email) ||
            string.IsNullOrWhiteSpace(param.password))
+            {
+                //Logger.LogInformation("Dados Inválidos");
                 return BadRequest("Dados Inválidos");
+            }
+
 
             var user = await repository.login(param);
+
+
 
             if (user != null && !string.IsNullOrWhiteSpace(user.name))
             {

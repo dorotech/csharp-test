@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace BookManager.Model
 {
     public class Token
     {
-        public int id { get; set; }
+        [Required]
         public string? token { get; set; }
+        [Required]
         public DateTime expires { get; set; }
     }
 }

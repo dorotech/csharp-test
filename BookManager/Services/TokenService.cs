@@ -40,4 +40,60 @@ public class TokenService
         });
         return obj;
     }
+
+
+
+
+    public bool IsTokenValid(string token)
+    {
+        if (string.IsNullOrEmpty(token))
+            throw new ArgumentException("Given token is null or empty.");
+        TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
+        JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+        try
+        {
+            ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    // public IEnumerable<Claim> GetTokenClaims(string token)
+    // {
+    //     if (string.IsNullOrEmpty(token))
+    //         throw new ArgumentException("Given token is null or empty.");
+
+    //     TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
+
+    //     JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+    //     try
+    //     {
+    //         ClaimsPrincipal tokenValid = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
+    //         return tokenValid.Claims;
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         throw ex;
+    //     }
+    // }
+
+    private SecurityKey GetSymmetricSecurityKey()
+    {
+        byte[] symmetricKey = Convert.FromBase64String(Settins.secret);
+        return new SymmetricSecurityKey(symmetricKey);
+    }
+
+    private TokenValidationParameters GetTokenValidationParameters()
+    {
+        return new TokenValidationParameters()
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            IssuerSigningKey = GetSymmetricSecurityKey()
+        };
+    }
 }
+

@@ -23,7 +23,7 @@ namespace BookManager.Controllers
             var books = await repository.GetBooksAsync();
             if (books != null && books.Any())
             {
-                books = books.OrderByDescending(b => b.title);
+                books = books.OrderBy(b => b.title);
                 return Ok(books);
             }
             else
