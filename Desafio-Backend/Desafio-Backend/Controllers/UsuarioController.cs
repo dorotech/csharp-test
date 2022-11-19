@@ -16,7 +16,7 @@ using Desafio_Backend.Domain.Services.Interfaces;
 
 namespace Desafio_Backend.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase

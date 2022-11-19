@@ -26,6 +26,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Desafio_Backend.Domain.Services.Interfaces;
 using Desafio_Backend.Domain.Services;
+using Desafio_Backend.Domain.Models;
 
 namespace Desafio_Backend
 {
@@ -81,10 +82,16 @@ namespace Desafio_Backend
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<IAutorService, AutorService>();
+            services.AddScoped<IEditoraService, EditoraService>();
+            services.AddScoped<IGeneroService, GeneroService>();
 
-            services.AddScoped<IBaseRepository, BaseRepository>();
+            services.AddScoped<IBaseRepository<Base>, BaseRepository<Base>>();
             services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAutorRepository, AutorRepository>();
+            services.AddScoped<IEditoraRepository, EditoraRepository>();
+            services.AddScoped<IGeneroRepository, GeneroRepository>();
 
             services.AddDbContext<DesafioContext>(options =>
             {

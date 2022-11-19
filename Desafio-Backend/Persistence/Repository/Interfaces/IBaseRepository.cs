@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Desafio_Backend.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -6,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Infrastructure.Repository.Interfaces
 {
-    public interface IBaseRepository
+    public interface IBaseRepository<T> where T : class
     {
-        public void Add<T>(T entity) where T : class;
-        public void Update<T>(T entity) where T : class;
-        public void Delete<T>(T entity) where T : class;
-        public Task<T> ObterPorAsync<T>(Expression<Func<T, bool>> filtro, params string[] includes) where T : class;
-        public Task<T> ObterPorAsync<T>(Expression<Func<T, bool>> filtro, params Expression<Func<T, object>>[] includes) where T : class;
-        public Task<T> ObterPorAsync<T>(Expression<Func<T, bool>> filtro) where T : class;
-
+        public void Add(T entity);
+        public void Update(T entity);
+        public void Delete(T entity);
+        public Task<T> ObterPorAsync(Expression<Func<T, bool>> filtro, params string[] includes);
+        public Task<T> ObterPorAsync(Expression<Func<T, bool>> filtro, params Expression<Func<T, object>>[] includes);
+        public Task<T> ObterPorAsync(Expression<Func<T, bool>> filtro);
+        Task<List<T>> ListarTodosAsync(int pagina = 0, int numItensPorPagina = 0, params string[] includes);
         Task<bool> SaveChanges();
     }
 }

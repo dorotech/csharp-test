@@ -12,7 +12,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Desafio_Backend.Infrastructure.Repository
 {
-    public class LivroRepository : BaseRepository, ILivroRepository
+    public class LivroRepository : BaseRepository<Livro>, ILivroRepository
     {
         DesafioContext context;
         public LivroRepository(DesafioContext context) : base(context)

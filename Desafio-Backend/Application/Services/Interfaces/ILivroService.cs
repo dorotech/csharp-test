@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Domain.Services.Interfaces
 {
-    public interface ILivroService : IBaseService
+    public interface ILivroService : IBaseService<Livro>
     {
         Task<List<LivroListarDto>> ListarTodosAsync(LivroFiltrosDto filtros, int pagina, int numItensPorPagina);
         Task<LivroListarDto> ObterPorIdAsync(int id);

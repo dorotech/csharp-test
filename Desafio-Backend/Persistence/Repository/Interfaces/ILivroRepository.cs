@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Infrastructure.Repository.Interfaces
 {
-    public interface ILivroRepository : IBaseRepository
+    public interface ILivroRepository : IBaseRepository<Livro>
     {
         /// <summary>
         /// Método Listar padrão. Recebe uma estrutura para filtrar do banco e devolver uma lista ordenada por Nome.

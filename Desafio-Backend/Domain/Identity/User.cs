@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Desafio_Backend.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
 namespace Desafio_Backend.Domain.Identity

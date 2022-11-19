@@ -105,7 +105,7 @@ namespace Backend.Tests
 
             var repoMock = new Mock<ILivroRepository>();
             repoMock.Setup(x => x.SaveChanges()).ReturnsAsync(true);
-            repoMock.Setup(x => x.ObterPorAsync<Livro>(It.IsAny<Expression<Func<Livro, bool>>>())).ReturnsAsync(() =>
+            repoMock.Setup(x => x.ObterPorAsync(It.IsAny<Expression<Func<Livro, bool>>>())).ReturnsAsync(() =>
             {
                 if(repositoryData.Contains(id)) return new Livro();
                 return null;
@@ -191,7 +191,7 @@ namespace Backend.Tests
             var repoMock = new Mock<ILivroRepository>();
             repoMock.Setup(x => x.SaveChanges()).ReturnsAsync(true);
 
-            repoMock.Setup(x => x.ObterPorAsync<Livro>(It.IsAny<Expression<Func<Livro, bool>>>())).ReturnsAsync(() => repositoryData.Where(e => e.id == id).FirstOrDefault());
+            repoMock.Setup(x => x.ObterPorAsync(It.IsAny<Expression<Func<Livro, bool>>>())).ReturnsAsync(() => repositoryData.Where(e => e.id == id).FirstOrDefault());
             repoLivro = repoMock.Object;
 
             serviceLivro = new LivroService(repoLivro, mapper);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Infrastructure.Repository.Interfaces
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IEditoraRepository : IBaseRepository<Editora>
     {
 
     }

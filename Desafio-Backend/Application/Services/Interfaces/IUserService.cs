@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Domain.Services.Interfaces
 {
-    public interface IUserService : IBaseService
+    public interface IUserService : IBaseService<User>
     {
         Task<List<User>> ListarTodosAsync();
 

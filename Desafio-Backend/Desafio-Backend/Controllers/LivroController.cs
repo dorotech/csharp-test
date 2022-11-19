@@ -16,9 +16,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Desafio_Backend.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class LivroController : ControllerBase
     {
         private readonly ILivroService serviceLivro;
@@ -135,6 +135,8 @@ namespace Desafio_Backend.Controllers
         /// <returns>Resultado da Operação</returns>
         /// <response code="200">Dados do Livro</response>
         /// <response code="204">Falha ao Cadastrar Livro.</response>
+        /// <response code="401">Não Autorizado. Requer Login</response>
+        /// <response code="403">Não Permitido. Requer Privilegios Maiores</response>
         /// <response code="500">Erro Interno</response>
         [HttpPost("Inserir")]
         public IActionResult Inserir(LivroAdicionarDto livro)
@@ -179,6 +181,8 @@ namespace Desafio_Backend.Controllers
         /// <returns>Resultado da Operação</returns>
         /// <response code="200">Livro Cadastrado</response>
         /// <response code="400">Falha ao Editar Livro. Verificar Dados de Entrada</response>
+        /// <response code="401">Não Autorizado. Requer Login</response>
+        /// <response code="403">Não Permitido. Requer Privilegios Maiores</response>
         /// <response code="500">Erro Interno</response>
         [HttpPut("Editar/{id}")]
         public IActionResult Editar(int id, LivroEditarDto livro)
@@ -215,6 +219,8 @@ namespace Desafio_Backend.Controllers
         /// <returns>Resultado da Operação</returns>
         /// <response code="200">Livro Deletado</response>
         /// <response code="400">Falha ao Deletar Livro. Verificar Dados de Entrada</response>
+        /// <response code="401">Não Autorizado. Requer Login</response>
+        /// <response code="403">Não Permitido. Requer Privilegios Maiores</response>
         /// <response code="500">Erro Interno</response>
         [HttpDelete("Deletar/{id}")]
         public IActionResult Deletar(int id)

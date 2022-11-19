@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Domain.Services
 {
-    public class UserService : BaseService, IUserService
+    public class UserService : BaseService<User>, IUserService
     {
         private readonly IUserRepository repository;
         private readonly IMapper mapper;

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Domain.Services
 {
-    public class LivroService : BaseService, ILivroService
+    public class LivroService : BaseService<Livro>, ILivroService
     {
         private readonly ILivroRepository repoLivro;
         private readonly IMapper mapper;

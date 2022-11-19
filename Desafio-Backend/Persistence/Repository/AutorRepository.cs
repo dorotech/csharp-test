@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Desafio_Backend.Infrastructure.Repository
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class AutorRepository : BaseRepository<Autor>, IAutorRepository
     {
         DesafioContext context;
-        public UserRepository(DesafioContext context) : base(context)
+        public AutorRepository(DesafioContext context) : base(context)
         {
             this.context = context;
         }
