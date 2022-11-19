@@ -192,7 +192,21 @@ namespace Desafio_Backend.Controllers
                 if (livro == null) 
                 {
                     logger.LogInformation(5, "Resultado : 400");
-                    return BadRequest("Dados Invalidos");
+                    return BadRequest("Dados Invalidos.");
+                }
+
+                LivroListarDto livroExistente = serviceLivro.ObterPorIdAsync(id).Result;
+                if (livroExistente == null)
+                {
+                    logger.LogInformation(5, "Resultado : 400");
+                    return BadRequest("Livro não Encontrado.");
+                }
+
+                livroExistente = serviceLivro.ObterPorNomeAsync(livro.nome).Result;
+                if (livroExistente != null)
+                {
+                    logger.LogInformation(5, "Resultado : 400");
+                    return BadRequest("Livro com mesmo nome já existe.");
                 }
 
                 Livro livroEditado = serviceLivro.EditarLivroAsync(id, livro).Result;
