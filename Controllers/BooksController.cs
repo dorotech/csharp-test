@@ -15,10 +15,12 @@ namespace dorotec_backend_test.Controllers;
 [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 public class BooksController : ControllerBase
 {
-    private readonly ILogger<BookDTO> _logger;
+    private readonly ILogger<BooksController> _logger;
     private readonly IBookService _service;
 
-    public BooksController(ILogger<BookDTO> logger, IBookService service)
+    public BooksController(
+        ILogger<BooksController> logger, 
+        IBookService service)
     {
         _logger = logger;
         _service = service;
