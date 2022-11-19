@@ -1,4 +1,9 @@
+using Castle.Core.Resource;
 using DoroTechChallenge.Context;
+using DoroTechChallenge.Models;
+using DoroTechChallenge.Repositories;
+using DoroTechChallenge.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Data;
@@ -6,6 +11,7 @@ using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//database config
 string connectionString = builder.Configuration.GetConnectionString("DoroTech");
 builder.Services.AddTransient<IDbConnection>(conn => new SqlConnection(connectionString));
 builder.Services.AddDbContext<DoroTechContext>(options =>
@@ -14,11 +20,15 @@ builder.Services.AddDbContext<DoroTechContext>(options =>
     options.UseLazyLoadingProxies();
 });
 
+//dependency injection into entity/service
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IValidator<Book>, BookValidator>();
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
-builder.Services.AddEndpointsApiExplorer();
+
+//swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -57,6 +67,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+//servidor config
+builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

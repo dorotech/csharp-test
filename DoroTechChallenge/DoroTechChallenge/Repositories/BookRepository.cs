@@ -17,7 +17,7 @@ public class BookRepository : IBookRepository
     public List<Book> List() =>
         Context.Books
         .Include(x => x.Author)
-        .Include(x => x.BookPublishingCompany)
+        .Include(x => x.PublishingCompanies)
         .Include(x => x.Genre)
         .ToList();
 
