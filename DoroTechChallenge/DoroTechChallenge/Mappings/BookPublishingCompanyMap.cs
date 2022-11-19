@@ -8,18 +8,18 @@ public class BookPublishingCompanyMap : IEntityTypeConfiguration<BookPublishingC
 {
     public void Configure(EntityTypeBuilder<BookPublishingCompany> builder)
     {
-        builder.ToTable("TAB_BOOK_PUBLISHING_COMPANY");
+        builder.ToTable("TAB_LIVRO_EDITORA");
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd()
-            .HasColumnName("ID_BOOK_PUBLISHING_COMPANY")
+            .HasColumnName("ID_LIVRO_EDITORA")
             .HasColumnType("INT");
         builder.Property(x => x.BookId)
-            .HasColumnName("BOOK_ID")
+            .HasColumnName("ID_LIVRO")
             .HasColumnType("INT")
             .IsRequired();
         builder.Property(x => x.PublishingCompanyId)
-            .HasColumnName("PUBLISHING_COMPANY_ID")
+            .HasColumnName("ID_EDITORA")
             .HasColumnType("INT")
             .IsRequired();
     }

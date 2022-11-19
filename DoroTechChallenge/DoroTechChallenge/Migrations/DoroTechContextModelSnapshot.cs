@@ -67,6 +67,11 @@ namespace DoroTechChallenge.Migrations
                         .HasColumnType("VARCHAR(30)")
                         .HasColumnName("DATA_PUBLICACAO");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)")
+                        .HasColumnName("TITULO");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
@@ -81,17 +86,17 @@ namespace DoroTechChallenge.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INT")
-                        .HasColumnName("ID_BOOK_PUBLISHING_COMPANY");
+                        .HasColumnName("ID_LIVRO_EDITORA");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("BookId")
                         .HasColumnType("INT")
-                        .HasColumnName("BOOK_ID");
+                        .HasColumnName("ID_LIVRO");
 
                     b.Property<int>("PublishingCompanyId")
                         .HasColumnType("INT")
-                        .HasColumnName("PUBLISHING_COMPANY_ID");
+                        .HasColumnName("ID_EDITORA");
 
                     b.HasKey("Id");
 
@@ -99,7 +104,7 @@ namespace DoroTechChallenge.Migrations
 
                     b.HasIndex("PublishingCompanyId");
 
-                    b.ToTable("TAB_BOOK_PUBLISHING_COMPANY", (string)null);
+                    b.ToTable("TAB_LIVRO_EDITORA", (string)null);
                 });
 
             modelBuilder.Entity("DoroTechChallenge.Models.Genre", b =>

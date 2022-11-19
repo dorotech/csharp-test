@@ -14,6 +14,10 @@ public class BookMap : IEntityTypeConfiguration<Book>
             .ValueGeneratedOnAdd()
             .HasColumnName("ID_LIVRO")
             .HasColumnType("INT");
+        builder.Property(x => x.Title)
+            .HasColumnName("TITULO")
+            .HasColumnType("VARCHAR(50)")
+            .IsRequired();
         builder.Property(x => x.Description)
             .HasColumnName("DESCRICACO")
             .HasColumnType("VARCHAR(MAX)")

@@ -4,7 +4,7 @@
 
 namespace DoroTechChallenge.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,6 +53,7 @@ namespace DoroTechChallenge.Migrations
                 {
                     ID_LIVRO = table.Column<int>(type: "INT", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    TITULO = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     DESCRICACO = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
                     DATA_PUBLICACAO = table.Column<string>(type: "VARCHAR(30)", nullable: false),
                     ID_AUTOR = table.Column<int>(type: "INT", nullable: false),
@@ -76,40 +77,40 @@ namespace DoroTechChallenge.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TAB_BOOK_PUBLISHING_COMPANY",
+                name: "TAB_LIVRO_EDITORA",
                 columns: table => new
                 {
-                    ID_BOOK_PUBLISHING_COMPANY = table.Column<int>(type: "INT", nullable: false)
+                    ID_LIVRO_EDITORA = table.Column<int>(type: "INT", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BOOK_ID = table.Column<int>(type: "INT", nullable: false),
-                    PUBLISHING_COMPANY_ID = table.Column<int>(type: "INT", nullable: false)
+                    ID_LIVRO = table.Column<int>(type: "INT", nullable: false),
+                    ID_EDITORA = table.Column<int>(type: "INT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TAB_BOOK_PUBLISHING_COMPANY", x => x.ID_BOOK_PUBLISHING_COMPANY);
+                    table.PrimaryKey("PK_TAB_LIVRO_EDITORA", x => x.ID_LIVRO_EDITORA);
                     table.ForeignKey(
-                        name: "FK_TAB_BOOK_PUBLISHING_COMPANY_TAB_EDITORA_PUBLISHING_COMPANY_ID",
-                        column: x => x.PUBLISHING_COMPANY_ID,
+                        name: "FK_TAB_LIVRO_EDITORA_TAB_EDITORA_ID_EDITORA",
+                        column: x => x.ID_EDITORA,
                         principalTable: "TAB_EDITORA",
                         principalColumn: "ID_EDITORA",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TAB_BOOK_PUBLISHING_COMPANY_TAB_LIVROS_BOOK_ID",
-                        column: x => x.BOOK_ID,
+                        name: "FK_TAB_LIVRO_EDITORA_TAB_LIVROS_ID_LIVRO",
+                        column: x => x.ID_LIVRO,
                         principalTable: "TAB_LIVROS",
                         principalColumn: "ID_LIVRO",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TAB_BOOK_PUBLISHING_COMPANY_BOOK_ID",
-                table: "TAB_BOOK_PUBLISHING_COMPANY",
-                column: "BOOK_ID");
+                name: "IX_TAB_LIVRO_EDITORA_ID_EDITORA",
+                table: "TAB_LIVRO_EDITORA",
+                column: "ID_EDITORA");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TAB_BOOK_PUBLISHING_COMPANY_PUBLISHING_COMPANY_ID",
-                table: "TAB_BOOK_PUBLISHING_COMPANY",
-                column: "PUBLISHING_COMPANY_ID");
+                name: "IX_TAB_LIVRO_EDITORA_ID_LIVRO",
+                table: "TAB_LIVRO_EDITORA",
+                column: "ID_LIVRO");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TAB_LIVROS_ID_AUTOR",
@@ -125,7 +126,7 @@ namespace DoroTechChallenge.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TAB_BOOK_PUBLISHING_COMPANY");
+                name: "TAB_LIVRO_EDITORA");
 
             migrationBuilder.DropTable(
                 name: "TAB_EDITORA");
