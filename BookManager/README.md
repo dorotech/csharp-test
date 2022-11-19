@@ -24,3 +24,10 @@ TODO: FK Migration,seeds,id incremental
 > dotnet ef database update --context BloggingContext
 
 //>Base All
+
+
+https://www.youtube.com/watch?v=vAUXU0YIWlU
+https://github.com/renatogroffe/ASPNETCore6-REST_API-JWT-Postman_ContagemAcessos/blob/main/APIContagem/Program.cs
+
+https://www.youtube.com/watch?v=ccVmPgxNE6c
+

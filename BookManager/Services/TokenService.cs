@@ -1,68 +1,42 @@
 using System.Text;
 using BookManager.Model;
-
-// namespace BookManager.Services
-// {
-//     public static class TokenService
-//     {
-
-//         public static string generateToken(User user)
-//         {
-//             var tokenHandler = new JwtSecurityTokenHandler();
-//             var key = Encoding.ASCII.GetBytes(Settins.secret);
-//             var TokenDescriptor = new SecurityTokenDescriptor
-//             {
-//                 expires=DateTime.UtcNow.AddHours(1),
-//                 signingCredentials( new SymmetricSecuritYKey(key), SecurityAlgorithms.)
-//             }
-//         }
-
-
-//     }
-// }
-
-//using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-// using System.Text;
-// // using Blog.Extensions;
-// // using Blog.Models;
-// using Microsoft.IdentityModel.Tokens;
-
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-
-
 namespace BookManager.Services;
 
 public class TokenService
 {
-    public string GenerateToken(User user)
+    public Token GenerateToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(Settins.secret);
-
+        var token = new Token();
+        token.expires = DateTime.UtcNow.AddHours(8);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = this.GetClaims(user),
-            Expires = DateTime.UtcNow.AddHours(8),
+            Expires = token.expires,
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)
         };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+        var tokenKey = tokenHandler.CreateToken(tokenDescriptor);
+        token.token = tokenHandler.WriteToken(tokenKey);
+        return token;
     }
 
     private ClaimsIdentity GetClaims(User user)
     {
-        //todo:
-
+        string name = string.IsNullOrWhiteSpace(user.name) ? string.Empty : user.name;
+        string email = string.IsNullOrWhiteSpace(user.email) ? string.Empty : user.email;
+        string role = string.IsNullOrWhiteSpace(user.role) ? string.Empty : user.role;
 
         var obj = new ClaimsIdentity(new[]
        {
-                new Claim(ClaimTypes.Name,user.name.ToString()),
-                new Claim(ClaimTypes.Email,user.email.ToString()),
-                new Claim(ClaimTypes.Role,user.role.ToString())
+                new Claim(ClaimTypes.Name,name),
+                new Claim(ClaimTypes.Email,email),
+                new Claim(ClaimTypes.Role,role)
         });
         return obj;
     }

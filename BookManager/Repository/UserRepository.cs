@@ -15,5 +15,22 @@ namespace BookManager.Repository
             _context = context;
         }
 
+
+        public async Task<User> login(Credential credential)
+        {
+
+
+
+            var ret = await _context.Users.Where(user => user.email.ToLower().Trim().Equals(credential.email.ToLower().Trim()) &&
+            user.password.Equals(credential.password)).FirstOrDefaultAsync();
+            if (ret != null)
+            {
+                ret.password = string.Empty;
+                return ret;
+            }
+            return new User();
+
+        }
+
     }
 }

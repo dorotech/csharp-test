@@ -2,8 +2,12 @@ namespace BookManager.Model
 {
     public class Credential
     {
-
-        public string? email { get; set; }
-        public string? password { get; set; }
+        public Credential()
+        {
+            email = string.Empty;
+            password = string.Empty;
+        }
+        public string email { get; set; }
+        public string password { get; set; }
     }
 }

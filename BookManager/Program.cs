@@ -18,6 +18,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
 
+
+builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
@@ -56,18 +59,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-//TODO:
-
-// var tokenConfigurations = new TokenConfigurations();
-// new ConfigureFromConfigurationOptions<TokenConfigurations>(
-//     builder.Configuration.GetSection("TokenConfigurations"))
-//         .Configure(tokenConfigurations);
-
-// // Aciona a extensão que irá configurar o uso de
-// // autenticação e autorização via tokens
-// builder.Services.AddJwtSecurity(tokenConfigurations);
-
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 

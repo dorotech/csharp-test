@@ -9,18 +9,17 @@ namespace BookManager.Controllers
     public class BooksController : ControllerBase
     {
 
-        private readonly IBookRepository _repository;
-        // private readonly IMapper _mapper;
-        public BooksController(IBookRepository repository)
+        private readonly IBookRepository repository;
+
+        public BooksController(IBookRepository pRepository)
         {
-            _repository = repository;
+            repository = pRepository;
         }
 
-        //TODO:Implementar Entity
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var books = await _repository.GetBooksAsync();
+            var books = await repository.GetBooksAsync();
 
             return books.Any()
                     ? Ok(books)
@@ -31,25 +30,34 @@ namespace BookManager.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var book = await _repository.GetBooksByIdAsync(id);
-
-            // var pacienteRetorno = _mapper.Map<PacienteDetalhesDto>(paciente);
-
+            var book = await repository.GetBooksByIdAsync(id);
             return book != null
                     ? Ok(book)
                     : BadRequest("Book not found");
         }
         [HttpPut]
-        public IActionResult put(int id)
+        public async Task<IActionResult> put(Book book)
         {
-            return Ok("ok");
+            if (book == null) return BadRequest("Dados Inválidos");
+
+            repository.Update(book);
+
+            return await repository.SaveChangesAsync()
+                ? Ok("Book adicionado com sucesso")
+                : BadRequest("Erro ao salvar o book");
         }
 
 
         [HttpDelete]
-        public IActionResult delete(int id)
+        public async Task<IActionResult> delete(Book book)
         {
-            return Ok("ok");
+            repository.Delete(book);
+
+            return await repository.SaveChangesAsync()
+                ? Ok("Book adicionado com sucesso")
+                : BadRequest("Erro ao salvar o book");
+
+
         }
 
 
@@ -58,11 +66,9 @@ namespace BookManager.Controllers
         {
             if (book == null) return BadRequest("Dados Inválidos");
 
-            // var pacienteAdicionar = _mapper.Map<Paciente>(paciente);
+            repository.Add(book);
 
-            _repository.Add(book);
-
-            return await _repository.SaveChangesAsync()
+            return await repository.SaveChangesAsync()
                 ? Ok("Book adicionado com sucesso")
                 : BadRequest("Erro ao salvar o book");
 
