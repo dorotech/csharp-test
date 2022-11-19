@@ -11,8 +11,26 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Services.AddW3CLogging(options =>
+{
+    // options.FileName = "";
+    options.LogDirectory = "Logs";
+});
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddFile(Path.Join("Logs", "Error", "{0:yyyy}-{0:MM}-{0:dd}.log"), configure =>
+    {
+        configure.FormatLogFileName = fName =>
+            String.Format(fName, DateTime.UtcNow);
+        configure.Append = true;
+        configure.MinLevel = LogLevel.Error;
+        configure.FileSizeLimitBytes = 10240;
+    });
+});
 
+// Add services to the container.
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddAuthentication(options =>
@@ -81,6 +99,8 @@ builder.WebHost.UseKestrel(options =>
 });
 
 var app = builder.Build();
+
+app.UseW3CLogging();
 
 app.UseSwagger();
 app.UseSwaggerUI();

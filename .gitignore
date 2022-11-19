@@ -1,3 +1,5 @@
 [Bb]in
 obj
 .vscode
+[L,l]ogs
+*.log
