@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using dorotec_backend_test.Classes.DTOs;
 using dorotec_backend_test.Classes.Exceptions;
@@ -10,7 +11,6 @@ namespace dorotec_backend_test.Controllers;
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
-[Consumes("application/json")]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 public class BooksController : ControllerBase
@@ -24,14 +24,35 @@ public class BooksController : ControllerBase
         _service = service;
     }
 
+    [HttpPost("search", Name = "Book[action]")]
+    [Consumes("multipart/form-data")]
+    [ProducesResponseType(typeof(PageResult<BookDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PageResult<BookDTO>>> SearchPage(
+        [Required][FromForm][DefaultValue(1)][Range(1, Int32.MaxValue)] int index,
+        [Required][FromForm][DefaultValue(5)][Range(1, 30)] byte size,
+        [FromForm] BookFilterDTO filter
+        )
+    {
+        try
+        {
+            var result = await _service.GetPage(index, size, filter);
+            return Ok(result);
+        }
+        catch (ResourceNotFoundException)
+        {
+            return NotFound();
+        }
+    }
+
     [HttpGet(Name = "Book[action]")]
     [ProducesResponseType(typeof(PageResult<BookDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PageResult<BookDTO>>> GetPage(
-        [Required][FromQuery][Range(1, Int32.MaxValue)] int index = 1,
-        [Required][FromQuery][Range(1, 30)] byte size = 5)
+        [Required][FromQuery][DefaultValue(1)][Range(1, Int32.MaxValue)] int index,
+        [Required][FromQuery][DefaultValue(5)][Range(1, 30)] byte size
+        )
     {
-
         try
         {
             var result = await _service.GetPage(index, size);
@@ -62,6 +83,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpPost(Name = "Book[action]")]
+    [Consumes("application/json")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status201Created)]
     public async Task<ActionResult> PostOne(
         [FromBody] BookDTO dto
@@ -73,6 +95,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpPatch("{id}", Name = "Book[action]")]
+    [Consumes("application/json")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<BookDTO>> EditOne(

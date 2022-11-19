@@ -1,9 +1,11 @@
+using System.Linq;
 using AutoMapper;
 using dorotec_backend_test.Classes.DTOs;
 using dorotec_backend_test.Classes.Exceptions;
 using dorotec_backend_test.Classes.Pagination;
 using dorotec_backend_test.Interfaces;
 using dorotec_backend_test.Models;
+using dorotec_backend_test.Utils.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace dorotec_backend_test.Services;
@@ -58,15 +60,39 @@ public class BookService : IBookService
 
         if (count < 1) throw new ResourceNotFoundException();
 
-        List<Book> books = await query
-            .OrderBy(x => x.Name)
+        List<BookDTO> books = await query
+            .OrderBy(book => book.Name)
             .Skip(filter.Skip)
             .Take(filter.Take)
+            .Select(book => _mapper.Map<BookDTO>(book))
             .ToListAsync();
 
-        List<BookDTO> bookDTOs = _mapper.Map<List<Book>, List<BookDTO>>(books);
+        // List<BookDTO> bookDTOs = _mapper.Map<List<Book>, List<BookDTO>>(books);
 
-        return new PageResult<BookDTO>(bookDTOs, filter, count);
+        return new PageResult<BookDTO>(books, filter, count);
+    }
+
+    public async Task<PageResult<BookDTO>> GetPage(int index, byte size, BookFilterDTO bookFilter)
+    {
+        PageFilter filter = new PageFilter(index, size);
+
+        IQueryable<Book> query = _context.Books
+            .IgnoreAutoIncludes();
+
+        query = query.WhereFilterMatches(bookFilter);
+
+        long count = await query.CountAsync();
+
+        if (count < 1) throw new ResourceNotFoundException();
+
+        List<BookDTO> books = await query
+            .OrderBy(book => book.Name)
+            .Skip(filter.Skip)
+            .Take(filter.Take)
+            .Select(book => _mapper.Map<BookDTO>(book))
+            .ToListAsync();
+
+        return new PageResult<BookDTO>(books, filter, count);
     }
 
     public async Task<BookDTO> UpdateOne(int id, BookDTO dto)
