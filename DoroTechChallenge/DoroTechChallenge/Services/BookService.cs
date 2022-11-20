@@ -39,36 +39,27 @@ public class BookService : IBookService
 
     public async Task<InsertOrUpdateResponse<BookDTO>> InsertOrUpdateAsync(InsertOrUpdateBookRequest request)
     {
-        var publishingCompanyCollection = request.PublishingCompanies.Select(x => new PublishingCompany(x)).ToList();
+        var publishingCompanyCollection = request.PublishingCompanies.Select(x => new PublishingCompany(x.ToLower())).ToList();
+        var result = TryDateTimeParse(request.PublishedDate, request.Id);
+
+        bool isInsert = request.Id is 0;
+        return isInsert
+            ? await Insert(request, publishingCompanyCollection, result)
+            : await Update(request, publishingCompanyCollection, result);
+    }
+
+    private async Task<InsertOrUpdateResponse<BookDTO>> Insert(
+        InsertOrUpdateBookRequest request, List<PublishingCompany> companies, Tuple<DateTime, bool> result)
+    {
         var book = new Book
         {
             Title = request.Title,
             Description = request.Description,
-            PublishedDate = ToDateTime(request.PublishedDate),
+            PublishedDate = result.Item2 ? result.Item1 : DateTime.MaxValue,
             Author = new Author(request.Author),
             Genre = new Genre(request.Genre),
-            PublishingCompanies = publishingCompanyCollection
+            PublishingCompanies = companies
         };
-        bool isInsert = request.Id is 0;
-        return isInsert
-            ? await Insert(book)
-            : await Update(book);
-    }
-
-    private async Task<InsertOrUpdateResponse<BookDTO>> Update(Book book)
-    {
-        var validationResult = Validator.Validate(book);
-        if (validationResult.IsValid)
-        {
-            var entity = await BookRepository.UpdateAsync(book);
-            var updatedDto = new BookDTO(entity);
-            return InsertOrUpdateResponse<BookDTO>.Valid(validationResult, updatedDto);
-        }
-        return InsertOrUpdateResponse<BookDTO>.Invalid(validationResult);
-    }
-
-    private async Task<InsertOrUpdateResponse<BookDTO>> Insert(Book book)
-    {
         var validationResult = Validator.Validate(book, o => o.IncludeRuleSets("Insert"));
         if (validationResult.IsValid)
         {
@@ -82,23 +73,60 @@ public class BookService : IBookService
         }
     }
 
-    private DateTime ToDateTime(string date)
+    private async Task<InsertOrUpdateResponse<BookDTO>> Update(
+       InsertOrUpdateBookRequest request, List<PublishingCompany> companies, Tuple<DateTime, bool> result)
     {
+        var existingBook = FetchBook(request.Id);
+        var entityBook = BookRepository.FetchBook(request.Id);
+        if (existingBook is null)
+        {
+            InsertOrUpdateResponse<BookDTO>.Invalid(new List<string> { "Id inválido!" });
+        }
+        var book = new Book
+        {
+            Id = request.Id,
+            Title = string.IsNullOrEmpty(request.Title) ? existingBook.Title : request.Title,
+            Description = string.IsNullOrEmpty(request.Description) ? existingBook.Description : request.Description,
+            PublishedDate = result.Item2 ? result.Item1 : DateTime.MaxValue,
+            Author = new Author(string.IsNullOrEmpty(request.Author) ? existingBook.Author : request.Author),
+            Genre = new Genre(string.IsNullOrEmpty(request.Genre) ? existingBook.Genre : request.Genre),
+            PublishingCompanies = !companies.Any() ? entityBook.PublishingCompanies : companies 
+        };
+        var validationResult = Validator.Validate(book);
+        if (validationResult.IsValid)
+        {
+            var entity = await BookRepository.TryUpdate(book);
+            var updatedDto = new BookDTO(entity.Item2);
+            return InsertOrUpdateResponse<BookDTO>.Valid(validationResult, updatedDto);
+        }
+        return InsertOrUpdateResponse<BookDTO>.Invalid(validationResult);
+    }
+
+    private Tuple<DateTime, bool> TryDateTimeParse(string date, int bookId)
+    {
+        if (string.IsNullOrWhiteSpace(date))
+        {
+            var book = FetchBook(bookId);
+            return Tuple.Create(book.PublishedDate, true);
+        }
         if (IsAValidDate(date))
         {
-            var day = date[0] + date[1];
-            var month = date[3] + date[4];
-            var year = date[6] + date[7] + date[8] + date[9];
-            return new DateTime(year, month, day);
+            var day = date[0].ToString() + date[1].ToString();
+            var month = date[3].ToString() + date[4].ToString();
+            var year = date[6].ToString() + date[7].ToString() + date[8].ToString() + date[9].ToString();
+            return Tuple.Create(new DateTime(int.Parse(year), int.Parse(month), int.Parse(day)), true);
         }
-        return DateTime.MinValue;
+        return Tuple.Create(DateTime.MaxValue, false);
     }
 
     private bool IsAValidDate(string value) =>
       DateTime.TryParse(value, out DateTime date);
 
-    public async Task<DeleteResponse<BookDTO>> Remove(int id) =>
-        await BookRepository.TryDelete(id) ?
+    public async Task<DeleteResponse<BookDTO>> DeleteAsync(int id)
+    {
+        var isDeleted = await BookRepository.TryDelete(id);
+        return isDeleted.Item1 ?
             DeleteResponse<BookDTO>.Valid(id) :
-            DeleteResponse<BookDTO>.Invalid(new List<string>() { "Erro ao deletar o livro!" });
+            DeleteResponse<BookDTO>.Invalid(new List<string>() { "Erro ao deletar o livro: id não encontrado!" });
+    }
 }

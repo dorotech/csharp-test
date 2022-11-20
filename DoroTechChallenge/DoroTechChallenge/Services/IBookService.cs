@@ -10,5 +10,5 @@ public interface IBookService
     BookDTO FetchBook(int id);
     PaginationResponse<BookDTO> PagedBooks(ListCriteria criteria);
     Task<InsertOrUpdateResponse<BookDTO>> InsertOrUpdateAsync(InsertOrUpdateBookRequest request);
-    Task<DeleteResponse<BookDTO>> Remove(int id);
+    Task<DeleteResponse<BookDTO>> DeleteAsync(int id);
 }
