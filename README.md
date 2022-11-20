@@ -3,9 +3,10 @@
 ### JSONs para teste:
 
 #### >> Paged book:
+//filtro por titulo do livro
 {
   "filter": {
-    "value": "globo"
+    "value": "a arte da"
   },
   "pagination": {
     "itemsPerPage": 1,
