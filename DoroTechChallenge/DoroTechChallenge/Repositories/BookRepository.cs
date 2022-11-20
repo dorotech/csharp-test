@@ -31,9 +31,7 @@ public class BookRepository : IBookRepository
     {
         IQueryable<Book> books = BooksWithInclude();
         if (filter is null || filter.Value is null) return books;
-        return books.Where(x => x.Author.AuthorName.Contains(filter.Value.ToLower())
-                || x.Title.Contains(filter.Value.ToLower())
-                || x.Genre.GenreName.Contains(filter.Value.ToLower()));
+        return books.Where(x => x.Title.Contains(filter.Value.ToLower()));
     }
 
     public async Task<Book> InsertAsync(Book book)
