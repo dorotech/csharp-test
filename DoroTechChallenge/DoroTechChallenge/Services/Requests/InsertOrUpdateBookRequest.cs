@@ -1,6 +1,4 @@
-﻿using DoroTechChallenge.Models;
-
-namespace DoroTechChallenge.Services.Requests;
+﻿namespace DoroTechChallenge.Services.Requests;
 
 public class InsertOrUpdateBookRequest
 {

@@ -8,8 +8,10 @@ public class BookValidator : AbstractValidator<Book>
 {
     public IBookRepository BookRepository { get; }
 
-    public BookValidator()
+    public BookValidator(IBookRepository bookRepository)
     {
+        BookRepository = bookRepository;
+
         RuleSet("Insert", () =>
         {
             RuleFor(book => book.Title)
@@ -20,14 +22,14 @@ public class BookValidator : AbstractValidator<Book>
                 .NotEmpty().WithMessage("Description must be filled!")
                 .NotNull().WithMessage("Description must be filled!");
             RuleFor(book => book.PublishedDate)
-               .NotEmpty().WithMessage("Publishing date must be filled!")
-               .NotNull().WithMessage("Publishing date must be filled!");
+                .NotEmpty().WithMessage("Publishing date must be filled!")
+                .NotNull().WithMessage("Publishing date must be filled!");
             RuleFor(book => book.Author.AuthorName)
-               .NotEmpty().WithMessage("Author must be filled!")
-               .NotNull().WithMessage("Author name must be filled!");
+                .NotEmpty().WithMessage("Author must be filled!")
+                .NotNull().WithMessage("Author name must be filled!");
             RuleFor(book => book.Genre.GenreName)
-               .NotEmpty().WithMessage("Genre must be filled!")
-               .NotNull().WithMessage("Genre must be filled!");
+                .NotEmpty().WithMessage("Genre must be filled!")
+                .NotNull().WithMessage("Genre must be filled!");
             RuleForEach(x => x.PublishingCompanies)
                 .SetValidator(new PublishingCompanyValidator());
         });
@@ -35,9 +37,10 @@ public class BookValidator : AbstractValidator<Book>
             .NotEmpty().WithMessage("The entity cannot be empty!")
             .NotNull().WithMessage("The entity cannot be empty!");
         RuleFor(book => book.PublishedDate)
-            .NotEqual(DateTime.MinValue).WithMessage("Wrong datetime format! Try dd/MM/yyyy");
+            .NotEqual(DateTime.MaxValue).WithMessage("Wrong datetime format! Try dd/MM/yyyy")
+            .LessThan(DateTime.Today).WithMessage("Try an existing date!");
     }
 
     private bool HaveUniqueTitle(string title) =>
-        BookRepository.FindByName(title) is null;
+        BookRepository.FindByTitle(title) is null;
 }
