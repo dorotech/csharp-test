@@ -24,8 +24,8 @@ public class AuthService : IAuthService
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                    new Claim(ClaimTypes.Name, Configuration["Jwt:Email"]),
-                    new Claim(ClaimTypes.Role, "User")
+                new Claim(ClaimTypes.Name, Configuration["Jwt:Email"]),
+                new Claim(ClaimTypes.Role, "User")
             }),
             Expires = expires,
             SigningCredentials = signInCredentials
