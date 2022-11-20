@@ -44,5 +44,39 @@ public class BookMap : IEntityTypeConfiguration<Book>
         builder.HasMany(x => x.PublishingCompanies)
             .WithMany(x => x.Books)
             .UsingEntity<BookPublishingCompany>();
+
+        builder.HasData
+            (
+                new Book
+                {
+                    Id = 1,
+                    Title = "o senhor dos aneis",
+                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                    PublishedDate = DateTime.Now,
+                    PublishingCompanies = new List<PublishingCompany>(),
+                    AuthorId = 2,
+                    GenreId = 2,
+                },
+                new Book
+                {
+                    Id = 2,
+                    Title = "harry potter",
+                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                    PublishedDate = DateTime.MinValue,
+                    PublishingCompanies = new List<PublishingCompany>(),
+                    AuthorId = 3,
+                    GenreId = 2,
+                },
+                new Book
+                {
+                    Id = 3,
+                    Title = "a arte da guerra",
+                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                    PublishedDate = DateTime.MaxValue,
+                    PublishingCompanies= new List<PublishingCompany>(),
+                    AuthorId = 1,
+                    GenreId = 1,
+                }
+            );
     }
 }

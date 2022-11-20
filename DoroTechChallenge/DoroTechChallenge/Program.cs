@@ -64,7 +64,7 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "DoroTech API",
         Version = "v1",
-        Description = "API construída para o desafio da DoroTech",
+        Description = "API construída para o desafio da DoroTech // use EntityFrameworkCore\\Update-Database para atualizar o banco e comecar os testes !!",
         Contact = new OpenApiContact
         {
             Name = "Ramon Barbosa",

@@ -18,5 +18,19 @@ public class GenreMap : IEntityTypeConfiguration<Genre>
             .HasColumnName("NOME_GENERO")
             .HasColumnType("VARCHAR(30)")
             .IsRequired();
+
+        builder.HasData
+            (
+                new Genre
+                {
+                    Id = 1,
+                    GenreName = "guerra"
+                },
+                new Genre
+                {
+                    Id = 2,
+                    GenreName = "aventura"
+                }
+            );
     }
 }

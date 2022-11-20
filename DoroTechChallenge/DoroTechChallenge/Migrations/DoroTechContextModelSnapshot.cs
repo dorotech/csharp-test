@@ -38,6 +38,23 @@ namespace DoroTechChallenge.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TAB_AUTORES", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthorName = "sun tzu"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AuthorName = "J. R. R. Tolkien"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AuthorName = "J. K. Rowling"
+                        });
                 });
 
             modelBuilder.Entity("DoroTechChallenge.Models.Book", b =>
@@ -62,7 +79,7 @@ namespace DoroTechChallenge.Migrations
                         .HasColumnType("INT")
                         .HasColumnName("ID_GENERO");
 
-                    b.Property<string>("PublishedAt")
+                    b.Property<string>("PublishedDate")
                         .IsRequired()
                         .HasColumnType("VARCHAR(30)")
                         .HasColumnName("DATA_PUBLICACAO");
@@ -79,6 +96,35 @@ namespace DoroTechChallenge.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("TAB_LIVROS", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthorId = 2,
+                            Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                            GenreId = 2,
+                            PublishedDate = "2022-11-20 13:36:45.4889244",
+                            Title = "o senhor dos aneis"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AuthorId = 3,
+                            Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                            GenreId = 2,
+                            PublishedDate = "0001-01-01 00:00:00",
+                            Title = "harry potter"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AuthorId = 1,
+                            Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                            GenreId = 1,
+                            PublishedDate = "9999-12-31 23:59:59.9999999",
+                            Title = "a arte da guerra"
+                        });
                 });
 
             modelBuilder.Entity("DoroTechChallenge.Models.BookPublishingCompany", b =>
@@ -105,6 +151,32 @@ namespace DoroTechChallenge.Migrations
                     b.HasIndex("PublishingCompanyId");
 
                     b.ToTable("TAB_LIVRO_EDITORA", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BookId = 1,
+                            PublishingCompanyId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BookId = 1,
+                            PublishingCompanyId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BookId = 2,
+                            PublishingCompanyId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BookId = 2,
+                            PublishingCompanyId = 2
+                        });
                 });
 
             modelBuilder.Entity("DoroTechChallenge.Models.Genre", b =>
@@ -124,6 +196,18 @@ namespace DoroTechChallenge.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TAB_GENEROS", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GenreName = "guerra"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GenreName = "aventura"
+                        });
                 });
 
             modelBuilder.Entity("DoroTechChallenge.Models.PublishingCompany", b =>
@@ -143,6 +227,18 @@ namespace DoroTechChallenge.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TAB_EDITORA", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CompanyName = "globo"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CompanyName = "record"
+                        });
                 });
 
             modelBuilder.Entity("DoroTechChallenge.Models.Book", b =>

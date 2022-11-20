@@ -18,5 +18,19 @@ public class PublishingCompanyMap : IEntityTypeConfiguration<PublishingCompany>
             .HasColumnName("NOME_EDITORA")
             .HasColumnType("VARCHAR(100)")
             .IsRequired();
+
+        builder.HasData
+            (
+                new PublishingCompany
+                {
+                    Id = 1,
+                    CompanyName = "globo"
+                },
+                new PublishingCompany
+                {
+                    Id = 2,
+                    CompanyName = "record"
+                }
+            );
     }
 }

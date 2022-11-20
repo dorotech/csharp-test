@@ -22,5 +22,33 @@ public class BookPublishingCompanyMap : IEntityTypeConfiguration<BookPublishingC
             .HasColumnName("ID_EDITORA")
             .HasColumnType("INT")
             .IsRequired();
+
+        builder.HasData
+            (
+                new BookPublishingCompany
+                {
+                    Id = 1,
+                    BookId = 1,
+                    PublishingCompanyId = 1,
+                },
+                new BookPublishingCompany
+                {
+                    Id = 2,
+                    BookId = 1,
+                    PublishingCompanyId = 2,
+                },
+                 new BookPublishingCompany
+                 {
+                     Id = 3,
+                     BookId = 2,
+                     PublishingCompanyId = 1,
+                 },
+                  new BookPublishingCompany
+                  {
+                      Id = 4,
+                      BookId = 2,
+                      PublishingCompanyId = 2,
+                  }
+            );
     }
 }

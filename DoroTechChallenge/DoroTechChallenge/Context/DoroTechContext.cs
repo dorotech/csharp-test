@@ -13,10 +13,10 @@ public class DoroTechContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.ApplyConfiguration(new BookMap());
         builder.ApplyConfiguration(new GenreMap());
         builder.ApplyConfiguration(new AuthorMap());
         builder.ApplyConfiguration(new PublishingCompanyMap());
         builder.ApplyConfiguration(new BookPublishingCompanyMap());
+        builder.ApplyConfiguration(new BookMap());
     }
 }

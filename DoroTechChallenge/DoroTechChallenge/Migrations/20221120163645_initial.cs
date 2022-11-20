@@ -4,7 +4,7 @@
 
 namespace DoroTechChallenge.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,6 +100,60 @@ namespace DoroTechChallenge.Migrations
                         principalTable: "TAB_LIVROS",
                         principalColumn: "ID_LIVRO",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "TAB_AUTORES",
+                columns: new[] { "ID_AUTOR", "NOME_AUTOR" },
+                values: new object[,]
+                {
+                    { 1, "sun tzu" },
+                    { 2, "J. R. R. Tolkien" },
+                    { 3, "J. K. Rowling" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TAB_EDITORA",
+                columns: new[] { "ID_EDITORA", "NOME_EDITORA" },
+                values: new object[,]
+                {
+                    { 1, "globo" },
+                    { 2, "record" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TAB_GENEROS",
+                columns: new[] { "ID_GENERO", "NOME_GENERO" },
+                values: new object[,]
+                {
+                    { 1, "guerra" },
+                    { 2, "aventura" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TAB_LIVROS",
+                columns: new[] { "ID_LIVRO", "ID_AUTOR", "DESCRICACO", "ID_GENERO", "DATA_PUBLICACAO", "TITULO" },
+                values: new object[] { 1, 2, "Lorem Ipsum is simply dummy text of the printing and typesetting industry", 2, "2022-11-20 13:36:45.4889244", "o senhor dos aneis" });
+
+            migrationBuilder.InsertData(
+                table: "TAB_LIVROS",
+                columns: new[] { "ID_LIVRO", "ID_AUTOR", "DESCRICACO", "ID_GENERO", "DATA_PUBLICACAO", "TITULO" },
+                values: new object[] { 2, 3, "Lorem Ipsum is simply dummy text of the printing and typesetting industry", 2, "0001-01-01 00:00:00", "harry potter" });
+
+            migrationBuilder.InsertData(
+                table: "TAB_LIVROS",
+                columns: new[] { "ID_LIVRO", "ID_AUTOR", "DESCRICACO", "ID_GENERO", "DATA_PUBLICACAO", "TITULO" },
+                values: new object[] { 3, 1, "Lorem Ipsum is simply dummy text of the printing and typesetting industry", 1, "9999-12-31 23:59:59.9999999", "a arte da guerra" });
+
+            migrationBuilder.InsertData(
+                table: "TAB_LIVRO_EDITORA",
+                columns: new[] { "ID_LIVRO_EDITORA", "ID_LIVRO", "ID_EDITORA" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 1, 2 },
+                    { 3, 2, 1 },
+                    { 4, 2, 2 }
                 });
 
             migrationBuilder.CreateIndex(

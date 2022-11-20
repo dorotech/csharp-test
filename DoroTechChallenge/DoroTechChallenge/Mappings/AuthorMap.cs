@@ -18,5 +18,24 @@ public class AuthorMap : IEntityTypeConfiguration<Author>
             .HasColumnName("NOME_AUTOR")
             .HasColumnType("VARCHAR(100)")
             .IsRequired();
+
+        builder.HasData
+            (
+                new Author
+                {
+                    Id = 1,
+                    AuthorName = "sun tzu"
+                },
+                new Author
+                {
+                    Id = 2,
+                    AuthorName = "J. R. R. Tolkien"
+                },
+                new Author
+                {
+                    Id = 3,
+                    AuthorName = "J. K. Rowling"
+                }
+            );
     }
 }
