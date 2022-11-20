@@ -34,6 +34,8 @@
 }
 
 #### >> Update book:
+#### Informar o id e os campos que deseja atualizar
+#### OBS: Os campos vazios nao terao alteracao, o campo que estava antes se mantera
 {
   "id": 2,
   "title": "",
