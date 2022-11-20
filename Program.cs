@@ -13,9 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+
 builder.Services.AddW3CLogging(options =>
 {
-    // options.FileName = "";
     options.LogDirectory = "Logs";
 });
 builder.Services.AddLogging(loggingBuilder =>
@@ -84,7 +84,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<BookstoreDbContext>(options =>
 {
-    options.UseSqlite("Data Source=test_db.sqlite");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
 });
 
 builder.Services.AddScoped<IBookService, BookService>();
