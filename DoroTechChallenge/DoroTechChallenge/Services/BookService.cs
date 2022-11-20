@@ -32,7 +32,7 @@ public class BookService : IBookService
         if (criteria is null) throw new ArgumentNullException(nameof(criteria));
 
         var filteredBooks = BookRepository.Filter(criteria.Filter);
-        var paginatedBooks = filteredBooks.Paginate(criteria.Pagination);
+        var paginatedBooks = filteredBooks.Paginate(criteria.Pagination).OrderBy(x => x.Title);
         var booksDTO = paginatedBooks.Select(b => new BookDTO(b));
         return new PaginationResponse<BookDTO>(filteredBooks.Count(), booksDTO.ToList());
     }
@@ -90,7 +90,7 @@ public class BookService : IBookService
             PublishedDate = result.Item2 ? result.Item1 : DateTime.MaxValue,
             Author = new Author(string.IsNullOrEmpty(request.Author) ? existingBook.Author : request.Author),
             Genre = new Genre(string.IsNullOrEmpty(request.Genre) ? existingBook.Genre : request.Genre),
-            PublishingCompanies = !companies.Any() ? entityBook.PublishingCompanies : companies 
+            PublishingCompanies = !companies.Any() ? entityBook.PublishingCompanies : companies
         };
         var validationResult = Validator.Validate(book);
         if (validationResult.IsValid)
