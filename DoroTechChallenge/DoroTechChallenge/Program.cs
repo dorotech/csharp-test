@@ -2,12 +2,16 @@ using DoroTechChallenge.Context;
 using DoroTechChallenge.Models;
 using DoroTechChallenge.Repositories;
 using DoroTechChallenge.Services;
+using DoroTechChallenge.Services.Auth;
 using DoroTechChallenge.Services.Validators;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +24,31 @@ builder.Services.AddDbContext<DoroTechContext>(options =>
     options.UseLazyLoadingProxies();
 });
 
+//JWT config
+var provider = builder.Services.BuildServiceProvider();
+var configuration = provider.GetRequiredService<IConfiguration>();
+
+var secretKey = configuration.GetValue<string>("JWT:Key");
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 //dependency injection into entity/service
+builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IValidator<Book>, BookValidator>();
@@ -44,7 +72,6 @@ builder.Services.AddSwaggerGen(c =>
             Url = new Uri("https://github.com/ramonfbarbosa")
         },
     });
-
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -71,6 +98,7 @@ builder.Services.AddSwaggerGen(c =>
 //server config
 builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
+app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

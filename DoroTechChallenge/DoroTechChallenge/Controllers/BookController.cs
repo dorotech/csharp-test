@@ -3,6 +3,7 @@ using DoroTechChallenge.Services.DTOs;
 using DoroTechChallenge.Services.Requests;
 using DoroTechChallenge.Services.Responses;
 using Kumbajah.Services.Pagination;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoroTechChallenge.Controllers;
@@ -29,6 +30,7 @@ public class BookController : Controller
         Ok(BookService.PagedBooks(criteria));
 
     [HttpPost("insert")]
+    [Authorize]
     public async Task<ActionResult<InsertOrUpdateResponse<BookDTO>>> InsertAsync([FromBody] InsertOrUpdateBookRequest request)
     {
         try
@@ -50,6 +52,7 @@ public class BookController : Controller
     }
 
     [HttpPost("update")]
+    [Authorize]
     public async Task<ActionResult<InsertOrUpdateResponse<BookDTO>>> UpdateAsync([FromBody] InsertOrUpdateBookRequest request)
     {
         try
@@ -71,6 +74,7 @@ public class BookController : Controller
     }
 
     [HttpDelete("{bookId:int}")]
+    [Authorize]
     public async Task<ActionResult<DeleteResponse<BookDTO>>> DeleteAsync([FromRoute] int bookId)
     {
         try
