@@ -1,6 +1,7 @@
 using DoroTechChallenge.Context;
 using DoroTechChallenge.Models;
 using DoroTechChallenge.Repositories;
+using DoroTechChallenge.Services;
 using DoroTechChallenge.Services.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<DoroTechContext>(options =>
 
 //dependency injection into entity/service
 builder.Services.AddTransient<IBookRepository, BookRepository>();
+builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IValidator<Book>, BookValidator>();
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
@@ -66,7 +68,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-//servidor config
+//server config
 builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
