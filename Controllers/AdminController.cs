@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dorotec_backend_test.Controllers;
 
+/// <summary> Controlador para os Administradores do sistema. Implementa rotas para Criar, Buscar e Deletar Administradores.</summary>
 [Authorize]
 [ApiController]
 [Route("[controller]")]
@@ -29,6 +30,9 @@ public class AdminController : ControllerBase
         _service = service;
     }
 
+    /// <summary> Registrar um novo Administrador no sistema. </summary>
+    /// <remarks> Apenas com Autorização. </remarks>
+    /// <param name="dto"> Credenciais de acesso e identidade. </param>
     [HttpPost("register", Name = "Admin[action]")]
     [ProducesResponseType(typeof(AdminDTO), StatusCodes.Status200OK)]
     public async Task<ActionResult<AdminDTO>> Register(
@@ -40,6 +44,16 @@ public class AdminController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary> Requisitar acesso a um token de autenticação. </summary>
+    /// <remarks>
+    ///     <para> As credenciais de acesso padrão são: "login":"admin", "password":"12345" </para> 
+    ///     <para> Busca um registro de Admin pelo login e então valida sua senha.</para>
+    ///     <para>
+    ///         Permite acesso sem token de autenticação, 
+    ///         mas retorna 401 Não Autorizado se o nome de login ou senha estiverem incorretos. 
+    ///      </para>
+    /// </remarks>
+    /// <param name="dto"> Credenciais de acesso. </param>
     [AllowAnonymous]
     [HttpPost("login", Name = "Admin[action]")]
     [ProducesResponseType(typeof(LoginResponseDTO), StatusCodes.Status200OK)]
@@ -52,14 +66,26 @@ public class AdminController : ControllerBase
         {
             var result = await _service.Login(dto);
 
+            _logger.LogInformation($"{result.Name} logged in @{DateTime.Now.ToString()}", result);
+
             return Ok(result);
         }
-        catch (UnauthorizedRequestException)
+        catch (System.Exception ex) when (
+            ex is UnauthorizedRequestException ||
+            ex is ResourceNotFoundException
+        )
         {
             return Unauthorized();
         }
     }
 
+    /// <summary> Remove o registro de um Admin. </summary>
+    /// <remarks>
+    ///     A aplicação precisa ter ao menos um Admin para funcionar.
+    ///     Se houver apenas um registro no banco de dados, não será possível deletá-lo.
+    ///     <para> Apenas com Autorização. </para>
+    /// </remarks>
+    /// <param name="id"> Id do administrador a ser removido. </param>
     [HttpDelete("{id}", Name = "Admin[action]")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -83,6 +109,9 @@ public class AdminController : ControllerBase
         }
     }
 
+    /// <summary> Informações de um Admin </summary>
+    /// <remarks> Apenas com Autorização. </remarks>
+    /// <param name="id"> Id do Admin. </param>
     [HttpGet("{id}", Name = "Admin[action]")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(AdminDTO), StatusCodes.Status200OK)]
@@ -106,6 +135,10 @@ public class AdminController : ControllerBase
         }
     }
 
+    /// <summary> Lista paginada com todos os registros de Admin. </summary>
+    /// <remarks> Apenas com Autorização. </remarks>
+    /// <param name="index"> Índice da página. </param>
+    /// <param name="size"> Quantidade de registros por página. </param>
     [HttpGet(Name = "Admin[action]")]
     [ProducesResponseType(typeof(PageResult<AdminDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

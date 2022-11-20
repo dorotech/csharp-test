@@ -70,9 +70,9 @@ public class BookService : IBookService
         return new PageResult<BookDTO>(books, filter, count);
     }
 
-    public async Task<PageResult<BookDTO>> GetPage(int index, byte size, BookFilterDTO bookFilter)
+    public async Task<PageResult<BookDTO>> GetPage(BookFilterDTO bookFilter)
     {
-        PageFilter filter = new PageFilter(index, size);
+        PageFilter filter = new PageFilter(bookFilter.Index, bookFilter.Size);
 
         IQueryable<Book> query = _context.Books
             .IgnoreAutoIncludes();

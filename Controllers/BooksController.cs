@@ -21,27 +21,27 @@ public class BooksController : ControllerBase
     private readonly IBookService _service;
 
     public BooksController(
-        ILogger<BooksController> logger, 
+        ILogger<BooksController> logger,
         IBookService service)
     {
         _logger = logger;
         _service = service;
     }
 
+    /// <summary> Lista paginada com todos os Livros que correspondem os critérios de pesquisa informados. </summary>
+    /// <param name="filter"> Critérios de pesquisa. </param>
     [AllowAnonymous]
     [HttpPost("search", Name = "Book[action]")]
     [Consumes("multipart/form-data")]
     [ProducesResponseType(typeof(PageResult<BookDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PageResult<BookDTO>>> SearchPage(
-        [Required][FromForm][DefaultValue(1)][Range(1, Int32.MaxValue)] int index,
-        [Required][FromForm][DefaultValue(5)][Range(1, 30)] byte size,
         [FromForm] BookFilterDTO filter
         )
     {
         try
         {
-            var result = await _service.GetPage(index, size, filter);
+            var result = await _service.GetPage(filter);
             return Ok(result);
         }
         catch (ResourceNotFoundException)
@@ -50,6 +50,9 @@ public class BooksController : ControllerBase
         }
     }
 
+    /// <summary> Lista paginada com todos os Livros. </summary>
+    /// <param name="index"> Índice da página. </param>
+    /// <param name="size"> Quantidade de registros por página. </param>
     [AllowAnonymous]
     [HttpGet(Name = "Book[action]")]
     [ProducesResponseType(typeof(PageResult<BookDTO>), StatusCodes.Status200OK)]
@@ -70,6 +73,8 @@ public class BooksController : ControllerBase
         }
     }
 
+    /// <summary> Informações de um único livro. </summary>
+    /// <param name="id"> Id do Livro. </param>
     [AllowAnonymous]
     [HttpGet("{id}", Name = "Book[action]")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status200OK)]
@@ -89,6 +94,13 @@ public class BooksController : ControllerBase
         }
     }
 
+    /// <summary> Cadastrar um livro. </summary>
+    /// <remarks>
+    ///     Os livros são únicos e não podem ser repetidos.
+    ///     Esta validação é feita de acordo com Nome do Autor, Nome do Livro, Gênero e Edição.
+    ///     <para>Apenas com Autorização.</para>
+    /// </remarks>
+    /// <param name="dto"> Informações necessárias para realizar o cadastro. </param>
     [HttpPost(Name = "Book[action]")]
     [Consumes("application/json")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status201Created)]
@@ -102,6 +114,13 @@ public class BooksController : ControllerBase
         return Created($"books/{created.Id}", created);
     }
 
+    /// <summary> Alterar o registro de um único livro. </summary>
+    /// <remarks> 
+    ///     Apenas as propriedades informadas serão aletradas, propriedades nulas serão ignoradas.
+    ///     <para>Apenas com Autorização.</para>
+    /// </remarks>
+    /// <param name="id"> Id do Livro. </param>
+    /// <param name="dto"> Informações necessárias para realizar o cadastro. </param>
     [HttpPatch("{id}", Name = "Book[action]")]
     [Consumes("application/json")]
     [ProducesResponseType(typeof(BookDTO), StatusCodes.Status200OK)]
@@ -123,6 +142,9 @@ public class BooksController : ControllerBase
         }
     }
 
+    /// <summary> Remover o registro de um único livro. </summary>
+    /// <remarks> Apenas com Autorização. </remarks>
+    /// <param name="id"> Id do Livro. </param>
     [HttpDelete("{id}", Name = "Book[action]")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -141,5 +163,4 @@ public class BooksController : ControllerBase
             return NotFound();
         }
     }
-
 }

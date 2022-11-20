@@ -5,5 +5,5 @@ namespace dorotec_backend_test.Interfaces;
 
 public interface IBookService : IService<BookDTO>
 { 
-    Task<PageResult<BookDTO>> GetPage(int index, byte size, BookFilterDTO filter);
+    Task<PageResult<BookDTO>> GetPage(BookFilterDTO filter);
 }
