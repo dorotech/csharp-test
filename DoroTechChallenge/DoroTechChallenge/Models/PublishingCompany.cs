@@ -7,6 +7,8 @@ public class PublishingCompany
     public virtual List<Book> Books { get; set; }
     public virtual List<BookPublishingCompany> BookPublishingCompany { get; set; }
 
+    public PublishingCompany() { }
+
     public PublishingCompany(string name)
     {
         CompanyName = name;
