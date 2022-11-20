@@ -1,13 +1,12 @@
 ﻿using DoroTechChallenge.Models;
 using FluentValidation;
 
-namespace DoroTechChallenge.Validators;
+namespace DoroTechChallenge.Services.Validators;
 
 public class PublishingCompanyValidator : AbstractValidator<PublishingCompany>
 {
     public PublishingCompanyValidator() 
     {
-
         RuleFor(pc => pc)
             .NotEmpty().WithMessage("The entity cannot be empty!")
             .NotNull().WithMessage("The entity cannot be empty!");

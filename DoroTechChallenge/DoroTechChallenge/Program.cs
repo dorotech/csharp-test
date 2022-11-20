@@ -1,8 +1,7 @@
-using Castle.Core.Resource;
 using DoroTechChallenge.Context;
 using DoroTechChallenge.Models;
 using DoroTechChallenge.Repositories;
-using DoroTechChallenge.Validators;
+using DoroTechChallenge.Services.Validators;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
