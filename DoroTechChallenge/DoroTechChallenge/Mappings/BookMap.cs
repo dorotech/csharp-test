@@ -22,7 +22,7 @@ public class BookMap : IEntityTypeConfiguration<Book>
             .HasColumnName("DESCRICACO")
             .HasColumnType("VARCHAR(MAX)")
             .IsRequired();
-        builder.Property(x => x.PublishedAt)
+        builder.Property(x => x.PublishedDate)
             .HasColumnName("DATA_PUBLICACAO")
             .HasColumnType("VARCHAR(30)")
             .IsRequired();
