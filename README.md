@@ -13,9 +13,9 @@
   }
 }
 
-#### >>Sign In:
+#### >> Sign In:
 {
-	"email": "ramonmfb777@gmail.com",
+	"email": "lol",
 	"password": "123"
 }
 
@@ -34,8 +34,7 @@
 }
 
 #### >> Update book:
-#### Informar o id e os campos que deseja atualizar
-#### OBS: Os campos vazios nao terao alteracao, o campo que estava antes se mantera
+<p> Informar o id e os campos que deseja atualizar <br /> OBS: Os campos vazios nao terao alteracao, o campo que estava antes se mantera</p> 
 {
   "id": 2,
   "title": "",
