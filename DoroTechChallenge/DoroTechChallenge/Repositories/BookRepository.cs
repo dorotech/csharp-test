@@ -14,12 +14,14 @@ public class BookRepository : IBookRepository
         Context = context;
     }
 
-    public List<Book> List() =>
+    public IQueryable<Book> BooksWithInclude() =>
         Context.Books
         .Include(x => x.Author)
         .Include(x => x.PublishingCompanies)
-        .Include(x => x.Genre)
-        .ToList();
+        .Include(x => x.Genre);
+
+    public Book FindByName(string bookName) =>
+            BooksWithInclude().FirstOrDefault(x => x.Title.ToLower() == bookName.ToLower());
 
     public Book FetchBook(int id) =>
         Context.Books.AsNoTracking()
@@ -27,14 +29,14 @@ public class BookRepository : IBookRepository
 
     public IQueryable<Book> Filter(Filter filter)
     {
-        IQueryable<Book> books = Context.Books;
+        IQueryable<Book> books = BooksWithInclude();
         if (filter is null || filter.Value is null) return books;
         return books.Where(x => x.Author.AuthorName.Contains(filter.Value.ToLower())
                 || x.Title.Contains(filter.Value.ToLower())
                 || x.Genre.GenreName.Contains(filter.Value.ToLower()));
     }
 
-    public async Task<Book> Insert(Book book)
+    public async Task<Book> InsertAsync(Book book)
     {
         using var transaction = Context.Database.BeginTransaction();
         try
@@ -55,7 +57,7 @@ public class BookRepository : IBookRepository
         }
     }
 
-    public async Task<Book> Update(Book book)
+    public async Task<Book> UpdateAsync(Book book)
     {
         using var transaction = Context.Database.BeginTransaction();
         try
