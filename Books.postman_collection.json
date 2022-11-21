@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "7b215260-6446-4bc4-bb18-32f4b9196726",
+		"name": "Books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19952004"
+	},
+	"item": [
+		{
+			"name": "01 - AuthSignup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n  \"name\": \"User Test\",\r\n  \"email\": \"1241@Gmail.com\",\r\n  \"password\": \"ForteLuz@123\",\r\n  \"role\": \"ADM\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7102/api/Auth/signup",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02 - AuthLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"//pm.environment.set(\"token_app\",JSON.stringify( jsonData.token));\r",
+							"pm.environment.set(\"token_app\", jsonData.token);\r",
+							"console.log(jsonData.token);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"teste@teste.com\",\r\n  \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7102/api/Auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03 - AddBooks",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_app}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"name\": \"Name\",\r\n  \"decription\": \"string\",\r\n  \"author\": \"string\",\r\n  \"idCategory\": 6,\r\n  \"isnb\": \"6699\",\r\n  \"year\": 2022,\r\n  \"idPublisher\": 1,\r\n  \"createAt\": \"2022-11-21T14:30:09.501Z\",\r\n  \"exemplary\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7102/api/Books",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04 - BookPut",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_app}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 149,\r\n  \"name\": \"novo nome\",\r\n  \"decription\": \"Vova Descrição\",\r\n   \"isnb\": \"999\",\r\n     \"author\": \"Novo Autor\"\r\n \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7102/api/Books",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05 - BookDetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7102/api/Books/id/149",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Books",
+						"id",
+						"149"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06 - BookDelete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_app}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7102/api/Books/id/148",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Books",
+						"id",
+						"148"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07 - Booksload",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token_app}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7102/api/Books/load/qtd/100",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Books",
+						"load",
+						"qtd",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08 - BookGet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7102/api/Books",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09 - BookGetFilter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7102/api/Books/GetFilter/skip/0/take/50/name/name",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7102",
+					"path": [
+						"api",
+						"Books",
+						"GetFilter",
+						"skip",
+						"0",
+						"take",
+						"50",
+						"name",
+						"name"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -97,7 +97,7 @@ Padroes de projeto:(explicitar )
 - Factory-ok
 - Singleton-ok
 - TDD-ok
-- VIDEO
+- VIDEO-ok
 
 dotnet ef migrations add Migration5 --context DataContext
 dotnet ef database update --context DataContext
@@ -106,6 +106,6 @@ dotnet ef database update --context DataContext
 ## Video Projeto execultaldo
 
 ```sh
- https://www.youtube.com/
+ https://www.youtube.com/watch?v=mjB4KRNpt3g
 
 ```
