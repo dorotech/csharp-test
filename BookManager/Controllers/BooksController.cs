@@ -264,28 +264,6 @@ namespace BookManager.Controllers
             {
                 //não sobe, grava no event viwer
             }
-
-
         }
-
-        [AllowAnonymous]
-        [HttpGet("testeLog")]
-        public IActionResult testeLog()
-        {
-            try
-            {
-                logger("Get", "Trace");
-                return Ok("0k");
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
-
-
-
-
     }
 }

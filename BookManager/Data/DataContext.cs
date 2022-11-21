@@ -8,7 +8,7 @@ namespace BookManager.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+            //AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
         public DbSet<Category> Categorys { get; set; }
         public DbSet<Publisher> Publishers { get; set; }

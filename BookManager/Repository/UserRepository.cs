@@ -34,7 +34,7 @@ namespace BookManager.Repository
             if (user == null || string.IsNullOrWhiteSpace(user.email)) return false;
             string email = user.email.Trim().ToLower();
             var ret = await _context.Users.Where(user => user.email.Equals(email)).ToListAsync();
-            return (ret == null || !ret.Any());
+            return !(ret == null || !ret.Any());
         }
 
     }
