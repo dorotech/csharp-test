@@ -134,7 +134,7 @@ namespace BookManager.Controllers
                 repository.Update(bookDB);
 
                 return await repository.SaveChangesAsync()
-                    ? Ok("Book adicionado com sucesso")
+                    ? Ok("Book Alterado  com sucesso")
                     : BadRequest("Erro ao salvar book");
             }
             catch (Exception ex)
