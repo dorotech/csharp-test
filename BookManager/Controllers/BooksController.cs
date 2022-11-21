@@ -165,7 +165,7 @@ namespace BookManager.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post(Book book)
         {
@@ -204,7 +204,7 @@ namespace BookManager.Controllers
 
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("load/qtd/{qtd:int}")]
         public async Task<IActionResult> load(int qtd = 100)
         {
