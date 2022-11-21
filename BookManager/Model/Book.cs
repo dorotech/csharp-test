@@ -8,10 +8,9 @@ namespace BookManager.Model
 
         public Book()
         {
-            title = string.Empty;
+            name = string.Empty;
             decription = string.Empty;
-            Author = string.Empty;
-            title = string.Empty;
+            author = string.Empty;
             isnb = string.Empty;
         }
 
@@ -20,11 +19,11 @@ namespace BookManager.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         [Required]
-        public string title { get; set; }
+        public string name { get; set; }
         [Required]
         public string decription { get; set; }
         [Required]
-        public string Author { get; set; }
+        public string author { get; set; }
         [Required]
         public int idCategory { get; set; }
         [Required]
@@ -33,6 +32,13 @@ namespace BookManager.Model
         public int year { get; set; }
         [Required]
         public int idPublisher { get; set; }
+        [Required]
+        public DateTime createAt { get; set; }
+
+        [Required]
+        public int exemplary { get; set; }
+
+
 
     }
 }

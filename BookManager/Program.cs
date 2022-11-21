@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using BookManager.Services;
+using BookManager.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureAuthentication(builder);
@@ -67,6 +68,7 @@ builder.Services.AddEntityFrameworkNpgsql()
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICostomLogRepository, CostomLogRepository>();
 
 var app = builder.Build();
 
@@ -78,7 +80,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseHttpLogging();
 
 
 app.UseAuthentication();

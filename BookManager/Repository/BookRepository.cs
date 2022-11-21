@@ -15,21 +15,39 @@ namespace BookManager.Repository
 
         public async Task<IEnumerable<Book>> GetBooksAsync()
         {
-            return await _context.Books
-                .Select(x => new Book { id = x.id, title = x.title })
-                .ToListAsync();
+            return await _context.Books.OrderBy(b => b.name).Take(1000).ToListAsync();
         }
 
         public async Task<Book> GetBooksByIdAsync(int id)
         {
-            var ret = await _context.Books.Where(x => x.id == id).FirstOrDefaultAsync();
-            if (ret != null)
+
+            Book? ret = await _context.Books.Where(x => x.id == id).FirstOrDefaultAsync();
+            if (ret == null)
             {
-                return ret;
+                ret = new Book();
             }
-            return new Book();
+            return ret;
 
         }
+
+        public async Task<IEnumerable<Book>> GetFilter(int skip, int take, string name)
+        {
+
+            name = string.IsNullOrWhiteSpace(name) ? string.Empty : name.Trim().ToLower();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                return await _context.Books.Where(
+                              x => x.name.Contains(name)
+                              ).AsNoTracking().Skip(skip).Take(take).OrderBy(b => b.name).ToListAsync();
+            }
+            else
+            {
+                return await _context.Books.AsNoTracking().Skip(skip).Take(take).OrderBy(b => b.name).ToListAsync();
+            }
+        }
+
+
 
 
 
@@ -39,6 +57,26 @@ namespace BookManager.Repository
             return (ret != null && ret.Any());
 
         }
+
+
+        public async Task<int> getMaxIdBook()
+        {
+            int maxId = 0;
+            var lst = await _context.Books.OrderByDescending(b => b.id).Take(1).ToListAsync();
+            if (lst != null && lst.Any())
+            {
+                var obj = lst.FirstOrDefault();
+                if (obj != null)
+                {
+                    maxId = obj.id;
+                }
+
+            }
+            return maxId;
+
+        }
+
+
 
     }
 }

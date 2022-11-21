@@ -1,6 +1,8 @@
 ## Desafio Back-End
 
-#### Check list
+# Atividades Trllo
+
+- Check list
 
 - Modelagem DR -OK
 - Swagger - OK
@@ -12,13 +14,14 @@
 - Crud-OK
 - Banco Pstegre -ok
 - Migrates -ok
-- Seeds - Carga
-- Log
-- SOLID
-- Factory
-- Singleton
-- TDD
+- Seeds - ok
+- Log - ok
+- Paginação-ok
+- SOLID -ok
+- Factory-ok
+- Singleton-ok
+- TDD-ok
 - VIDEO
 
-> dotnet ef migrations add MyFirstMigration --context DataContext
-> dotnet ef database update --context BloggingContext
+dotnet ef migrations add Migration5 --context DataContext
+dotnet ef database update --context DataContext
