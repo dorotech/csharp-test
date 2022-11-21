@@ -38,13 +38,32 @@ namespace BookManager.Repository
             if (!string.IsNullOrWhiteSpace(name))
             {
                 return await _context.Books.Where(
-                              x => x.name.Contains(name)
+                              x => x.name.Trim().ToLower().Contains(name)
                               ).AsNoTracking().Skip(skip).Take(take).OrderBy(b => b.name).ToListAsync();
             }
             else
             {
                 return await _context.Books.AsNoTracking().Skip(skip).Take(take).OrderBy(b => b.name).ToListAsync();
             }
+        }
+
+        public int getCountBook(string name)
+        {
+            int count = 0;
+
+            name = string.IsNullOrWhiteSpace(name) ? string.Empty : name.Trim().ToLower();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                count = _context.Books.Where(
+                              x => x.name.Trim().ToLower().Contains(name)
+                              ).AsNoTracking().Count();
+            }
+            else
+            {
+                count = _context.Books.Count();
+            }
+            return count;
         }
 
 
@@ -75,8 +94,6 @@ namespace BookManager.Repository
             return maxId;
 
         }
-
-
 
     }
 }

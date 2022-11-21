@@ -11,5 +11,6 @@ namespace BookManager.Repository.Interfaces
         public Task<IEnumerable<Book>> GetFilter(int skip, int take, string name);
 
         public Task<int> getMaxIdBook();
+        public int getCountBook(string name);
     }
 }

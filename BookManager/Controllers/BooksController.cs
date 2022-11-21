@@ -2,6 +2,7 @@ using BookManager.Model;
 using BookManager.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace BookManager.Controllers
 {
@@ -32,6 +33,7 @@ namespace BookManager.Controllers
                 }
                 else
                 {
+
                     return NotFound("Books not exiists");
                 }
             }
@@ -44,27 +46,35 @@ namespace BookManager.Controllers
 
 
         [AllowAnonymous]
-        [HttpGet("skip/{skip:int}/take/{take:int}/name/{name}")]
+        [HttpGet("GetFilter/skip/{skip:int}/take/{take:int}/name/{name}")]
         public async Task<IActionResult> GetFilter(
-            [FromRoute] int skip,
-            [FromRoute] int take,
-            [FromRoute] string name)
+            [FromRoute] int skip = 0,
+            [FromRoute] int take = 50,
+            [FromRoute] string name = "")
         {
             try
             {
                 var books = await repository.GetFilter(skip, take, name);
+
                 if (books != null && books.Any())
                 {
-                    return Ok(books);
+                    int pCount = repository.getCountBook(name);
+                    return Ok(new
+                    {
+                        skip = skip,
+                        take = take,
+                        count = pCount,
+                        data = books
+                    });
                 }
                 else
                 {
-                    return NotFound("Books not exiists");
+                    return NotFound("Books not exists");
                 }
             }
             catch (Exception ex)
             {
-                logger("Get", ex.ToString());
+                logger("GetFilter", ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -76,14 +86,20 @@ namespace BookManager.Controllers
         {
             try
             {
+                if (id <= 0)
+                {
+                    return NotFound("Id Not Found");
+                }
+
+
                 var book = await repository.GetBooksByIdAsync(id);
                 return book != null
                         ? Ok(book)
-                        : BadRequest("Book not found");
+                        : NotFound("Book not found");
             }
             catch (Exception ex)
             {
-                logger("Get", ex.ToString());
+                logger("GetById", ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -119,11 +135,11 @@ namespace BookManager.Controllers
 
                 return await repository.SaveChangesAsync()
                     ? Ok("Book adicionado com sucesso")
-                    : BadRequest("Erro ao salvar o book");
+                    : BadRequest("Erro ao salvar book");
             }
             catch (Exception ex)
             {
-                logger("Get", ex.ToString());
+                logger("Put", ex.ToString());
                 return BadRequest(ex.Message);
             }
 
@@ -144,7 +160,7 @@ namespace BookManager.Controllers
             }
             catch (Exception ex)
             {
-                logger("Get", ex.ToString());
+                logger("delete", ex.ToString());
                 return BadRequest(ex.Message);
             }
         }
@@ -181,7 +197,7 @@ namespace BookManager.Controllers
             }
             catch (Exception ex)
             {
-                logger("Get", ex.ToString());
+                logger("Post", ex.ToString());
                 return BadRequest(ex.Message);
             }
 
@@ -190,7 +206,7 @@ namespace BookManager.Controllers
 
         [AllowAnonymous]
         [HttpGet("load/qtd/{qtd:int}")]
-        public async Task<IActionResult> load(int qtd)
+        public async Task<IActionResult> load(int qtd = 100)
         {
             try
             {
@@ -211,7 +227,9 @@ namespace BookManager.Controllers
                         isnb = $"9999{i}",
                         year = 2004,
                         idPublisher = 1,
-                        exemplary = i
+                        exemplary = i,
+                        createAt = DateTime.Now
+
                     };
                     repository.Add(book);
 
@@ -229,13 +247,18 @@ namespace BookManager.Controllers
 
         }
 
-        private void logger(string pOperation, string pTrace)
+        private async void logger(string pOperation, string pTrace)
         {
             try
             {
-                var log = new CustomLog() { operation = pOperation, trace = pTrace, createAt = DateTime.Now };
+                var log = new CustomLog()
+                {
+                    operation = String.Concat("bookController", pOperation).ToLower(),
+                    trace = pTrace,
+                    createAt = DateTime.Now
+                };
                 costomLogRepository.Add(log);
-                costomLogRepository.SaveChangesAsync();
+                await costomLogRepository.SaveChangesAsync();
             }
             catch
             {
@@ -244,6 +267,24 @@ namespace BookManager.Controllers
 
 
         }
+
+        [AllowAnonymous]
+        [HttpGet("testeLog")]
+        public IActionResult testeLog()
+        {
+            try
+            {
+                logger("Get", "Trace");
+                return Ok("0k");
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+
 
 
     }

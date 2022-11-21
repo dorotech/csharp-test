@@ -44,7 +44,7 @@ namespace BookManager.Controllers
             else
             {
 
-                return BadRequest("User not found.");
+                return NotFound("User not found.");
             }
 
         }
