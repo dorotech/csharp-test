@@ -1,0 +1,5 @@
+"IdBook";"Name";"Genre";"Author";"WrittenDate";"BarCode";"AvailableQuantity";"RentedQuantity"
+3;"Don Quixote";"Novel";"Miguel de Cervantes";"1924-01-01 00:00:00";"7227715787";6;2
+4;"A Passage to India";"Novel";"E.M. Forster";"1615-01-01 00:00:00";"5268865911";8;2
+5;"Beloved";"Novel";"Toni Morrison";"1987-01-01 00:00:00";"0069266027";2;2
+6;"Moby Dick";"Novel";"Herman Melville";"1851-01-01 00:00:00";"8472729595";10;0
