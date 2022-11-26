@@ -1,4 +1,4 @@
-## Desafio Back-End
+## Desafio para Back-end Developer na DoroTech - C# .NET
 
 #### Requisitos Gerais:
 
@@ -48,7 +48,7 @@ Para ajudar a livraria foi solicitado a você desenvolver uma aplicação web pa
 
 
 
-## Back-End Challenge (English)
+## C# Back-end Challenge (English)
 
 #### General requirements:
 
