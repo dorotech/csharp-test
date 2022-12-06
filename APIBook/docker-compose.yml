@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  apibook:
+    image: ${DOCKER_REGISTRY-}apibook
+    build:
+      context: .
+      dockerfile: APIBook/Dockerfile
+    volumes:
+        - .\programlog:/programlog 
+    depends_on: 
+        - sqldata
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y 
+      - MSSQL_SA_PASSWORD=shadowy123
+    volumes:
+      - .\dbo:/var/opt/mssql/data
+    ports:
+      - "1433:1433"
