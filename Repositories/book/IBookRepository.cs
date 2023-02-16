@@ -1,0 +1,16 @@
+﻿using api.Model;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace api.Repositories.book
+{
+    public interface IBookRepository
+    {
+        Task<IEnumerable<Book>> Get();
+        Task<Book> Get(int Id);
+        Task<Book> Post(Book book);
+        Task Put(Book book);
+        Task Delete(int Id);
+    }
+}
