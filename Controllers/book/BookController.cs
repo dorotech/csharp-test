@@ -18,6 +18,9 @@ namespace api.Controllers.book
             _bookRepository = bookRepository;
         }
 
+        /// <summary>
+        /// Get all books in asceding order. Any user can submit this request.
+        /// </summary>
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
@@ -29,6 +32,10 @@ namespace api.Controllers.book
             return Ok(book);
         }
 
+        /// <summary>
+        /// Get book by Id. Any user can submit this request.
+        /// </summary>
+        /// <param name="Id"></param>
         [HttpGet("{Id}")]
         [AllowAnonymous]
         public async Task<ActionResult<Book>> GetBookById([FromRoute] int Id)
@@ -40,6 +47,11 @@ namespace api.Controllers.book
 
         }
 
+        /// <summary>
+        /// Create book. Only users with ADMIN and EMPLOYEE privileges can make this request.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "ADMIN,EMPLOYEE")]
         public async Task<ActionResult<Book>> CreateBook([FromBody] Book book)
@@ -47,13 +59,18 @@ namespace api.Controllers.book
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (book.Id != 0 || book.Title != null) 
+            if (book.Id != 0 || book.Title != null)
                 return BadRequest(new { message = "book already exists" });
 
             var createBook = await _bookRepository.Post(book);
             return CreatedAtAction(nameof(GetBookById), new { id = createBook.Id }, createBook);
         }
 
+        /// <summary>
+        /// Update Book. Only users with ADMIN and EMPLOYEE privileges can make this request.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="book"></param>
         [HttpPut("{Id}")]
         [Authorize(Roles = "ADMIN,EMPLOYEE")]
         public async Task<ActionResult> UpdateBook([FromRoute] int Id, [FromBody] Book book)
@@ -69,7 +86,10 @@ namespace api.Controllers.book
             return NoContent();
         }
 
-
+        /// <summary>
+        /// Delete Books. Only users with ADMIN privileges can make this request.
+        /// </summary>
+        /// <param name="Id"></param>
         [HttpDelete("{Id}")]
         [Authorize(Roles = "ADMIN")]
         public async Task<ActionResult> DeleteBook([FromRoute] int Id)

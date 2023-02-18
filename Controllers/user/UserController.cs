@@ -23,6 +23,10 @@ namespace api.Controllers.user
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// Register User. Any user can submit this request.
+        /// </summary>
+        /// <param name="users"></param>
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] Users users)
@@ -54,6 +58,10 @@ namespace api.Controllers.user
             return Ok(new { user, token });
         }
 
+        /// <summary>
+        /// Login. Any user can submit this request.
+        /// </summary>
+        /// <param name="login"></param>
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult<Users>> Login([FromBody] Login login)
@@ -73,8 +81,11 @@ namespace api.Controllers.user
             return Ok(new { user, token });
         }
 
+        /// <summary>
+        /// Get all users. Only users with ADMIN privileges can make this request.
+        /// </summary>
         [HttpGet("user")]
-        [Authorize(Roles="ADMIN")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<ActionResult<IEnumerable<Users>>> GetUser()
         {
             var user = await _userRepository.Get();
@@ -82,6 +93,24 @@ namespace api.Controllers.user
                 return NotFound();
 
             return Ok(user);
+        }
+
+        /// <summary>
+        /// Create users. Only users with ADMIN privileges can make this request
+        /// </summary>
+        /// <param name="users"></param>
+        [HttpPost("create")]
+        [Authorize(Roles = "ADMIN")]
+        public async Task<IActionResult> CreateUser(Users users)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (users.Id != 0 || users.Username != null)
+                return BadRequest(new { message = "User already exists." });
+
+            var createUser = await _userRepository.Post(users);
+            return CreatedAtAction(nameof(CreateUser), createUser);
         }
     }
 }

@@ -18,6 +18,10 @@ namespace api.Controllers.category
             _categoryRepository = categoryRepository;
         }
 
+        /// <summary>
+        /// Create Category. Only users with ADMIN privileges can make this request.
+        /// </summary>
+        /// <param name="category"></param>
         [HttpPost]
         [Authorize(Roles = "ADMIN, EMPLOYEE")]
         public async Task<ActionResult<Category>> CreateCategory([FromBody] Category category)

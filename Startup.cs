@@ -12,7 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models; 
+using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace api
@@ -29,6 +32,36 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "DoroBooks API",
+                    Description = "Simple book API with JWT Authentication",
+                    Contact = new OpenApiContact
+                    {
+                        Name = Configuration.GetSection("CONTACT_NAME").Value,
+                        Email = Configuration.GetSection("CONTACT_EMAIL").Value
+                    }
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
             services.AddLogging(builder => builder.AddConsole()); // Adicionando logger e um dos provedores de logger
             services.AddLogging();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("devConn")));
@@ -37,10 +70,6 @@ namespace api
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<TokenService>();
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
-            });
 
             var key = Encoding.ASCII.GetBytes(Configuration["JWT_SECRET"]);
             services.AddAuthentication(x =>
@@ -64,6 +93,7 @@ namespace api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors();
 
             if (env.IsDevelopment())
             {
@@ -73,7 +103,6 @@ namespace api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
