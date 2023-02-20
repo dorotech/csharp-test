@@ -47,13 +47,14 @@ namespace api.Repositories.user
             return new Users
             {
                 Username = username,
-                Password = password
+                Password = password,
+                Role = user.Role
             };
         }
 
         public async Task<IEnumerable<Users>> Get()
         {
-            return await _context.Users.OrderBy(b => b.Username).ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         public async Task<Users> Get(int Id)

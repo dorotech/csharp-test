@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace api.Controllers.user
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -84,33 +84,15 @@ namespace api.Controllers.user
         /// <summary>
         /// Get all users. Only users with ADMIN privileges can make this request.
         /// </summary>
-        [HttpGet("user")]
+        [HttpGet("users")]
         [Authorize(Roles = "ADMIN")]
-        public async Task<ActionResult<IEnumerable<Users>>> GetUser()
+        public async Task<ActionResult<IEnumerable<Users>>> GetUsers()
         {
             var user = await _userRepository.Get();
             if (user == null)
                 return NotFound();
 
             return Ok(user);
-        }
-
-        /// <summary>
-        /// Create users. Only users with ADMIN privileges can make this request
-        /// </summary>
-        /// <param name="users"></param>
-        [HttpPost("create")]
-        [Authorize(Roles = "ADMIN")]
-        public async Task<IActionResult> CreateUser(Users users)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (users.Id != 0 || users.Username != null)
-                return BadRequest(new { message = "User already exists." });
-
-            var createUser = await _userRepository.Post(users);
-            return CreatedAtAction(nameof(CreateUser), createUser);
         }
     }
 }
