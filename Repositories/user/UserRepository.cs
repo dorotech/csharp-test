@@ -44,9 +44,6 @@ namespace api.Repositories.user
 
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Username == username && u.Password == hashedPassword);
 
-            if (user == null)
-                return null;
-
             return new Users
             {
                 Username = username,
@@ -69,8 +66,7 @@ namespace api.Repositories.user
             _logger.LogInformation($"Create User: {users.Username}");
 
             if (string.IsNullOrWhiteSpace(users.Username) ||
-                string.IsNullOrWhiteSpace(users.Password) ||
-                string.IsNullOrWhiteSpace(users.Role.ToString()))
+                string.IsNullOrWhiteSpace(users.Password))
             {
                 _logger.LogWarning("credentials is not inserted!");
                 return null;
@@ -79,7 +75,8 @@ namespace api.Repositories.user
             var user = new Users
             {
                 Username = users.Username,
-                Password = HashPassword(users.Password)
+                Password = HashPassword(users.Password),
+                Role = users.Role
             };
 
             _logger.LogInformation("creating user");
@@ -96,7 +93,7 @@ namespace api.Repositories.user
                 return null;
             }
 
-            return users;
+            return user;
         }
     }
 }

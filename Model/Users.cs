@@ -15,13 +15,6 @@ namespace api.Model
         [Required(ErrorMessage = "{0} is required!")]
         [Column(TypeName = "varchar(250)")]
         public string Password { get; set; }
-
-        public Role? Role { get; set; }
-    }
-
-    public enum Role
-    {
-        ADMIN,
-        EMPLOYEE
+        public string Role { get; set; }
     }
 }

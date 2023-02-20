@@ -20,18 +20,14 @@ namespace api.Services
 
         public string GenerateToken(Users users)
         {
-            if (users == null)
-                throw new ArgumentNullException(nameof(users));
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration.GetSection("JWT_SECRET").Value);
-
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, users.Username),
-                    new Claim(ClaimTypes.Role, users.Role.ToString())
+                    new Claim(ClaimTypes.Role, users.Role),
                 }),
 
                 Expires = DateTime.UtcNow.AddHours(2),
