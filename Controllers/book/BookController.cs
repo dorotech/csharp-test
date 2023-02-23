@@ -3,6 +3,7 @@ using api.Repositories.book;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace api.Controllers.book
@@ -23,13 +24,14 @@ namespace api.Controllers.book
         /// </summary>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooks(int pageNumber = 1, int pageSize = 10, string orderBy = "id", string search = "")
         {
-            var book = await _bookRepository.Get();
-            if (book == null)
+            var books = await _bookRepository.Get(pageNumber, pageSize, orderBy, search);
+
+            if (books == null || !books.Any())
                 return NotFound();
 
-            return Ok(book);
+            return Ok(books);
         }
 
         /// <summary>
@@ -44,7 +46,6 @@ namespace api.Controllers.book
             if (book == null) return NotFound();
 
             return Ok(book);
-
         }
 
         /// <summary>

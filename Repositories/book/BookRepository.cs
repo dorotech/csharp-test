@@ -100,5 +100,36 @@ namespace api.Repositories.book
                 return;
             }
         }
+
+        public async Task<IEnumerable<Book>> Get(int pageNumber, int pageSize, string orderBy, string search)
+        {
+            var books = _context.Books.AsQueryable();
+
+            // Filtrar pelo campo search
+            if (!string.IsNullOrEmpty(search))
+            {
+                books = books.Where(b => b.Title.ToLower().Contains(search.ToLower()));
+            }
+
+            // Ordenar pelo campo orderBy
+            switch (orderBy?.ToLower())
+            {
+                case "title":
+                    books = books.OrderBy(b => b.Title);
+                    break;
+                case "author":
+                    books = books.OrderBy(b => b.Author);
+                    break;
+                default:
+                    books = books.OrderBy(b => b.Id);
+                    break;
+            }
+
+            // Paginação
+            var skip = (pageNumber - 1) * pageSize;
+            books = books.Skip(skip).Take(pageSize);
+
+            return await books.ToListAsync();
+        }
     }
 }

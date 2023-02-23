@@ -7,7 +7,7 @@ namespace api.Repositories.book
 {
     public interface IBookRepository
     {
-        Task<IEnumerable<Book>> Get();
+        Task<IEnumerable<Book>> Get(int pageNumber, int pageSize, string orderBy, string search);
         Task<Book> Get(int Id);
         Task<Book> Post(Book book);
         Task Put(Book book);
