@@ -1,2 +1,9 @@
 bin/
 obj/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+*.log
+*.nupkg
