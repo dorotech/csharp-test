@@ -60,8 +60,12 @@ namespace api.Controllers.book
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            if (book.Id != 0 || book.Title != null)
-                return BadRequest(new { message = "book already exists" });
+            var existingBook = await _bookRepository.Get(book.Author, book.Title);
+            
+            if (existingBook != null)
+            {
+                return BadRequest(new { message = "A book with the same author and title already exists" });
+            }
 
             var createBook = await _bookRepository.Post(book);
             return CreatedAtAction(nameof(GetBookById), new { id = createBook.Id }, createBook);

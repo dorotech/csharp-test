@@ -9,6 +9,7 @@ namespace api.Repositories.book
     {
         Task<IEnumerable<Book>> Get(int pageNumber, int pageSize, string orderBy, string search);
         Task<Book> Get(int Id);
+        Task<Book> Get(string author, string title);
         Task<Book> Post(Book book);
         Task Put(Book book);
         Task Delete(int Id);

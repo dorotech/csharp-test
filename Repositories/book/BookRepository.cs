@@ -131,5 +131,10 @@ namespace api.Repositories.book
 
             return await books.ToListAsync();
         }
+
+        public async Task<Book> Get(string author, string title)
+        {
+            return await _context.Books.SingleOrDefaultAsync(u => u.Author == author && u.Title == title);
+        }
     }
 }
