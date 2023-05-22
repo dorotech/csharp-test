@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Livraria</name>
+    </assembly>
+    <members>
+        <member name="M:Livraria.Controllers.LivrariaController.GetLivros">
+            <summary>
+            Lista os dados de todos os livros cadastrados
+            </summary>
+            <returns>Livros listados de forma ascendente pelo seu título</returns>
+        </member>
+        <member name="M:Livraria.Controllers.LivrariaController.GetLivro(System.Int32)">
+            <summary>
+            Lista os dados de apenas um livro através de seu id ou identificador
+            </summary>
+            <param name="id"></param>
+            <returns>Dados de apenas um livro</returns>
+        </member>
+        <member name="M:Livraria.Controllers.LivrariaController.PostLivro(Livraria.DTO.LivrariaDTO)">
+            <summary>
+            Cadastra um livro a aplicação
+            </summary>
+            <param name="livrariaDTO"></param>
+            <returns>Lista os dados do livro cadastrado</returns>
+        </member>
+        <member name="M:Livraria.Controllers.LivrariaController.PutLivro(System.Int32,Livraria.DTO.LivrariaDTO)">
+            <summary>
+            Altera os dados de um livro já cadastrado através de seu id ou identificador
+            </summary>
+            <param name="id"></param>
+            <param name="livrariaDTO"></param>
+            <returns>Mensagem informando ao consumidor que os dados do livro foram alterados</returns>
+        </member>
+        <member name="M:Livraria.Controllers.LivrariaController.DeleteLivro(System.Int32)">
+            <summary>
+            Excluí para sempre os dados do livro cujo id ou identificador for inserido
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna uma mensagem informando que os dados do livro foram excluídos</returns>
+        </member>
+        <member name="M:Livraria.Controllers.UsuarioController.GetADMToken(Livraria.DTO.UsuarioDTO)">
+            <summary>
+            Retorna um token de acesso ao administrador da livraria caso os dados inseridos estejam de acordo com o definido no corpo do método
+            </summary>
+            <param name="usuarioDTO"></param>
+            <returns>Token de Acesso ou mensagem aleatória</returns>
+            
+        </member>
+        <member name="M:Livraria.Controllers.UsuarioController.PostUsuario(Livraria.DTO.UsuarioDTO)">
+            <summary>
+            Adiciona um administrador e usuários a aplicação
+            </summary>
+            <param name="usuarioDTO"></param>
+            <returns>Disponibiliza parametros de acesso ao token</returns>
+        </member>
+        <member name="T:Livraria.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Livraria.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Livraria.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Livraria.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Livraria.Migrations.UsuarioDbMigrations.Administrador">
+            <inheritdoc />
+        </member>
+        <member name="M:Livraria.Migrations.UsuarioDbMigrations.Administrador.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Livraria.Migrations.UsuarioDbMigrations.Administrador.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Livraria.Migrations.UsuarioDbMigrations.Administrador.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
