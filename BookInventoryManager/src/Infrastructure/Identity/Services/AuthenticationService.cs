@@ -33,10 +33,4 @@ public class AuthenticationService : IAuthenticationService
 
         return await _jwtService.GenerateEncodedToken(user, roles);
     }
-
-    public async Task SignOut()
-    {
-        //TODO Verificar signOut com JWT
-        //await _signInManager.SignOutAsync();
-    }
 }

@@ -24,7 +24,7 @@ public class Book : BaseAuditableEntity
     public decimal? Length { get; private set; }
     public decimal? Width { get; private set; }
     public int Isbn { get; private set; }
-    public int CurrentInventory { get; private set; } //TODO faz sentido?
+    public int CurrentInventory { get; private set; }
     public bool Active { get; private set; }
     public int? Pages { get; private set; }
     public ICollection<StockMovement> StockMovements { get; private set; }
@@ -37,7 +37,8 @@ public class Book : BaseAuditableEntity
         Guid categoryId,
         Guid publisherId,
         int isbn,
-        int currentInventory
+        int currentInventory,
+        int? pages = null
     )
     {
         Title = title;

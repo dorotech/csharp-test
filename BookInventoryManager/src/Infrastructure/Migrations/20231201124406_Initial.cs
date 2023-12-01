@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Infrastructure.Data.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -277,6 +277,7 @@ namespace Infrastructure.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BookId = table.Column<Guid>(type: "uniqueidentifier", maxLength: 100, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -337,6 +338,11 @@ namespace Infrastructure.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Authors_IsDeleted",
+                table: "Authors",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorId",
                 table: "Books",
                 column: "AuthorId");
@@ -347,14 +353,34 @@ namespace Infrastructure.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Books_IsDeleted",
+                table: "Books",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Books_PublisherId",
                 table: "Books",
                 column: "PublisherId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Categories_IsDeleted",
+                table: "Categories",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Publishers_IsDeleted",
+                table: "Publishers",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_StockMoviments_BookId",
                 table: "StockMoviments",
                 column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StockMoviments_IsDeleted",
+                table: "StockMoviments",
+                column: "IsDeleted");
         }
 
         /// <inheritdoc />
