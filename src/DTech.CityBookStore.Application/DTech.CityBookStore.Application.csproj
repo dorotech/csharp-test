@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DTech.CityBookStore.Application.Core\DTech.CityBookStore.Application.Core.csproj" />
+    <ProjectReference Include="..\DTech.CityBookStore.Data\DTech.CityBookStore.Data.csproj" />
+    <ProjectReference Include="..\DTech.CityBookStore.Domain\DTech.CityBookStore.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

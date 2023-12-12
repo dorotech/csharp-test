@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DTech.Domain.Core\DTech.Domain.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Validations\BookMessageValidationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookMessageValidationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Validations\GeneralMessageValidationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralMessageValidationResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Validations\BookMessageValidationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookMessageValidationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Validations\GeneralMessageValidationResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralMessageValidationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
