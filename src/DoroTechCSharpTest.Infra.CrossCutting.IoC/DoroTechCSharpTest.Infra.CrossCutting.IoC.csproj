@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DoroTechCSharpTest.Application\DoroTechCSharpTest.Application.csproj" />
+    <ProjectReference Include="..\DoroTechCSharpTest.Domain\DoroTechCSharpTest.Domain.csproj" />
+    <ProjectReference Include="..\DoroTechCSharpTest.Infra.Data\DoroTechCSharpTest.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
