@@ -23,4 +23,8 @@
     <ProjectReference Include="..\DTech.CityBookStore.Domain\DTech.CityBookStore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

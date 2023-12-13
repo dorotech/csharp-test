@@ -61,6 +61,15 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The Book with Id {0} don&apos;t exists..
+        /// </summary>
+        public static string BookDontExists {
+            get {
+                return ResourceManager.GetString("BookDontExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The value of Edition need greater than 0..
         /// </summary>
         public static string EditionGreaterThan {

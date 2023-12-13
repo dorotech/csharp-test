@@ -8,7 +8,9 @@ internal class BookProfile : Profile
 {
     public BookProfile()
     {
-        CreateMap<Book, BookAddDto>();
-        CreateMap<Book, BookDetailsDto>();
+        CreateMap<BookAddDto, Book>();
+        CreateMap<BookUpdateDto, Book>();
+        CreateMap<Book, BookDetailsDto>()            
+            .ForMember(d => d.Dimensions, o => o.MapFrom(s => s.GetDemensions()));
     }
 }

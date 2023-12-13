@@ -1,5 +1,9 @@
 using DTech.CityBookStore.Data.Extensions;
 using DTech.CityBookStore.Application.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using DTech.CityBookStore.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +18,7 @@ builder.Services.AddDbCityBookStoreContext(configuration);
 builder.Services.AddRepositores();
 builder.Services.AddCityBookStoreAutoMapper();
 builder.Services.AddCityBookStoreServices();
+builder.Services.AddSwaggerConfigs();
 
 var app = builder.Build();
 

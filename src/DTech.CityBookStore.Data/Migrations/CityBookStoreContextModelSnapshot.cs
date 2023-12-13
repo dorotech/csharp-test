@@ -31,6 +31,12 @@ namespace DTech.CityBookStore.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("Author");
+
                     b.Property<decimal?>("DimensionHeight")
                         .HasColumnType("decimal(5, 2)")
                         .HasColumnName("DimensionHeight");
@@ -49,16 +55,19 @@ namespace DTech.CityBookStore.Data.Migrations
 
                     b.Property<string>("ISBN10")
                         .IsRequired()
+                        .HasMaxLength(10)
                         .HasColumnType("varchar(10)")
                         .HasColumnName("ISBN10");
 
                     b.Property<string>("ISBN13")
                         .IsRequired()
-                        .HasColumnType("varchar(13)")
+                        .HasMaxLength(14)
+                        .HasColumnType("varchar(14)")
                         .HasColumnName("ISBN13");
 
                     b.Property<string>("Language")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("varchar(50)")
                         .HasColumnName("Language");
 
@@ -68,11 +77,13 @@ namespace DTech.CityBookStore.Data.Migrations
 
                     b.Property<string>("Publishing")
                         .IsRequired()
+                        .HasMaxLength(150)
                         .HasColumnType("varchar(150)")
                         .HasColumnName("Publishing");
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(250)
                         .HasColumnType("varchar(250)")
                         .HasColumnName("Title");
 

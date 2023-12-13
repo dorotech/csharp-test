@@ -14,6 +14,10 @@ public class BookValidator : AbstractValidator<Book>
             .NotEmpty().WithMessage(GeneralMessageValidationResources.PropertyIsRequired)
             .Length(1, 250).WithMessage(GeneralMessageValidationResources.PropertyLength);
 
+        RuleFor(x => x.Author)
+            .NotEmpty().WithMessage(GeneralMessageValidationResources.PropertyIsRequired)
+            .Length(1, 250).WithMessage(GeneralMessageValidationResources.PropertyLength);
+
         RuleFor(x => x.Language)
             .NotEmpty().WithMessage(GeneralMessageValidationResources.PropertyIsRequired)
             .Length(3, 50).WithMessage(GeneralMessageValidationResources.PropertyLength);

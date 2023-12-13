@@ -21,11 +21,19 @@ internal class BookTypeConfiguration : IEntityTypeConfiguration<Book>
         builder.Property(p => p.Title)
                .HasColumnName("Title")
                .HasColumnType("varchar(250)")
+               .HasMaxLength(250)
+               .IsRequired(true);
+
+        builder.Property(p => p.Author)
+               .HasColumnName("Author")
+               .HasColumnType("varchar(250)")
+               .HasMaxLength(250)
                .IsRequired(true);
 
         builder.Property(p => p.Language)
                .HasColumnName("Language")
                .HasColumnType("varchar(50)")
+               .HasMaxLength(50)
                .IsRequired(true);
 
         builder.Property(p => p.Edition)
@@ -41,11 +49,13 @@ internal class BookTypeConfiguration : IEntityTypeConfiguration<Book>
         builder.Property(p => p.Publishing)
                .HasColumnName("Publishing")
                .HasColumnType("varchar(150)")
+               .HasMaxLength(150)
                .IsRequired(true);
 
         builder.Property(p => p.ISBN10)
                .HasColumnName("ISBN10")
-               .HasColumnType("varchar(10)")
+               .HasColumnType("varchar(10)")               
+               .HasMaxLength(10)
                .IsRequired(true);
 
         builder.HasIndex(p => p.ISBN10)
@@ -54,7 +64,8 @@ internal class BookTypeConfiguration : IEntityTypeConfiguration<Book>
 
         builder.Property(p => p.ISBN13)
                .HasColumnName("ISBN13")
-               .HasColumnType("varchar(13)")
+               .HasColumnType("varchar(14)")
+               .HasMaxLength(14)
                .IsRequired(true);
 
         builder.HasIndex(p => p.ISBN13)
