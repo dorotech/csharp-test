@@ -7,6 +7,7 @@ using DTech.CityBookStore.Domain.Books.Repositories;
 using DTech.CityBookStore.Domain.Books.Validations;
 using DTech.CityBookStore.Domain.Resources.Validations;
 using DTech.Domain.Core.Pagination;
+using Microsoft.Extensions.Logging;
 
 namespace DTech.CityBookStore.Application.Books;
 
@@ -14,12 +15,17 @@ public class BookService : BaseService, IBookService
 {
     private readonly IBookRepository _repository;
     private readonly IMapper _mapper;
+    private readonly ILogger<BookService> _logger;
 
-    public BookService(IBookRepository repository, IMapper mapper, INotifier notifier)
+    public BookService(IBookRepository repository, 
+                       IMapper mapper,
+                       INotifier notifier,
+                       ILogger<BookService> logger)
         : base(notifier)
     {
         _repository = repository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<BookDetailsDto> GetAsync(int id)
@@ -45,12 +51,14 @@ public class BookService : BaseService, IBookService
         if (hasBookWithISBNS)
         {
             Notify(BookMessageValidationResources.ExistsBook);
+            _logger.LogError(BookMessageValidationResources.ExistsBook);
             return null;
         }
 
         var insertedModel = await _repository.CreateAsync(model);
 
         var createdDto = _mapper.Map<BookDetailsDto>(insertedModel);
+        _logger.LogInformation($"Book created: {model.ToString()}");
 
         return createdDto;
     }
@@ -71,6 +79,7 @@ public class BookService : BaseService, IBookService
         if (!hasBookWithId)
         {
             Notify(string.Format(BookMessageValidationResources.BookDontExists, id));
+            _logger.LogError(BookMessageValidationResources.BookDontExists, id);
             return null;
         }
 
@@ -79,12 +88,14 @@ public class BookService : BaseService, IBookService
         if (hasBookWithISBNSAndDifferentId)
         {
             Notify(BookMessageValidationResources.ExistsBook);
+            _logger.LogError($"{BookMessageValidationResources.ExistsBook} ISBN10: {model.ISBN10} and ISBN13: {model.ISBN13}.");
             return null;
         }
 
         var insertedModel = await _repository.UpdateAsync(model);
 
         var updatedDto = _mapper.Map<BookDetailsDto>(insertedModel);
+        _logger.LogInformation($"Book updated: {model.ToString()}");
 
         return updatedDto;
     }
@@ -96,10 +107,12 @@ public class BookService : BaseService, IBookService
         if (!hasBookWithId)
         {
             Notify(string.Format(BookMessageValidationResources.BookDontExists, id));
+            _logger.LogError(BookMessageValidationResources.BookDontExists, id);
             return;
         }
-
+                
         await _repository.DeleteAsync(id);
+        _logger.LogInformation($"Book deleted Id: {id}.");
     }
 
     public async Task<PagedResult<BookDetailsDto>> FindByFiltersAsync(int? id,

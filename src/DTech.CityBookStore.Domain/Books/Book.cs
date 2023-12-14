@@ -20,4 +20,7 @@ public class Book : Entity
     public bool IsValid() => new BookValidator().Validate(this).IsValid;
 
     public string GetDemensions() => $"{DimensionLength ?? 0.0M} mm x {DimensionHeight ?? 0.0M} mm x {DimensionWidth ?? 0.0M} mm";
+
+    public override string ToString()
+        => $"Book Id: {Id} Title: {Title} Author: {Author} Language: {Language} Edition: {Edition} Pages: {Pages} Publishing: {Publishing} ISBN10: {ISBN10} ISBN13: {ISBN13} Dimensions: {GetDemensions()}.";
 }

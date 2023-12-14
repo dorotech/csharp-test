@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DTech.CityBookStore.Api.Extensions;
+using ElmahCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,10 @@ builder.Services.AddRepositores();
 builder.Services.AddCityBookStoreAutoMapper();
 builder.Services.AddCityBookStoreServices();
 builder.Services.AddSwaggerConfigs();
+builder.Services.AddElmah(options => 
+{
+    options.Path = "loggins";    
+});
 
 var app = builder.Build();
 
@@ -32,5 +37,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseElmah();
 
 app.Run();
