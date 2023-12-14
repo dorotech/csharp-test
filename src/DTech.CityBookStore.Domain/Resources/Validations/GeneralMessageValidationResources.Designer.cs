@@ -22,7 +22,7 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class GeneralMessageValidationResources {
+    public class GeneralMessageValidationResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DTech.CityBookStore.Domain.Resources.Validations.GeneralMessageValidationResource" +
@@ -52,7 +52,7 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,16 +64,25 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The {PropertyName} must be exactly {MinLength} characters long..
         /// </summary>
-        internal static string PropertyExactLength {
+        public static string PropertyExactLength {
             get {
                 return ResourceManager.GetString("PropertyExactLength", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The value of {PropertyName} need greater than 0..
+        /// </summary>
+        public static string PropertyGraterThen0 {
+            get {
+                return ResourceManager.GetString("PropertyGraterThen0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The {PropertyName} is required..
         /// </summary>
-        internal static string PropertyIsRequired {
+        public static string PropertyIsRequired {
             get {
                 return ResourceManager.GetString("PropertyIsRequired", resourceCulture);
             }
@@ -82,7 +91,7 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The {PropertyName} must have between {MinLength} and {MaxLength} characters..
         /// </summary>
-        internal static string PropertyLength {
+        public static string PropertyLength {
             get {
                 return ResourceManager.GetString("PropertyLength", resourceCulture);
             }

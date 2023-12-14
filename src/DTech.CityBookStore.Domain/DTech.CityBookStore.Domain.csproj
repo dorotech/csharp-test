@@ -32,7 +32,7 @@
       <LastGenOutput>BookMessageValidationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Validations\GeneralMessageValidationResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GeneralMessageValidationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

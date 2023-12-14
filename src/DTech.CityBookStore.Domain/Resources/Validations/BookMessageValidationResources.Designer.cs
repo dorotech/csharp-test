@@ -70,11 +70,11 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The value of Edition need greater than 0..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The Book Id is different to informed Id..
         /// </summary>
-        public static string EditionGreaterThan {
+        public static string BookIdDifferent {
             get {
-                return ResourceManager.GetString("EditionGreaterThan", resourceCulture);
+                return ResourceManager.GetString("BookIdDifferent", resourceCulture);
             }
         }
         
@@ -84,15 +84,6 @@ namespace DTech.CityBookStore.Domain.Resources.Validations {
         public static string ExistsBook {
             get {
                 return ResourceManager.GetString("ExistsBook", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The value of Pages need greater than 0..
-        /// </summary>
-        public static string PagesGreaterThan {
-            get {
-                return ResourceManager.GetString("PagesGreaterThan", resourceCulture);
             }
         }
     }

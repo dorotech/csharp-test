@@ -67,6 +67,12 @@ public class BookService : BaseService, IBookService
     {
         var model = _mapper.Map<Book>(dto);
 
+        if (model.Id != id)
+        {
+            Notify(BookMessageValidationResources.BookIdDifferent);
+            return null;
+        }
+
         var validator = new BookValidator();
 
         if (!Validate(validator, model))

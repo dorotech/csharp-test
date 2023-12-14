@@ -19,9 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTech.CityBookStore.Data", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Application", "02-Application", "{A9BFB8B9-D370-42DE-A1BD-F6810551BE1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTech.CityBookStore.Application", "src\DTech.CityBookStore.Application\DTech.CityBookStore.Application.csproj", "{56527C22-1058-49F8-A75B-02F702B9A47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTech.CityBookStore.Application", "src\DTech.CityBookStore.Application\DTech.CityBookStore.Application.csproj", "{56527C22-1058-49F8-A75B-02F702B9A47C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTech.CityBookStore.Application.Core", "src\DTech.CityBookStore.Application.Core\DTech.CityBookStore.Application.Core.csproj", "{8B323198-B44B-4885-9EC7-06D6885EA4BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTech.CityBookStore.Application.Core", "src\DTech.CityBookStore.Application.Core\DTech.CityBookStore.Application.Core.csproj", "{8B323198-B44B-4885-9EC7-06D6885EA4BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ZZ-Tests", "ZZ-Tests", "{363B3EC0-9571-41A5-A933-625682968927}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTech.CityBookStore.UnitTests", "src\DTech.CityBookStore.UnitTests\DTech.CityBookStore.UnitTests.csproj", "{FD53553F-08FE-4D53-84CC-E757BD2665DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,10 @@ Global
 		{8B323198-B44B-4885-9EC7-06D6885EA4BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B323198-B44B-4885-9EC7-06D6885EA4BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B323198-B44B-4885-9EC7-06D6885EA4BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD53553F-08FE-4D53-84CC-E757BD2665DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD53553F-08FE-4D53-84CC-E757BD2665DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD53553F-08FE-4D53-84CC-E757BD2665DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD53553F-08FE-4D53-84CC-E757BD2665DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{008BF4AB-7579-4F62-8C2A-67F4211F66AC} = {5832C43A-854C-414A-B519-46292F8EE400}
 		{56527C22-1058-49F8-A75B-02F702B9A47C} = {A9BFB8B9-D370-42DE-A1BD-F6810551BE1A}
 		{8B323198-B44B-4885-9EC7-06D6885EA4BB} = {A9BFB8B9-D370-42DE-A1BD-F6810551BE1A}
+		{FD53553F-08FE-4D53-84CC-E757BD2665DE} = {363B3EC0-9571-41A5-A933-625682968927}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC12495A-4D88-4F8B-ABAA-BBC1CF523950}

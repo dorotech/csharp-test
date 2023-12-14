@@ -6,14 +6,14 @@ namespace DTech.CityBookStore.Application.Core.Base;
 
 public abstract class BaseService
 {
-    private readonly INotifier _notifier;
+    protected readonly INotifier _notifier;
 
     public BaseService(INotifier notifier)
     {
         _notifier = notifier;
     }
 
-    protected void Notify(ValidationResult validationResult)
+    public void Notify(ValidationResult validationResult)
     {
         foreach (var error in validationResult.Errors)
         {
@@ -21,12 +21,12 @@ public abstract class BaseService
         }
     }
 
-    protected void Notify(string message)
+    public void Notify(string message)
     {
         _notifier.Handle(new Notification(message));
     }
 
-    protected bool Validate<TV, TE>(TV validation, TE entity) where TV : AbstractValidator<TE>
+    public bool Validate<TV, TE>(TV validation, TE entity) where TV : AbstractValidator<TE>
     {
         var validator = validation.Validate(entity);
 
@@ -37,5 +37,7 @@ public abstract class BaseService
         return false;
     }
 
-    protected bool IsValid() => _notifier.HasNotification();
+    public bool IsValid() => !_notifier.HasNotification();
+
+    public List<string> GetErrosMessages() => _notifier.GetNotifications().Select(n => n.Message).ToList();
 }

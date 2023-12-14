@@ -120,6 +120,9 @@
   <data name="PropertyExactLength" xml:space="preserve">
     <value>The {PropertyName} must be exactly {MinLength} characters long.</value>
   </data>
+  <data name="PropertyGraterThen0" xml:space="preserve">
+    <value>The value of {PropertyName} need greater than 0.</value>
+  </data>
   <data name="PropertyIsRequired" xml:space="preserve">
     <value>The {PropertyName} is required.</value>
   </data>
