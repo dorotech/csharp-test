@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "a2684ade-31c6-41d4-851b-783821735d99",
+		"name": "CityBookStore API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "728460"
+	},
+	"item": [
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Add Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"O erro de Descartes\",\r\n  \"author\": \" António Damásio;  Dora Vicente; Georgina Segurado\",\r\n  \"language\": \"Português\",\r\n  \"edition\": 1,\r\n  \"pages\": 264,\r\n  \"publishing\": \"Edição Econômica\",\r\n  \"isbN10\": \"8535922008\",\r\n  \"isbN13\": \"978-8535922004\",\r\n  \"dimensionLength\": 22.8,\r\n  \"dimensionHeight\": 16,\r\n  \"dimensionWidth\": 1.6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/{{version}}/book",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\" : 1,\r\n  \"title\": \"O verdadeiro criador de tudo: Como o cérebro humano esculpiu o universo como nós o conhecemos.\",\r\n  \"author\": \"Dr Miguel Nicolelis\",\r\n  \"language\": \"Português\",\r\n  \"edition\": 1,\r\n  \"pages\": 401,\r\n  \"publishing\": \"Editora Crítica\",\r\n  \"isbN10\": \"6555350288\",\r\n  \"isbN13\": \"978-6555350289\",\r\n  \"dimensionLength\": 22.8,\r\n  \"dimensionHeight\": 15.2,\r\n  \"dimensionWidth\": 1.8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/{{version}}/book/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl9pZCI6IjEiLCJzdWIiOiIxIiwiZW1haWwiOiJhZG1pbkBkb3JvdGVjaC5jb20uYnIiLCJqdGkiOiI1MjMwMTQyZi1kODM4LTRmYWMtOTZlNS1hNzFkZDM5ZGEyNzkiLCJuYmYiOjE3MDI1ODM4NDgsImlhdCI6MTcwMjU4Mzg0OCwiSXNBZG1pbiI6IlRydWUiLCJleHAiOjE3MDI2MTI2NDgsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE0OSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE0OSJ9.uiLW9gEoX_Tj05uzF8hax-QNDTb_Fr5MZ8Ms3up7SPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/{{version}}/book/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"book",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/{{version}}/book/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"book",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/{{version}}/book?id&title&author&language&minEdition&maxEdition&minPages=&maxPages=&publishing&isbn10&isbn13&page=1&pageSize=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"book"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": null
+								},
+								{
+									"key": "title",
+									"value": null
+								},
+								{
+									"key": "author",
+									"value": null
+								},
+								{
+									"key": "language",
+									"value": null
+								},
+								{
+									"key": "minEdition",
+									"value": null
+								},
+								{
+									"key": "maxEdition",
+									"value": null
+								},
+								{
+									"key": "minPages",
+									"value": ""
+								},
+								{
+									"key": "maxPages",
+									"value": ""
+								},
+								{
+									"key": "publishing",
+									"value": null
+								},
+								{
+									"key": "isbn10",
+									"value": null
+								},
+								{
+									"key": "isbn13",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"admin@dorotech.com.br\",\r\n  \"password\": \"DoroTech@2023\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
