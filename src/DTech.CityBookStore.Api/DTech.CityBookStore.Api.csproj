@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -16,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="ElmahCore" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,6 +29,12 @@
     <ProjectReference Include="..\DTech.CityBookStore.Data\DTech.CityBookStore.Data.csproj" />
     <ProjectReference Include="..\DTech.CityBookStore.Domain\DTech.CityBookStore.Domain.csproj" />
     <ProjectReference Include="..\DTech.Domain.Core\DTech.Domain.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sitybookstore-hsa-4096-key.pub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

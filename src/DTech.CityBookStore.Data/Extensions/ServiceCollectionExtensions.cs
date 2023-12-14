@@ -1,6 +1,8 @@
 ﻿using DTech.CityBookStore.Data.Context;
 using DTech.CityBookStore.Data.Repositories.Books;
+using DTech.CityBookStore.Data.Repositories.Users;
 using DTech.CityBookStore.Domain.Books.Repositories;
+using DTech.CityBookStore.Domain.Users.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,5 +27,6 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection AddRepositores(this IServiceCollection services)
-        => services.AddScoped<IBookRepository, BookRepository>();
+        => services.AddScoped<IBookRepository, BookRepository>()
+                   .AddScoped<IUserRepository, UserRepository>();
 }

@@ -20,6 +20,7 @@ builder.Services.AddRepositores();
 builder.Services.AddCityBookStoreAutoMapper();
 builder.Services.AddCityBookStoreServices();
 builder.Services.AddSwaggerConfigs();
+builder.Services.AddIdentityConfiguration(configuration);
 builder.Services.AddElmah(options => 
 {
     options.Path = "loggins";    
@@ -34,7 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
+app.UseIdentityConfiguration();
 
 app.MapControllers();
 

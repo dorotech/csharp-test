@@ -20,3 +20,12 @@ GO
 
 SET IDENTITY_INSERT [Books] OFF
 GO
+
+SET IDENTITY_INSERT [Users] ON
+GO
+
+INSERT INTO [Users] ([Id],[FullName],[Login],[Email],[Password],[Status],[CreatedAt],[LastLoginDate],[IsAdmin])
+VALUES(1, 'Administrator', 'admin@dorotech.com.br', 'admin@dorotech.com.br', '02101824E1C1FBBCE9FF19A87FC6B6B5', 1, SYSDATETIMEOFFSET(), NULL, 1);
+
+SET IDENTITY_INSERT [Users] OFF
+GO

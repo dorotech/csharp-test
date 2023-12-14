@@ -1,8 +1,10 @@
 ﻿using DTech.CityBookStore.Api.Controllers.Base;
+using DTech.CityBookStore.Api.Extensions;
 using DTech.CityBookStore.Application.Books;
 using DTech.CityBookStore.Application.Books.Dto;
 using DTech.CityBookStore.Application.Core.Notifications;
 using DTech.Domain.Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +14,7 @@ namespace DTech.CityBookStore.Api.Controllers.V1;
 
 [Route("api/v1/book")]
 [ApiController]
+[Authorize]
 public class BookController : BaseController
 {
     private readonly IBookService _service;
@@ -27,6 +30,7 @@ public class BookController : BaseController
     /// </summary>
     /// <param name="id">Identifier of the Book. (integer)</param>
     /// <returns>Book.</returns>
+    [AllowAnonymous]
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BookDetailsDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -41,7 +45,7 @@ public class BookController : BaseController
 
         return CustomResponse(result);
     }
-        
+
 
     /// <summary>
     /// Gets paginated list of Books filtering by parameters.
@@ -63,6 +67,7 @@ public class BookController : BaseController
     /// <param name="page">Number of the current Page. (integer)</param>
     /// <param name="pageSize">Size of current Page. (integer)</param>
     /// <returns>Paginated List of Books.</returns>
+    [AllowAnonymous]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResult<BookDetailsDto>))]
     public async Task<IActionResult> GetAsync([FromQuery] int? id,
@@ -97,6 +102,7 @@ public class BookController : BaseController
     /// </summary>
     /// <param name="book"></param>
     /// <returns></returns>
+    [ClaimsAuthorize("IsAdmin", "True")]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(BookDetailsDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -123,6 +129,7 @@ public class BookController : BaseController
     /// <param name="book">Book model values.</param>
     /// <param name="id">Id of the the Book.</param>
     /// <returns></returns>
+    [ClaimsAuthorize("IsAdmin", "True")]
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BookDetailsDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -148,6 +155,7 @@ public class BookController : BaseController
     /// </summary>    
     /// <param name="id">Id of the the Book.</param>
     /// <returns></returns>
+    [ClaimsAuthorize("IsAdmin", "True")]
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

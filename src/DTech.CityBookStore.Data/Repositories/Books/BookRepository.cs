@@ -120,6 +120,8 @@ public class BookRepository : IBookRepository
             query = query.Where(b => b.Pages <= maxPages.Value);
         }
 
+        query = query.OrderBy(b => b.Title);
+
         return await query.GetPagedAsync(page, pageSize);
     }
         

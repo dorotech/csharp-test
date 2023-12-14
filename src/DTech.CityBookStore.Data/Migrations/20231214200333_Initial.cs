@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -33,6 +34,26 @@ namespace DTech.CityBookStore.Data.Migrations
                     table.PrimaryKey("PK_Books", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "varchar(350)", maxLength: 350, nullable: false),
+                    Login = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
+                    Email = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
+                    Password = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset(7)", nullable: false),
+                    LastLoginDate = table.Column<DateTimeOffset>(type: "datetimeoffset(7)", nullable: true),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Book_Unique_ISBN10",
                 table: "Books",
@@ -44,6 +65,12 @@ namespace DTech.CityBookStore.Data.Migrations
                 table: "Books",
                 column: "ISBN13",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Unique_Login",
+                table: "Users",
+                column: "Login",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -51,6 +78,9 @@ namespace DTech.CityBookStore.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

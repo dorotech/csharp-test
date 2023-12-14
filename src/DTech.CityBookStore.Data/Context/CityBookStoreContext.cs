@@ -1,4 +1,5 @@
 ﻿using DTech.CityBookStore.Domain.Books;
+using DTech.CityBookStore.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace DTech.CityBookStore.Data.Context;
@@ -6,6 +7,7 @@ namespace DTech.CityBookStore.Data.Context;
 public class CityBookStoreContext : DbContext
 {
     public DbSet<Book> Books { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public CityBookStoreContext(DbContextOptions<CityBookStoreContext> options)
             : base(options)
