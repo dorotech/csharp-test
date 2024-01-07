@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
 
-public class PublisherConfiguration : IEntityTypeConfiguration<Publisher>
-{
-    public void Configure(EntityTypeBuilder<Publisher> builder)
-    {
-        builder.ToTable("Publishers");
+//public class PublisherConfiguration : IEntityTypeConfiguration<Publisher>
+//{
+//    public void Configure(EntityTypeBuilder<Publisher> builder)
+//    {
+//        //builder.ToTable("Publishers");
 
-        builder.HasKey(publisher => publisher.Id);
-        builder
-            .Property(publisher => publisher.Name)
-            .IsRequired();
-    }
-}
+//        //builder.HasKey(publisher => publisher.Id);
+//        //builder
+//        //    .Property(publisher => publisher.Name)
+//        //    .IsRequired();
+//    }
+//}

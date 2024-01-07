@@ -10,7 +10,7 @@ public class Book : Entity
         string title,
         int edition,
         string language,
-        DateTimeOffset publicationDate,
+        DateOnly publicationDate,
         string isbn,
         string? description,
         int? pages
@@ -30,7 +30,7 @@ public class Book : Entity
         string title,
         int edition,
         string language,
-        DateTimeOffset publicationDate,
+        DateOnly publicationDate,
         string isbn,
         string? description,
         int? pages
@@ -43,7 +43,7 @@ public class Book : Entity
     public string? Description { get; private set; }
     public int Edition { get; private set; }
     public string Language { get; private set; }
-    public DateTimeOffset PublicationDate { get; private set; }
+    public DateOnly PublicationDate { get; private set; }
     //public long AuthorId { get; private set; }
     //public Author Author { get; private set; }
     //public long PublisherId { get; private set; }
@@ -63,7 +63,7 @@ public class Book : Entity
         string title,
         int edition,
         string language,
-        DateTimeOffset publicationDate,
+        DateOnly publicationDate,
         string isbn,
         string? description,
         int? pages
@@ -75,7 +75,7 @@ public class Book : Entity
         string title,
         int edition,
         string language,
-        DateTimeOffset publicationDate,
+        DateOnly publicationDate,
         string isbn,
         string? description,
         int? pages

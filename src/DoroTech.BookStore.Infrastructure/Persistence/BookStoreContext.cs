@@ -24,7 +24,7 @@ public class BookStoreContext : DbContext
                 .SelectMany(t => t.GetProperties())
                 .Where(p => p.ClrType == baseStringType)
                 .Select(p => modelBuilder.Entity(p.DeclaringType.ClrType).Property(p.Name))
-                .ForEach(propBuilder => propBuilder.IsRequired().IsUnicode(false).HasMaxLength(255));
+                .ForEach(propBuilder => propBuilder.IsRequired().IsUnicode(false).HasMaxLength(150));
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookStoreContext).Assembly);
         base.OnModelCreating(modelBuilder);

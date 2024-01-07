@@ -7,7 +7,7 @@ public record struct BookDetailsViewModel
     public string Description { get; init; }
     public int Edition { get; init; }
     public string Language { get; init; }
-    public DateTimeOffset PublicationDate { get; init; }
+    public DateOnly PublicationDate { get; init; }
     public decimal? Cust { get; init; }
     public bool ItIsFromDonation { get; init; }
     public decimal SalePrice { get; init; }

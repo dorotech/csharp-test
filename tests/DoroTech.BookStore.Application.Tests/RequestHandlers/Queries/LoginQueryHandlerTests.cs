@@ -1,7 +1,7 @@
 ﻿using DoroTech.BookStore.Application.Common;
 using DoroTech.BookStore.Application.Repositories;
 using DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
-using DoroTech.BookStore.Contracts.Requests.Queries.Auth;
+using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
 using DoroTech.BookStore.Contracts.Responses.Auth;
 using DoroTech.BookStore.Domain.Aggregates;
 using FluentAssertions;
