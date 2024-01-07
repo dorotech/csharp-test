@@ -4,6 +4,8 @@ using DoroTech.BookStore.Application.Common.Interfaces.Services;
 using DoroTech.BookStore.Application.Repositories;
 using DoroTech.BookStore.Infrastructure.Authentication;
 using DoroTech.BookStore.Infrastructure.Persistence;
+using DoroTech.BookStore.Infrastructure.Persistence.Repositories;
+using DoroTech.BookStore.Infrastructure.Persistence.Seeds;
 using DoroTech.BookStore.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +60,7 @@ public static class DependencyInjection
            options.UseSqlServer(connection,
                b => b.MigrationsAssembly(typeof(BookStoreContext).Assembly.FullName)));
 
+        services.AddScoped<SeedGenerationService>();
         return services;
     }
 
@@ -65,6 +68,7 @@ public static class DependencyInjection
     {
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IBookRepository, BookRepository>();
         return services;
     }
 }

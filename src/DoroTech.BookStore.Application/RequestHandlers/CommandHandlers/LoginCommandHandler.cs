@@ -1,21 +1,21 @@
 ﻿using DoroTech.BookStore.Application.Common;
 using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Contracts.Requests.Queries.Auth;
+using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
 using DoroTech.BookStore.Contracts.Responses.Auth;
 using DoroTech.BookStore.Domain.Aggregates;
 using MapsterMapper;
 using OperationResult;
 
-namespace DoroTech.BookStore.Application.RequestHandlers.QueryHandlers;
+namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
-public class LoginQueryHandler : BaseQueryHandler<LoginQuery, Result<AuthenticationResponse>>
+public class LoginCommandHandler : BaseCommandHandler<LoginQuery, Result<AuthenticationResponse>>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IPasswordEncrypter _passwordEncrypter;
 
-    public LoginQueryHandler(IUserRepository userRepository, IMapper mapper, IPasswordEncrypter passwordEncrypter, IJwtTokenGenerator jwtTokenGenerator)
+    public LoginCommandHandler(IUserRepository userRepository, IMapper mapper, IPasswordEncrypter passwordEncrypter, IJwtTokenGenerator jwtTokenGenerator)
     {
         _userRepository = userRepository;
         _mapper = mapper;
@@ -38,7 +38,7 @@ public class LoginQueryHandler : BaseQueryHandler<LoginQuery, Result<Authenticat
 
         return new AuthenticationResponse(
             user.Id,
-            user.FirstName, 
+            user.FirstName,
             user.LastName,
             user.Email,
             token

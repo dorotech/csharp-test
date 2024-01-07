@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
 
-public class UserConfigurations : IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
@@ -13,9 +13,10 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
         builder.HasKey(user => user.Id);
         builder.Property(user => user.Id);
         
-        builder.Property(user => user.FirstName).IsRequired();
-        builder.Property(user => user.LastName).IsRequired();
-        builder.Property(user => user.Email).IsRequired();
-        builder.Property(user => user.Hash).IsRequired();
+        builder.Property(user => user.FirstName);
+        builder.Property(user => user.LastName);
+        builder.Property(user => user.Email);
+        builder.Property(user => user.Hash);
+        builder.Property(user => user.Salt).IsRequired(false);
     }
 }

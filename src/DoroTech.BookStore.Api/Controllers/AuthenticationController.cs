@@ -1,6 +1,5 @@
 ﻿using DoroTech.BookStore.Contracts.Authentication;
 using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-using DoroTech.BookStore.Contracts.Requests.Queries.Auth;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -9,7 +8,7 @@ using ILogger = Serilog.ILogger;
 
 namespace DoroTech.BookStore.Api.Controllers;
 
-[Route("auth")]
+[Route("api/[controller]")]
 [AllowAnonymous]
 public class AuthenticationController : ApiBaseController
 {

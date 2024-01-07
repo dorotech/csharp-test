@@ -8,6 +8,7 @@ public interface IRepository<TEntity>
 {
     TEntity? GetById(long id, bool asNoTracking = false);
     TEntity? Get(Expression<Func<TEntity, bool>> expression, bool asNoTracking = false);
+    IQueryable<TViewModel> GetAllProjected<TViewModel>();
     long Insert(TEntity entity);
     void Update(TEntity entity);
     void Remove(TEntity entity);

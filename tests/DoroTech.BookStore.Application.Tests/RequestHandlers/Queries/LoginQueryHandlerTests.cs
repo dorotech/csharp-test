@@ -1,6 +1,6 @@
 ﻿using DoroTech.BookStore.Application.Common;
 using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Application.RequestHandlers.QueryHandlers;
+using DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 using DoroTech.BookStore.Contracts.Requests.Queries.Auth;
 using DoroTech.BookStore.Contracts.Responses.Auth;
 using DoroTech.BookStore.Domain.Aggregates;
@@ -16,7 +16,7 @@ public class LoginQueryHandlerTests
     private readonly IMapper _mapper;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IPasswordEncrypter _passwordEncrypter;
-    private readonly LoginQueryHandler _sut;
+    private readonly LoginCommandHandler _sut;
 
     public LoginQueryHandlerTests()
     {
@@ -24,7 +24,7 @@ public class LoginQueryHandlerTests
         _mapper = Substitute.For<IMapper>();
         _passwordEncrypter = Substitute.For<IPasswordEncrypter>();
         _jwtTokenGenerator = Substitute.For<IJwtTokenGenerator>();
-        _sut = new LoginQueryHandler(_userRepository, _mapper, _passwordEncrypter, _jwtTokenGenerator);
+        _sut = new LoginCommandHandler(_userRepository, _mapper, _passwordEncrypter, _jwtTokenGenerator);
     }
 
     [Fact]

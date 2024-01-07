@@ -28,7 +28,7 @@ public class User : Entity
     public string Hash { get; private set; } = null!;
     public string? Salt { get; private set; }
 
-     public static User Create(string firstName, string lastName, string email, string hash, string? salt = default)
+    public static User Create(string firstName, string lastName, string email, string hash, string? salt = default)
         => new(firstName, lastName, email, hash, salt);
     
     public static User Create(long id, string firstName, string lastName, string email, string hash, string? salt = default)

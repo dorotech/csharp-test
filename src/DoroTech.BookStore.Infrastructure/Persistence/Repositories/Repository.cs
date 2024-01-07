@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using DoroTech.BookStore.Application.Repositories;
 using DoroTech.BookStore.Domain;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -62,4 +63,7 @@ public class Repository<TEntity> : IRepository<TEntity>
         Context.Remove(entity);
         Context.SaveChanges();
     }
+
+    public IQueryable<TViewModel> GetAllProjected<TViewModel>()
+        => CurrentSet.ProjectToType<TViewModel>();
 }

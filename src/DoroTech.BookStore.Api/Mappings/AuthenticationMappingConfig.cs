@@ -1,7 +1,6 @@
 ﻿using DoroTech.BookStore.Application.Authentication.Common;
 using DoroTech.BookStore.Contracts.Authentication;
 using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-using DoroTech.BookStore.Contracts.Requests.Queries.Auth;
 using DoroTech.BookStore.Contracts.Responses.Auth;
 using Mapster;
 
