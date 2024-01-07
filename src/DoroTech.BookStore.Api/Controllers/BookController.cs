@@ -3,22 +3,18 @@ using DoroTech.BookStore.Contracts.Requests.Queries.Book;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using ILogger = Serilog.ILogger;
 
 namespace DoroTech.BookStore.Api.Controllers;
 
 [Route("api/[controller]")]
-public class BookController : ApiBaseController
+public class BookController(ISender mediator, ILogger logger) : ApiBaseController(mediator, logger)
 {
-    public BookController(ISender mediator, ILogger logger) : base(mediator, logger)
-    {
-    }
-
-    [AllowAnonymous]
     [HttpGet]
+    [AllowAnonymous]
+    [EnableQuery]
     [ProducesResponseType(typeof(IQueryable<BookDetailsViewModel>), 200)]
     public async Task<IActionResult> GetAllBooks()
-    {
-        return await SendRequest(new GelAllBooksDetailsQuery());
-    }
+        => await SendRequest(new GelAllBooksDetailsQuery());
 }
