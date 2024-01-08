@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
 public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, Result<AuthenticationResponse>>
 {

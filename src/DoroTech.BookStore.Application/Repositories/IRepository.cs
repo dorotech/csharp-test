@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Application.Repositories;
+﻿using DoroTech.BookStore.Domain.Common;
+
+namespace DoroTech.BookStore.Application.Repositories;
 
 public interface IRepository<TEntity>
     where TEntity : Entity

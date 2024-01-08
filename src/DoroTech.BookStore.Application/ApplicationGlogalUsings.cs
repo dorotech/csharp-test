@@ -1,8 +1,7 @@
 ﻿global using DoroTech.BookStore.Application.PipelineBehaviors;
 global using DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 global using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-global using DoroTech.BookStore.Domain.Aggregates;
-global using DoroTech.BookStore.Domain;
+global using DoroTech.BookStore.Domain.Entities;
 global using DoroTech.BookStore.Application.Common.Interfaces.Services;
 global using DoroTech.BookStore.Application.Common;
 global using DoroTech.BookStore.Application.Exceptions;
@@ -18,7 +17,6 @@ global using System.Reflection;
 global using FluentValidation;
 global using MediatR;
 global using Microsoft.Extensions.DependencyInjection;
-global using ILogger = Serilog.ILogger;
 global using FluentValidation.Results;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Http;

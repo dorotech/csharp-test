@@ -1,3 +1,5 @@
+using DoroTech.BookStore.Domain.Entities;
+
 namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>

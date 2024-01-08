@@ -5,6 +5,7 @@ namespace DoroTech.BookStore.Contracts.Requests.Commands;
 public sealed record CreateNewBookCommand : ICommand<Result<BookDetailsViewModel>>
 {
     public string Title { get; init; } = null!;
+    public string Author { get; init; } = null!;
     public string? Description { get; init; }
     public int Edition { get; init; }
     public string Language { get; init; } = null!;

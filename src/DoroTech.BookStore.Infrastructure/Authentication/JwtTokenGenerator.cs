@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Infrastructure.Authentication;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
@@ -19,13 +21,16 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             SecurityAlgorithms.HmacSha256
         );
 
-        var claims = new[]
+        var claims = new List<Claim>()
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
-            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.GivenName, user.FirstName),
+            new(JwtRegisteredClaimNames.FamilyName, user.LastName),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
+
+        if (!string.IsNullOrEmpty(user.Role))
+            claims.Add(new Claim(ClaimTypes.Role, user.Role));
 
         var securityToken = new JwtSecurityToken(
             issuer: _jwtSettings.Issuer,

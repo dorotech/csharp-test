@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Commands;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Commands;
 
 public class CreateNewBookCommandHandlerTests : MapperServiceFactory
 {

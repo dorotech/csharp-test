@@ -22,13 +22,19 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DoroTech.BookStore.Domain.Aggregates.Book", b =>
+            modelBuilder.Entity("DoroTech.BookStore.Domain.Entities.Book", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(150)");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
@@ -87,7 +93,7 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                     b.ToTable("Books", (string)null);
                 });
 
-            modelBuilder.Entity("DoroTech.BookStore.Domain.Aggregates.User", b =>
+            modelBuilder.Entity("DoroTech.BookStore.Domain.Entities.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

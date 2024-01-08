@@ -1,7 +1,7 @@
 ### BookStore Auth Service
 # @name bookstore
 @host = http://localhost:5097
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiJjMjA4N2RlMi0wY2IxLTQ2OWMtYWYyNC05NzRiM2JmYmYyOGYiLCJleHAiOjE3MDQ3NTA3MzMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.C1qnB1p6JE6t-h3U96dvW3kdQmfNOr539DXBdZnLTlo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiI5MGIwNmUxZC0yYjljLTRkYzUtODM1NS1lNzc0OTkyYTM5NzQiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwNDc1NjE4NCwiaXNzIjoiRG9yb1RlY2guQm9va1N0b3JlIiwiYXVkIjoiRG9yb1RlY2guQm9va1N0b3JlIn0.HSnxR9qUq6JS7FzGMxqDBNTUCr5a2vrN3GVn47k5zN0
 
 POST {{host}}/api/Authentication/login
 Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
@@ -15,7 +15,7 @@ Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
 
 # @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiI2ZWY3YWZiZi0yNjZmLTRhMDUtOTdjZC1hNDY0ZmUyODIyMjUiLCJleHAiOjE3MDQ2NjE2OTMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.yflZkvSucDxSkKs4IP0aJKmD_Z6-BXwHAKWZFk5SsEg
 
-GET {{host}}/api/Book
+GET {{host}}/api/Book?%24orderBy=title%20asc&%24skip=5&%24top=5
 
 
 ###
@@ -26,6 +26,7 @@ Authorization: Bearer {{token}}
 
 {
   "title": "The FlashPoint Paradox",
+  "author": "DC Comics",
   "description": "An history to reboot all DC universe",
   "edition": 1,
   "language": "English",

@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Infrastructure.Persistence.Seeds;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Infrastructure.Persistence.Seeds;
 
 public static class UserSeed
 {
@@ -8,7 +10,7 @@ public static class UserSeed
             return;
 
         var passwordHash = encrypter.CreatePasswordHash("DoroTech@123");
-        var admin = User.Create("admin", "", "admin@bookstore.com", passwordHash);
+        var admin = User.Create("admin", "", "admin@bookstore.com", passwordHash, "admin");
 
         context.Users.Add(admin);
 

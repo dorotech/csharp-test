@@ -23,7 +23,6 @@ public static class InfraDependencyInjection
         services.AddScoped<IPasswordEncrypter, PasswordEncrypter>();
         services.AddScoped<INotificationService, NotificationService>();
 
-        //defaultScheme: JwtBearerDefaults.AuthenticationScheme
         services
             .AddAuthentication(options =>
             {
@@ -46,6 +45,7 @@ public static class InfraDependencyInjection
                        .RequireAuthenticatedUser()
                        .AddAuthenticationSchemes("DoroTech")
                        .Build();
+            options.AddPolicy("admin", policy => policy.RequireRole("admin"));
         });
 
         return services;

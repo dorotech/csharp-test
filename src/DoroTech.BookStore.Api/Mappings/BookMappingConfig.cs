@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Api.Mappings;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Api.Mappings;
 
 public class BookMappingConfig : IRegister
 {

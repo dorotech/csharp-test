@@ -30,6 +30,7 @@ public class UpdateBookCommandHandler : BaseCommandHandler<UpdateBookCommand, Re
 
         bookToUpdate!.Update(
             request.BookDetails.Title,
+            request.BookDetails.Author,
             request.BookDetails.Edition,
             request.BookDetails.Language,
             request.BookDetails.Cust,

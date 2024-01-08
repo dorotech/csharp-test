@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Domain.Aggregates;
+﻿using DoroTech.BookStore.Domain.Common;
+
+namespace DoroTech.BookStore.Domain.Entities;
 
 public class User : Entity
 {
@@ -29,7 +31,7 @@ public class User : Entity
 
     public static User Create(string firstName, string lastName, string email, string hash, string? role = default)
         => new(firstName, lastName, email, hash, role);
-    
+
     public static User Create(long id, string firstName, string lastName, string email, string hash, string? role = default)
         => new(id, firstName, lastName, email, hash, role);
 

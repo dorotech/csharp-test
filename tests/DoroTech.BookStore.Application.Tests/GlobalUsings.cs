@@ -6,7 +6,7 @@ global using DoroTech.BookStore.Contracts.Responses.Auth;
 global using FluentAssertions;
 global using NSubstitute;
 global using OperationResult;
-global using DoroTech.BookStore.Domain.Aggregates;
+global using DoroTech.BookStore.Domain.Entities;
 global using MapsterMapper;
 
 global using System.Linq.Expressions;

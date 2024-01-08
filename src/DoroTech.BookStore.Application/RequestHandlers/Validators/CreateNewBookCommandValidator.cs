@@ -7,7 +7,11 @@ public class CreateNewBookCommandValidator : AbstractValidator<CreateNewBookComm
         RuleFor(command => command.Title)
             .NotEmpty()
             .WithMessage("Title should not be empty");
-        
+
+        RuleFor(command => command.Author)
+            .NotEmpty()
+            .WithMessage("Author should not be empty");
+
         RuleFor(command => command.Edition)
             .GreaterThan(0)
             .WithMessage("Edition should be greater than 0");

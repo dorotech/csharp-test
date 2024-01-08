@@ -1,6 +1,4 @@
-﻿using DoroTech.BookStore.Domain.Aggregates;
-
-namespace DoroTech.BookStore.Application.Repositories;
+﻿namespace DoroTech.BookStore.Application.Repositories;
 
 public interface IUserRepository
 {

@@ -10,7 +10,7 @@ global using DoroTech.BookStore.Application.Common.Interfaces.Services;
 global using DoroTech.BookStore.Application.Exceptions;
 global using DoroTech.BookStore.Infrastructure.Persistence.Seeds;
 global using DoroTech.BookStore.Application.Authentication.Common;
-global using DoroTech.BookStore.Domain.Aggregates;
+global using DoroTech.BookStore.Domain;
 global using DoroTech.BookStore.Contracts;
 global using DoroTech.BookStore.Contracts.Requests.Commands;
 global using DoroTech.BookStore.Contracts.Requests.Queries;

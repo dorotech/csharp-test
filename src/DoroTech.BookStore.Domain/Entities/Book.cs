@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Domain.Aggregates;
+﻿using DoroTech.BookStore.Domain.Common;
+
+namespace DoroTech.BookStore.Domain.Entities;
 
 public class Book : Entity
 {
@@ -8,6 +10,7 @@ public class Book : Entity
 
     private Book(
         string title,
+        string author,
         int edition,
         string language,
         decimal? cust,
@@ -20,6 +23,7 @@ public class Book : Entity
     )
     {
         Title = title;
+        Author = author;
         Edition = edition;
         Language = language;
         Cust = cust;
@@ -28,12 +32,13 @@ public class Book : Entity
         Isbn = isbn;
         Description = description;
         Pages = pages;
-        ItIsFromDonation = isDonation; 
+        ItIsFromDonation = isDonation;
     }
 
     private Book(
         long id,
         string title,
+        string author,
         int edition,
         string language,
         decimal? cust,
@@ -43,7 +48,7 @@ public class Book : Entity
         bool isDonation,
         string? description,
         int? pages
-    ) : this(title, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages)
+    ) : this(title, author, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages)
     {
         Id = id;
     }
@@ -53,10 +58,7 @@ public class Book : Entity
     public int Edition { get; private set; }
     public string Language { get; private set; }
     public DateOnly PublicationDate { get; private set; }
-    //public long AuthorId { get; private set; }
-    //public Author Author { get; private set; }
-    //public long PublisherId { get; private set; }
-    //public Publisher Publisher { get; private set; }
+    public string Author { get; private set; }
     public decimal? Cust { get; private set; }
     public bool ItIsFromDonation { get; private set; }
     public decimal Price { get; private set; }
@@ -64,12 +66,9 @@ public class Book : Entity
     public int CurrentInventory { get; private set; }
     public int? Pages { get; private set; }
 
-    //public void SetAuthor(Author author) => Author = author;
-
-    //public void SetPublisher(Publisher publisher) => Publisher = publisher;
-
     public static Book Create(
         string title,
+        string author,
         int edition,
         string language,
         decimal? cust,
@@ -80,11 +79,12 @@ public class Book : Entity
         string? description = default,
         int? pages = 0
     )
-        => new(title, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages);
+        => new(title, author, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages);
 
     public static Book Create(
         long id,
         string title,
+        string author,
         int edition,
         string language,
         decimal? cust,
@@ -95,10 +95,11 @@ public class Book : Entity
         string? description = default,
         int? pages = 0
     )
-        => new(id, title, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages);
+        => new(id, author, title, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages);
 
     public void Update(
         string? title,
+        string? author,
         int? edition,
         string? language,
         decimal? cust,
@@ -111,6 +112,7 @@ public class Book : Entity
     )
     {
         Title = title ?? Title;
+        Author = author ?? Author;
         Edition = edition ?? Edition;
         Language = language ?? Language;
         Cust = cust ?? Cust;

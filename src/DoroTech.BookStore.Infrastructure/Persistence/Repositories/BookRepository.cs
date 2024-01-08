@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Infrastructure.Persistence.Repositories;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Infrastructure.Persistence.Repositories;
 
 public class BookRepository : Repository<Book>, IBookRepository
 {

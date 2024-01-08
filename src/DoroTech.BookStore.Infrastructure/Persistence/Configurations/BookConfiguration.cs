@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
 
 public class BookConfiguration : IEntityTypeConfiguration<Book>
 {

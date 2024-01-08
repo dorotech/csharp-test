@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
+﻿using DoroTech.BookStore.Domain.Entities;
+
+namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
 public class CreateNewBookCommandHandler : BaseCommandHandler<CreateNewBookCommand, Result<BookDetailsViewModel>>
 {
@@ -20,6 +22,7 @@ public class CreateNewBookCommandHandler : BaseCommandHandler<CreateNewBookComma
 
         var newBook = Book.Create(
             request.Title,
+            request.Author,
             request.Edition,
             request.Language,
             request.Cust,

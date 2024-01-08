@@ -2,7 +2,6 @@
 global using DoroTech.BookStore.Application.Common.Interfaces.Services;
 global using DoroTech.BookStore.Application.Repositories;
 global using DoroTech.BookStore.Contracts.Responses;
-global using DoroTech.BookStore.Domain.Aggregates;
 global using DoroTech.BookStore.Domain;
 global using DoroTech.BookStore.Infrastructure.Authentication;
 global using DoroTech.BookStore.Infrastructure.Persistence;

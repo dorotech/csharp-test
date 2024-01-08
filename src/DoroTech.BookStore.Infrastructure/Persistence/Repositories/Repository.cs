@@ -1,3 +1,5 @@
+using DoroTech.BookStore.Domain.Common;
+
 namespace DoroTech.BookStore.Infrastructure.Persistence;
 
 public class Repository<TEntity> : IRepository<TEntity>

@@ -1,4 +1,4 @@
-﻿namespace DoroTech.BookStore.Domain;
+﻿namespace DoroTech.BookStore.Domain.Common;
 
 public class Entity
 {
