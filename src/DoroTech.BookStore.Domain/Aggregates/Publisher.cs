@@ -1,6 +1,4 @@
-﻿using System.Transactions;
-
-namespace DoroTech.BookStore.Domain.Aggregates;
+﻿namespace DoroTech.BookStore.Domain.Aggregates;
 
 public class Publisher : Entity
 {

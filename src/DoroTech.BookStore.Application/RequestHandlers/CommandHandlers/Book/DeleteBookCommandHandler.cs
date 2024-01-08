@@ -1,18 +1,8 @@
-﻿using DoroTech.BookStore.Application.Exceptions;
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Contracts.Requests.Commands;
-using OperationResult;
+﻿namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
-namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
-
-public class DeleteBookCommandHandler : BaseCommandHandler<DeleteBookCommand, Result>
+public class DeleteBookCommandHandler(IBookRepository bookRepository) : BaseCommandHandler<DeleteBookCommand, Result>
 {
-    private readonly IBookRepository _bookRepository;
-
-    public DeleteBookCommandHandler(IBookRepository bookRepository)
-    {
-        _bookRepository = bookRepository;
-    }
+    private readonly IBookRepository _bookRepository = bookRepository;
 
     public override Task<Result> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
     {

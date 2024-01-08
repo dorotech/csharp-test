@@ -2,7 +2,7 @@
 
 public class Book : Entity
 {
-    public Book()
+    private Book()
     {
     }
 
@@ -10,8 +10,11 @@ public class Book : Entity
         string title,
         int edition,
         string language,
+        decimal? cust,
+        decimal price,
         DateOnly publicationDate,
         string isbn,
+        bool isDonation,
         string? description,
         int? pages
     )
@@ -19,10 +22,13 @@ public class Book : Entity
         Title = title;
         Edition = edition;
         Language = language;
+        Cust = cust;
+        Price = price;
         PublicationDate = publicationDate;
         Isbn = isbn;
         Description = description;
         Pages = pages;
+        ItIsFromDonation = isDonation; 
     }
 
     private Book(
@@ -30,11 +36,14 @@ public class Book : Entity
         string title,
         int edition,
         string language,
+        decimal? cust,
+        decimal price,
         DateOnly publicationDate,
         string isbn,
+        bool isDonation,
         string? description,
         int? pages
-    ) : this(title, edition, language, publicationDate, isbn, description, pages)
+    ) : this(title, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages)
     {
         Id = id;
     }
@@ -50,7 +59,7 @@ public class Book : Entity
     //public Publisher Publisher { get; private set; }
     public decimal? Cust { get; private set; }
     public bool ItIsFromDonation { get; private set; }
-    public decimal SalePrice { get; private set; }
+    public decimal Price { get; private set; }
     public string Isbn { get; private set; }
     public int CurrentInventory { get; private set; }
     public int? Pages { get; private set; }
@@ -63,31 +72,39 @@ public class Book : Entity
         string title,
         int edition,
         string language,
+        decimal? cust,
+        decimal price,
         DateOnly publicationDate,
         string isbn,
-        string? description,
-        int? pages
+        bool isDonation = false,
+        string? description = default,
+        int? pages = 0
     )
-        => new(title, edition, language, publicationDate, isbn, description, pages);
+        => new(title, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages);
 
     public static Book Create(
         long id,
         string title,
         int edition,
         string language,
+        decimal? cust,
+        decimal price,
         DateOnly publicationDate,
         string isbn,
-        string? description,
-        int? pages
+        bool isDonation = false,
+        string? description = default,
+        int? pages = 0
     )
-        => new(id, title, edition, language, publicationDate, isbn, description, pages);
+        => new(id, title, edition, language, cust, price, publicationDate, isbn, isDonation, description, pages);
 
     public void Update(
         string? title,
         int? edition,
         string? language,
+        decimal? cust,
+        decimal? price,
         DateOnly? publicationDate,
-        string isbn,
+        string? isbn,
         string? description,
         int? pages
     )
@@ -95,6 +112,8 @@ public class Book : Entity
         Title = title ?? Title;
         Edition = edition ?? Edition;
         Language = language ?? Language;
+        Cust = cust ?? Cust;
+        Price = price ?? Price;
         PublicationDate = publicationDate ?? PublicationDate;
         Isbn = isbn ?? Isbn;
         Description = description ?? Description;

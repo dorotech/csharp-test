@@ -1,6 +1,4 @@
-﻿
-
-namespace DoroTech.BookStore.Api.Controllers;
+﻿namespace DoroTech.BookStore.Api.Controllers;
 
 [Route("api/[controller]")]
 [AllowAnonymous]

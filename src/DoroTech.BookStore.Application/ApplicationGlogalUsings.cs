@@ -10,6 +10,8 @@ global using DoroTech.BookStore.Application.Repositories;
 global using DoroTech.BookStore.Contracts.Responses.Auth;
 global using DoroTech.BookStore.Contracts;
 global using DoroTech.BookStore.Contracts.Requests.Queries;
+global using DoroTech.BookStore.Contracts.Requests.Commands;
+
 
 global using System.Linq.Expressions;
 global using System.Reflection;

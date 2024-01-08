@@ -2,7 +2,7 @@
 
 internal class BookNotFoundException : BookStoreException
 {
-    public BookNotFoundException(string? title) : base("BOOK_NOT_FOUND", StatusCodes.Status404NotFound, $"Book { title ?? string.Empty } not found")
+    public BookNotFoundException(long id) : base("BOOK_NOT_FOUND", StatusCodes.Status404NotFound, $"Book id {id} not found")
     {
     }
 }

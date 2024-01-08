@@ -9,10 +9,10 @@ public record UpdateBookCommand : ICommand<Result<BookDetailsViewModel>>
     public long Id { get; init; }
 
     [FromBody]
-    public UpdateBook BookDetails { get; set; } = null!;
+    public UpdateBookDto BookDetails { get; set; } = null!;
 }
 
-public record UpdateBook
+public record UpdateBookDto
 {
     public string? Title { get; init; }
     public string? Description { get; init; }
@@ -21,7 +21,7 @@ public record UpdateBook
     public DateOnly PublicationDate { get; init; }
     public decimal? Cust { get; init; }
     public bool ItIsFromDonation { get; init; }
-    public decimal SalePrice { get; init; }
+    public decimal Price { get; init; }
     public string? Isbn { get; init; }
     public int? Pages { get; init; }
 }

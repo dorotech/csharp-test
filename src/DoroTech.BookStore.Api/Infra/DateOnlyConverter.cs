@@ -29,6 +29,6 @@ public sealed class NullableDateOnlyJsonConverter : JsonConverter<DateOnly?>
         if (value is null)
             writer.WriteNullValue();
  
-        writer.WriteStringValue(((DateOnly)value).ToString("O"));
+        writer.WriteStringValue(((DateOnly)value!).ToString("O"));
     }
 }

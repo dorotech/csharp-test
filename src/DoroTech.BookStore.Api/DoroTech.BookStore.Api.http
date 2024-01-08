@@ -11,9 +11,8 @@ Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
     "password": "DoroTech@123"
 }
 
-#### Variable Response
+###
 
-# @token = {{bookstore.response.body.$.token}}
 # @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiI2ZWY3YWZiZi0yNjZmLTRhMDUtOTdjZC1hNDY0ZmUyODIyMjUiLCJleHAiOjE3MDQ2NjE2OTMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.yflZkvSucDxSkKs4IP0aJKmD_Z6-BXwHAKWZFk5SsEg
 
 POST {{host}}/api/Book
@@ -26,10 +25,11 @@ Authorization: Bearer {{token}}
   "edition": 1,
   "language": "English",
   "publicationDate": "2010-09-10",
-  "cust": 10,
+  "cust": 10.0,
+  "price": 15.0,
   "itIsFromDonation": false,
   "salePrice": 15.50,
-  "isbn": "",
+  "isbn": "1092-1209-1092-021",
   "pages": 40
 }
 
@@ -41,10 +41,11 @@ Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
 Authorization: Bearer {{token}}
 
 {
-  "title": "Dom Casmurro",
+  "title": "Justice League: The Flashpoint Paradox",
   "edition": 2,
   "language": "English",
   "publicationDate": "2010-10-30",
+  "price": 20,
   "pages": 50
 }
 

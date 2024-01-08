@@ -1,11 +1,4 @@
-﻿using System.Reflection;
-using DoroTech.BookStore.Application.PipelineBehaviors;
-using DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
-using FluentValidation;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace DoroTech.BookStore.Application;
+﻿namespace DoroTech.BookStore.Application;
 
 public static class ApplicationDependencyInjection
 {

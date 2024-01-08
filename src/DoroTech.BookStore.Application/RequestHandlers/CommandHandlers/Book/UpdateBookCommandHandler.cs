@@ -1,11 +1,4 @@
-﻿using DoroTech.BookStore.Application.Exceptions;
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Contracts;
-using DoroTech.BookStore.Contracts.Requests.Commands;
-using MapsterMapper;
-using OperationResult;
-
-namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
+﻿namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
 public class UpdateBookCommandHandler : BaseCommandHandler<UpdateBookCommand, Result<BookDetailsViewModel>>
 {
@@ -33,12 +26,14 @@ public class UpdateBookCommandHandler : BaseCommandHandler<UpdateBookCommand, Re
 
         var bookToUpdate = _bookRepository.GetById(request.Id);
         if (bookToUpdate is null)
-            return Result.Error<BookDetailsViewModel>(new BookNotFoundException(bookTitle));
+            return Result.Error<BookDetailsViewModel>(new BookNotFoundException(request.Id));
 
         bookToUpdate!.Update(
             request.BookDetails.Title,
             request.BookDetails.Edition,
             request.BookDetails.Language,
+            request.BookDetails.Cust,
+            request.BookDetails.Price,
             request.BookDetails.PublicationDate,
             request.BookDetails.Isbn,
             request.BookDetails.Description,

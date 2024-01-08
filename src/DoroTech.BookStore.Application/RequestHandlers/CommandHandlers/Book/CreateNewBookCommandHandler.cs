@@ -1,12 +1,4 @@
-﻿using DoroTech.BookStore.Application.Exceptions;
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Contracts;
-using DoroTech.BookStore.Contracts.Requests.Commands;
-using DoroTech.BookStore.Domain.Aggregates;
-using MapsterMapper;
-using OperationResult;
-
-namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
+﻿namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
 public class CreateNewBookCommandHandler : BaseCommandHandler<CreateNewBookCommand, Result<BookDetailsViewModel>>
 {
@@ -30,8 +22,11 @@ public class CreateNewBookCommandHandler : BaseCommandHandler<CreateNewBookComma
             request.Title,
             request.Edition,
             request.Language,
+            request.Cust,
+            request.Price,
             request.PublicationDate,
             request.Isbn,
+            request.ItIsFromDonation,
             request.Description,
             request.Pages      
         );

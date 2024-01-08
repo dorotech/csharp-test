@@ -25,7 +25,7 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
            .HasPrecision(18, 2)
            .IsRequired(false);
 
-        builder.Property(book => book.SalePrice)
+        builder.Property(book => book.Price)
             .HasPrecision(18, 2);
 
         builder.Property(book => book.Isbn);

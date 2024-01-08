@@ -30,7 +30,7 @@ try
     //await dbContext.Database.EnsureCreatedAsync();
 
     await using var seedService = serviceScope.ServiceProvider.GetRequiredService<SeedGenerationService>();
-    await seedService.SeedAsync();
+    await seedService.InsertInitialData();
 }
 catch (Exception ex)
 {

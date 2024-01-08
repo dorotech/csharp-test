@@ -30,7 +30,7 @@ public class SeedGenerationService : IDisposable, IAsyncDisposable
         GC.SuppressFinalize(this);
     }
 
-    public async Task SeedAsync()
+    public async Task InsertInitialData()
     {
         try
         {
