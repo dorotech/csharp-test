@@ -1,4 +1,5 @@
-﻿using DoroTech.BookStore.Contracts;
+﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
+using DoroTech.BookStore.Contracts;
 using DoroTech.BookStore.Contracts.Requests.Commands;
 using DoroTech.BookStore.Contracts.Requests.Queries;
 using MapsterMapper;
@@ -11,7 +12,7 @@ using ILogger = Serilog.ILogger;
 namespace DoroTech.BookStore.Api.Controllers;
 
 [Route("api/[controller]")]
-public class BookController(ISender mediator, ILogger logger, IMapper mapper) : ApiBaseController(mediator, logger, mapper)
+public class BookController(ISender mediator, ILogger logger, IMapper mapper, INotificationService notification) : ApiBaseController(mediator, logger, mapper, notification)
 {
     [HttpGet]
     [AllowAnonymous]

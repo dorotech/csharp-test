@@ -9,7 +9,7 @@ Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
 
 {
     "email": "admin@bookstore.com",
-    "password": "DoroTech@1233"
+    "password": "DoroTech@123"
 }
 
 #### Variable Response

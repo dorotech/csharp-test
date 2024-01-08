@@ -1,4 +1,5 @@
-﻿using DoroTech.BookStore.Contracts.Authentication;
+﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
+using DoroTech.BookStore.Contracts.Authentication;
 using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
 using MapsterMapper;
 using MediatR;
@@ -14,7 +15,7 @@ public class AuthenticationController : ApiBaseController
 {
     private readonly IMapper _mapper;
 
-    public AuthenticationController(ISender mediator, ILogger logger, IMapper mapper) : base(mediator, logger, mapper)
+    public AuthenticationController(ISender mediator, ILogger logger, IMapper mapper, INotificationService notification) : base(mediator, logger, mapper, notification)
     {
         _mapper = mapper;
     }

@@ -38,6 +38,7 @@ public static class DependencyInjection
         services.AddSingleton(Options.Create(JwtSettings));
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IPasswordEncrypter, PasswordEncrypter>();
+        services.AddScoped<INotificationService, NotificationService>();
 
         //defaultScheme: JwtBearerDefaults.AuthenticationScheme
         services
