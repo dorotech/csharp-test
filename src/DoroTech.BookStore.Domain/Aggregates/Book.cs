@@ -80,5 +80,24 @@ public class Book : Entity
         string? description,
         int? pages
     )
-         => new(id, title, edition, language, publicationDate, isbn, description, pages);
+        => new(id, title, edition, language, publicationDate, isbn, description, pages);
+
+    public void Update(
+        string? title,
+        int? edition,
+        string? language,
+        DateOnly? publicationDate,
+        string isbn,
+        string? description,
+        int? pages
+    )
+    {
+        Title = title ?? Title;
+        Edition = edition ?? Edition;
+        Language = language ?? Language;
+        PublicationDate = publicationDate ?? PublicationDate;
+        Isbn = isbn ?? Isbn;
+        Description = description ?? Description;
+        Pages = pages ?? Pages;
+    }
 }

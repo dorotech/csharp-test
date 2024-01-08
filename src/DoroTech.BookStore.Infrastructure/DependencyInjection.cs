@@ -8,6 +8,7 @@ using DoroTech.BookStore.Infrastructure.Persistence.Repositories;
 using DoroTech.BookStore.Infrastructure.Persistence.Seeds;
 using DoroTech.BookStore.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,17 +39,30 @@ public static class DependencyInjection
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         services.AddScoped<IPasswordEncrypter, PasswordEncrypter>();
 
-        services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+        //defaultScheme: JwtBearerDefaults.AuthenticationScheme
+        services
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer("DoroTech", options => options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = true,
+                ValidateLifetime = false,
                 ValidateIssuerSigningKey = true,
                 ValidIssuers = new[] { JwtSettings.Issuer },
                 ValidAudience = JwtSettings.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.Secret))
             });
+
+        services.AddAuthorization(options => {
+            options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                       .RequireAuthenticatedUser()
+                       .AddAuthenticationSchemes("DoroTech")
+                       .Build();
+        });
 
         return services;
     }

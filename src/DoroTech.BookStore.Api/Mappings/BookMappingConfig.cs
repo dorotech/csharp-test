@@ -1,4 +1,4 @@
-﻿using DoroTech.BookStore.Contracts.Book;
+﻿using DoroTech.BookStore.Contracts;
 using DoroTech.BookStore.Domain.Aggregates;
 using Mapster;
 

@@ -1,4 +1,5 @@
 ﻿using DoroTech.BookStore.Application.Common;
+using DoroTech.BookStore.Application.Exceptions;
 using DoroTech.BookStore.Application.Repositories;
 using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
 using DoroTech.BookStore.Contracts.Responses.Auth;
@@ -29,10 +30,10 @@ public class LoginCommandHandler : BaseCommandHandler<LoginQuery, Result<Authent
         await Task.CompletedTask;
 
         if (_userRepository.GetUserByEmail(request.Email) is not User user)
-            return Result.Error<AuthenticationResponse>(new Exception("User does not exists"));
+            return Result.Error<AuthenticationResponse>(new UserDoesNotExistsException());
 
         if (!_passwordEncrypter.VerifyPassword(request.Password, user.Hash))
-            return Result.Error<AuthenticationResponse>(new Exception("Incorrect credentials"));
+            return Result.Error<AuthenticationResponse>(new InvalidCredentialsException("INVALID_CREDENTIALS"));
 
         var token = _jwtTokenGenerator.GenerateToken(user);
 

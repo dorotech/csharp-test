@@ -1,6 +1,6 @@
 ﻿using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Contracts.Book;
-using DoroTech.BookStore.Contracts.Requests.Queries.Book;
+using DoroTech.BookStore.Contracts;
+using DoroTech.BookStore.Contracts.Requests.Queries;
 using OperationResult;
 
 namespace DoroTech.BookStore.Application.RequestHandlers.QueryHandlers;

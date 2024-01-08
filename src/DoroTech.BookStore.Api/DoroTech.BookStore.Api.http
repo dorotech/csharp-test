@@ -1,6 +1,58 @@
-@DoroTech.BookStore.Api_HostAddress = http://localhost:5097
+### BookStore Auth Service
+# @name bookstore
+@host = http://localhost:5097
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiI2ZWY3YWZiZi0yNjZmLTRhMDUtOTdjZC1hNDY0ZmUyODIyMjUiLCJleHAiOjE3MDQ2NjE2OTMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.yflZkvSucDxSkKs4IP0aJKmD_Z6-BXwHAKWZFk5SsEg
 
-GET {{DoroTech.BookStore.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+
+POST {{host}}/api/Authentication/login
+Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
+
+{
+    "email": "admin@bookstore.com",
+    "password": "DoroTech@1233"
+}
+
+#### Variable Response
+
+# @token = {{bookstore.response.body.$.token}}
+# @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiI2ZWY3YWZiZi0yNjZmLTRhMDUtOTdjZC1hNDY0ZmUyODIyMjUiLCJleHAiOjE3MDQ2NjE2OTMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.yflZkvSucDxSkKs4IP0aJKmD_Z6-BXwHAKWZFk5SsEg
+
+POST {{host}}/api/Book
+Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
+Authorization: Bearer {{token}}
+
+{
+  "title": "The FlashPoint Paradox",
+  "description": "An history to reboot all DC universe",
+  "edition": 1,
+  "language": "English",
+  "publicationDate": "2010-09-10",
+  "cust": 10,
+  "itIsFromDonation": false,
+  "salePrice": 15.50,
+  "isbn": "",
+  "pages": 40
+}
+
+###
+
+@id = 7
+PUT {{host}}/api/Book/{{id}}
+Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
+Authorization: Bearer {{token}}
+
+{
+  "title": "Justice League: The FlashPoint Paradox",
+  "edition": 2,
+  "language": "English",
+  "publicationDate": "2010-10-30",
+  "pages": 50
+}
+
+
+###
+
+DELETE {{host}}/api/Book/{{id}}
+Authorization: Bearer {{token}}
 
 ###

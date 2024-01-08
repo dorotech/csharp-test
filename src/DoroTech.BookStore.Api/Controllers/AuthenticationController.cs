@@ -14,7 +14,7 @@ public class AuthenticationController : ApiBaseController
 {
     private readonly IMapper _mapper;
 
-    public AuthenticationController(ISender mediator, ILogger logger, IMapper mapper) : base(mediator, logger)
+    public AuthenticationController(ISender mediator, ILogger logger, IMapper mapper) : base(mediator, logger, mapper)
     {
         _mapper = mapper;
     }

@@ -1,6 +1,5 @@
-﻿using DoroTech.BookStore.Contracts.Book;
-using OperationResult;
+﻿using OperationResult;
 
-namespace DoroTech.BookStore.Contracts.Requests.Queries.Book;
+namespace DoroTech.BookStore.Contracts.Requests.Queries;
 
 public record struct GelAllBooksDetailsQuery() : IQuery<Result<IQueryable<BookDetailsViewModel>>>;
