@@ -66,12 +66,12 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                     b.Property<int?>("Pages")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("PublicationDate")
-                        .HasColumnType("date");
-
-                    b.Property<decimal>("SalePrice")
+                    b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateOnly>("PublicationDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Title")
                         .IsRequired()

@@ -105,6 +105,7 @@ public class Book : Entity
         decimal? price,
         DateOnly? publicationDate,
         string? isbn,
+        bool? isDonation,
         string? description,
         int? pages
     )
@@ -118,5 +119,6 @@ public class Book : Entity
         Isbn = isbn ?? Isbn;
         Description = description ?? Description;
         Pages = pages ?? Pages;
+        ItIsFromDonation = isDonation ?? ItIsFromDonation;
     }
 }

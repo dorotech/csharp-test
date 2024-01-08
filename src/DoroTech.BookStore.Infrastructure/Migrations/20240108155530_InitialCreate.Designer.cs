@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoroTech.BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20240107175150_InitialCreate")]
+    [Migration("20240108155530_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -69,12 +69,12 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                     b.Property<int?>("Pages")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("PublicationDate")
-                        .HasColumnType("date");
-
-                    b.Property<decimal>("SalePrice")
+                    b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateOnly>("PublicationDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("Title")
                         .IsRequired()

@@ -41,11 +41,12 @@ Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
 Authorization: Bearer {{token}}
 
 {
-  "title": "Justice League: The Flashpoint Paradox",
+  "title": "Justice League: The Flashpoint Paradox 2",
   "edition": 2,
   "language": "English",
   "publicationDate": "2010-10-30",
-  "price": 20,
+  "itIsFromDonation": true,
+  "price": 100,
   "pages": 50
 }
 

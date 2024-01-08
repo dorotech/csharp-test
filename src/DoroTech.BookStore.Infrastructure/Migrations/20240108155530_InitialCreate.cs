@@ -24,7 +24,7 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                     PublicationDate = table.Column<DateOnly>(type: "date", nullable: false),
                     Cust = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
                     ItIsFromDonation = table.Column<bool>(type: "bit", nullable: false),
-                    SalePrice = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Isbn = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 150, nullable: false),
                     CurrentInventory = table.Column<int>(type: "int", nullable: false),
                     Pages = table.Column<int>(type: "int", nullable: true),

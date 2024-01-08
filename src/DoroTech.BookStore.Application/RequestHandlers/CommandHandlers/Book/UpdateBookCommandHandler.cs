@@ -36,6 +36,7 @@ public class UpdateBookCommandHandler : BaseCommandHandler<UpdateBookCommand, Re
             request.BookDetails.Price,
             request.BookDetails.PublicationDate,
             request.BookDetails.Isbn,
+            request.BookDetails.ItIsFromDonation,
             request.BookDetails.Description,
             request.BookDetails.Pages
         );
