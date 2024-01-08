@@ -51,7 +51,7 @@ public static class DependencyInjection
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = false,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuers = new[] { JwtSettings.Issuer },
                 ValidAudience = JwtSettings.Audience,

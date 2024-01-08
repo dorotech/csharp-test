@@ -12,15 +12,15 @@ namespace DoroTech.BookStore.Api.Controllers;
 public class ApiBaseController : ControllerBase
 {
     protected ISender Mediator { get; }
-    private readonly IMapper _mapper;
+    protected IMapper Mapper { get; }
     private readonly ILogger _logger;
     private readonly INotificationService _notificationService;
 
     public ApiBaseController(ISender mediator, ILogger logger, IMapper mapper, INotificationService notificationService)
     {
         Mediator = mediator;
+        Mapper = mapper;
         _logger = logger;
-        _mapper = mapper;
         _notificationService = notificationService;
     }
 
@@ -46,7 +46,7 @@ public class ApiBaseController : ControllerBase
     {
         ActionResult actionResult = error switch
         {
-            BookStoreException e => StatusCode(e.StatusCode, _mapper.Map<BookStoreException, ProblemDetails>(e)),
+            BookStoreException e => StatusCode(e.StatusCode, Mapper.Map<BookStoreException, ProblemDetails>(e)),
             _ => _notificationService.HasErrors
                      ? HandleNotificationErrors(_notificationService.ProblemDetails)
                      : StatusCode(StatusCodes.Status500InternalServerError, GenerateDefaultError())

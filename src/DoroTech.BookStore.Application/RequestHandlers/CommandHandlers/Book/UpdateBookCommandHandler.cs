@@ -1,4 +1,5 @@
-﻿using DoroTech.BookStore.Application.Repositories;
+﻿using DoroTech.BookStore.Application.Exceptions;
+using DoroTech.BookStore.Application.Repositories;
 using DoroTech.BookStore.Contracts;
 using DoroTech.BookStore.Contracts.Requests.Commands;
 using MapsterMapper;
@@ -26,12 +27,13 @@ public class UpdateBookCommandHandler : BaseCommandHandler<UpdateBookCommand, Re
                 string.Equals(book.Title, request.BookDetails.Title),
             asNoTracking: true);
 
+        var bookTitle = request.BookDetails.Title!;
         if (bookWithTitleExists is not null)
-            return Result.Error<BookDetailsViewModel>(new Exception("Already exists book with the name"));
+            return Result.Error<BookDetailsViewModel>(new BookTitleAlreadyExistException(bookTitle));
 
         var bookToUpdate = _bookRepository.GetById(request.Id);
         if (bookToUpdate is null)
-            return Result.Error<BookDetailsViewModel>(new Exception("Book not found"));
+            return Result.Error<BookDetailsViewModel>(new BookNotFoundException(bookTitle));
 
         bookToUpdate!.Update(
             request.BookDetails.Title,

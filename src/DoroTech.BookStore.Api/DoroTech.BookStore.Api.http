@@ -1,7 +1,7 @@
 ### BookStore Auth Service
 # @name bookstore
 @host = http://localhost:5097
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiI2ZWY3YWZiZi0yNjZmLTRhMDUtOTdjZC1hNDY0ZmUyODIyMjUiLCJleHAiOjE3MDQ2NjE2OTMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.yflZkvSucDxSkKs4IP0aJKmD_Z6-BXwHAKWZFk5SsEg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiJmOGRlMGI0Yi1iYTJhLTRmN2YtYWJjYS1jYzY3NzAxZGFmNTUiLCJleHAiOjE3MDQ2ODE1OTcsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.I_CHAFE9PBrlFntz6DTPbfG808CAtGz1lrdrDx1UNh8
 
 
 POST {{host}}/api/Authentication/login
@@ -42,7 +42,7 @@ Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
 Authorization: Bearer {{token}}
 
 {
-  "title": "Justice League: The FlashPoint Paradox",
+  "title": "Dom Casmurro",
   "edition": 2,
   "language": "English",
   "publicationDate": "2010-10-30",

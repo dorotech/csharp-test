@@ -1,6 +1,7 @@
 ﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
 using DoroTech.BookStore.Contracts.Authentication;
 using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
+using DoroTech.BookStore.Contracts.Responses.Auth;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -13,24 +14,23 @@ namespace DoroTech.BookStore.Api.Controllers;
 [AllowAnonymous]
 public class AuthenticationController : ApiBaseController
 {
-    private readonly IMapper _mapper;
-
     public AuthenticationController(ISender mediator, ILogger logger, IMapper mapper, INotificationService notification) : base(mediator, logger, mapper, notification)
     {
-        _mapper = mapper;
     }
 
     [HttpPost("register")]
+    [ProducesResponseType(typeof(AuthenticationResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        var command = _mapper.Map<RegisterCommand>(request);
+        var command = Mapper.Map<RegisterCommand>(request);
         return await SendRequest(command, StatusCodes.Status201Created);
     }
 
     [HttpPost("login")]
+    [ProducesResponseType(typeof(AuthenticationResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var query = _mapper.Map<LoginQuery>(request);
+        var query = Mapper.Map<LoginQuery>(request);
         return await SendRequest(query, StatusCodes.Status200OK);
     }
 }
