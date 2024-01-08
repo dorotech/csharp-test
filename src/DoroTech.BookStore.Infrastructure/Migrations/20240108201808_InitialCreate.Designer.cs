@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoroTech.BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20240108155530_InitialCreate")]
+    [Migration("20240108201808_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -125,7 +125,7 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(150)");
 
-                    b.Property<string>("Salt")
+                    b.Property<string>("Role")
                         .HasMaxLength(150)
                         .IsUnicode(false)
                         .HasColumnType("varchar(150)");

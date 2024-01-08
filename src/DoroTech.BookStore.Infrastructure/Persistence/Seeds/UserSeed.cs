@@ -8,7 +8,7 @@ public static class UserSeed
             return;
 
         var passwordHash = encrypter.CreatePasswordHash("DoroTech@123");
-        var admin = User.Create("admin", "", "admin@bookstore.com", passwordHash, role: "admin");
+        var admin = User.Create("admin", "", "admin@bookstore.com", passwordHash);
 
         context.Users.Add(admin);
 

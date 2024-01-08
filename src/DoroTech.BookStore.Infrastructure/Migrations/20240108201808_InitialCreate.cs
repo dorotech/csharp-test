@@ -46,7 +46,7 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                     LastName = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 150, nullable: false),
                     Email = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 150, nullable: false),
                     Hash = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 150, nullable: false),
-                    Salt = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 150, nullable: true),
+                    Role = table.Column<string>(type: "varchar(150)", unicode: false, maxLength: 150, nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },

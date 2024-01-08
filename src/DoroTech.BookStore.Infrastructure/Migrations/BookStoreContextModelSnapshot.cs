@@ -122,7 +122,7 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(150)");
 
-                    b.Property<string>("Salt")
+                    b.Property<string>("Role")
                         .HasMaxLength(150)
                         .IsUnicode(false)
                         .HasColumnType("varchar(150)");

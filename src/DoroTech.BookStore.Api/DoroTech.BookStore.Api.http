@@ -1,7 +1,7 @@
 ### BookStore Auth Service
 # @name bookstore
 @host = http://localhost:5097
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiIzMmMyOThhMi1mZTVhLTQwNGEtYWVmNS01Nzk2YzhjYmExOWMiLCJleHAiOjE3MDQ2ODU2MTMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.gVKMpd8swwU3L45vPz-kczjABx75vS5qfdAg6W-Zei8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiJjMjA4N2RlMi0wY2IxLTQ2OWMtYWYyNC05NzRiM2JmYmYyOGYiLCJleHAiOjE3MDQ3NTA3MzMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.C1qnB1p6JE6t-h3U96dvW3kdQmfNOr539DXBdZnLTlo
 
 POST {{host}}/api/Authentication/login
 Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
@@ -14,6 +14,11 @@ Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
 ###
 
 # @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiIiLCJqdGkiOiI2ZWY3YWZiZi0yNjZmLTRhMDUtOTdjZC1hNDY0ZmUyODIyMjUiLCJleHAiOjE3MDQ2NjE2OTMsImlzcyI6IkRvcm9UZWNoLkJvb2tTdG9yZSIsImF1ZCI6IkRvcm9UZWNoLkJvb2tTdG9yZSJ9.yflZkvSucDxSkKs4IP0aJKmD_Z6-BXwHAKWZFk5SsEg
+
+GET {{host}}/api/Book
+
+
+###
 
 POST {{host}}/api/Book
 Content-Type: application/json;odata.metadata=minimal;odata.streaming=true
