@@ -31,4 +31,8 @@
     <ProjectReference Include="..\..\src\DoroTech.BookStore.Domain\DoroTech.BookStore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RequestHandlers\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,3 @@
-using DoroTech.BookStore.Domain.Aggregates;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
@@ -17,6 +13,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(user => user.LastName);
         builder.Property(user => user.Email);
         builder.Property(user => user.Hash);
-        builder.Property(user => user.Salt).IsRequired(false);
+        builder.Property(user => user.Role).IsRequired(false);
     }
 }

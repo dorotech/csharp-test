@@ -1,19 +1,8 @@
-﻿using DoroTech.BookStore.Application.Common;
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
-using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-using DoroTech.BookStore.Contracts.Responses.Auth;
-using DoroTech.BookStore.Domain.Aggregates;
-using FluentAssertions;
-using MapsterMapper;
-using NSubstitute;
+﻿namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Commands;
 
-namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Queries;
-
-public class LoginQueryHandlerTests
+public class LoginQueryHandlerTests : MapperServiceFactory
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
     private readonly IPasswordEncrypter _passwordEncrypter;
     private readonly LoginCommandHandler _sut;
@@ -21,7 +10,6 @@ public class LoginQueryHandlerTests
     public LoginQueryHandlerTests()
     {
         _userRepository = Substitute.For<IUserRepository>();
-        _mapper = Substitute.For<IMapper>();
         _passwordEncrypter = Substitute.For<IPasswordEncrypter>();
         _jwtTokenGenerator = Substitute.For<IJwtTokenGenerator>();
         _sut = new LoginCommandHandler(_userRepository, _mapper, _passwordEncrypter, _jwtTokenGenerator);
@@ -42,6 +30,10 @@ public class LoginQueryHandlerTests
             .VerifyPassword(Arg.Any<string>(), Arg.Any<string>())
             .Returns(true);
 
+        _jwtTokenGenerator
+            .GenerateToken(user)
+            .Returns("token");
+
         //Act
         var result = await _sut.Handle(query, CancellationToken.None);
 
@@ -52,5 +44,9 @@ public class LoginQueryHandlerTests
             .NotBeNull()
             .And
             .BeOfType<AuthenticationResponse>();
+
+        result
+            .Value.As<AuthenticationResponse>()
+            .Token.Should().NotBeNullOrEmpty();
     }
 }

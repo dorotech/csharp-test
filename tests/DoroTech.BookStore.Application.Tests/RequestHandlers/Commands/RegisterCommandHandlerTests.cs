@@ -1,13 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common;
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
-using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-using DoroTech.BookStore.Contracts.Responses.Auth;
-using FluentAssertions;
-using NSubstitute;
-using OperationResult;
-
-namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Commands;
+﻿namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Commands;
 
 public class RegisterCommandHandlerTests
 {

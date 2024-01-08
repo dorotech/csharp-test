@@ -6,17 +6,17 @@ public class User : Entity
     {
     }
 
-    private User(string firstName, string lastName, string email, string hash, string? salt)
+    private User(string firstName, string lastName, string email, string hash, string? role)
     {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Hash = hash;
-        Salt = salt;
+        Role = role;
     }
 
-    private User(long id, string firstName, string lastName, string email, string hash, string? salt)
-        : this(firstName, lastName, email, hash, salt)
+    private User(long id, string firstName, string lastName, string email, string hash, string? role)
+        : this(firstName, lastName, email, hash, role)
     {
         Id = id;
     }
@@ -25,17 +25,17 @@ public class User : Entity
     public string LastName { get; private set; } = null!;
     public string Email { get; private set; } = null!;
     public string Hash { get; private set; } = null!;
-    public string? Salt { get; private set; }
+    public string? Role { get; private set; }
 
-    public static User Create(string firstName, string lastName, string email, string hash, string? salt = default)
-        => new(firstName, lastName, email, hash, salt);
+    public static User Create(string firstName, string lastName, string email, string hash, string? role = default)
+        => new(firstName, lastName, email, hash, role);
     
-    public static User Create(long id, string firstName, string lastName, string email, string hash, string? salt = default)
-        => new(id, firstName, lastName, email, hash, salt);
+    public static User Create(long id, string firstName, string lastName, string email, string hash, string? role = default)
+        => new(id, firstName, lastName, email, hash, role);
 
     public void SetHash(string hash)
         => Hash = hash;
 
-    public void SetSalt(string salt)
-        => Salt = salt;
+    public void SetRole(string role)
+        => Role = role;
 }

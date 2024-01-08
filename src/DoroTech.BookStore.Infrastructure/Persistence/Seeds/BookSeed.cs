@@ -2,7 +2,7 @@
 
 public static class BookSeed
 {
-    internal async static Task Generate(BookStoreContext context)
+    public async static Task Generate(BookStoreContext context)
     {
         if (context.Books.Any())
             return;
