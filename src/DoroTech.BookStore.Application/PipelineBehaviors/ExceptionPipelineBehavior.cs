@@ -1,8 +1,5 @@
-﻿using System.Reflection;
-using MediatR;
-using OperationResult;
+﻿namespace DoroTech.BookStore.Application.PipelineBehaviors;
 
-namespace DoroTech.BookStore.Application.PipelineBehaviors;
 public sealed class ExceptionPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest
 {
     private readonly MethodInfo? _operationResultError;

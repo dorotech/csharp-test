@@ -1,15 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
-using DoroTech.BookStore.Contracts;
-using DoroTech.BookStore.Contracts.Requests.Commands;
-using DoroTech.BookStore.Contracts.Requests.Queries;
-using MapsterMapper;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.OData.Query;
-using ILogger = Serilog.ILogger;
-
-namespace DoroTech.BookStore.Api.Controllers;
+﻿namespace DoroTech.BookStore.Api.Controllers;
 
 [Route("api/[controller]")]
 public class BookController(ISender mediator, ILogger logger, IMapper mapper, INotificationService notification) : ApiBaseController(mediator, logger, mapper, notification)

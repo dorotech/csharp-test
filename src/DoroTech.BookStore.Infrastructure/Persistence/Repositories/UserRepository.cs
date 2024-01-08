@@ -1,6 +1,3 @@
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Domain.Aggregates;
-
 namespace DoroTech.BookStore.Infrastructure.Persistence;
 
 public class UserRepository : Repository<User>, IUserRepository

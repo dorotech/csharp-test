@@ -1,6 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
-
-namespace DoroTech.BookStore.Infrastructure.Services;
+﻿namespace DoroTech.BookStore.Infrastructure.Services;
 
 public class DateTimeProvider : IDateTimeProvider
 {

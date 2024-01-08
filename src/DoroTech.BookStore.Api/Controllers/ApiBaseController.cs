@@ -1,12 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
-using DoroTech.BookStore.Application.Exceptions;
-using MapsterMapper;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using OperationResult;
-using ILogger = Serilog.ILogger;
-
-namespace DoroTech.BookStore.Api.Controllers;
+﻿namespace DoroTech.BookStore.Api.Controllers;
 
 [ApiController]
 public class ApiBaseController : ControllerBase
@@ -64,7 +56,7 @@ public class ApiBaseController : ControllerBase
         return StatusCode(StatusCodes.Status400BadRequest, problemDetails);
     }
 
-    private ProblemDetails GenerateDefaultError()
+    private static ProblemDetails GenerateDefaultError()
        => new()
        {
            Type = "Internal Error",

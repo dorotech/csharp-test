@@ -1,6 +1,4 @@
-﻿using DoroTech.BookStore.Domain.Aggregates;
-
-namespace DoroTech.BookStore.Application.Authentication.Common;
+﻿namespace DoroTech.BookStore.Application.Authentication.Common;
 
 public record AuthenticationResult(
     User User,

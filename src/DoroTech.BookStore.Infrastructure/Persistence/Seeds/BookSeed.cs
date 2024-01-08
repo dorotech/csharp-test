@@ -1,6 +1,4 @@
-﻿using DoroTech.BookStore.Domain.Aggregates;
-
-namespace DoroTech.BookStore.Infrastructure.Persistence.Seeds;
+﻿namespace DoroTech.BookStore.Infrastructure.Persistence.Seeds;
 
 public static class BookSeed
 {

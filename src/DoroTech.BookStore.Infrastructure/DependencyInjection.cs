@@ -1,21 +1,4 @@
-﻿using System.Text;
-using DoroTech.BookStore.Application.Common;
-using DoroTech.BookStore.Application.Common.Interfaces.Services;
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Infrastructure.Authentication;
-using DoroTech.BookStore.Infrastructure.Persistence;
-using DoroTech.BookStore.Infrastructure.Persistence.Repositories;
-using DoroTech.BookStore.Infrastructure.Persistence.Seeds;
-using DoroTech.BookStore.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-
-namespace DoroTech.BookStore.Infrastructure;
+﻿namespace DoroTech.BookStore.Infrastructure;
 
 public static class DependencyInjection
 {

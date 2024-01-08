@@ -1,4 +1,5 @@
-﻿using DoroTech.BookStore.Application.Repositories;
+﻿using DoroTech.BookStore.Application.Exceptions;
+using DoroTech.BookStore.Application.Repositories;
 using DoroTech.BookStore.Contracts.Requests.Commands;
 using OperationResult;
 
@@ -18,7 +19,7 @@ public class DeleteBookCommandHandler : BaseCommandHandler<DeleteBookCommand, Re
         var book = _bookRepository.GetById(request.Id);
 
         if (book is null)
-            return Result.Error(new Exception("Book already created"));
+            return Result.Error(new BookNotFoundException(default));
 
         _bookRepository.Remove(book);
 

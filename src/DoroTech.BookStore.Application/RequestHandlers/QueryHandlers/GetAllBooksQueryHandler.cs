@@ -1,9 +1,4 @@
-﻿using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Contracts;
-using DoroTech.BookStore.Contracts.Requests.Queries;
-using OperationResult;
-
-namespace DoroTech.BookStore.Application.RequestHandlers.QueryHandlers;
+﻿namespace DoroTech.BookStore.Application.RequestHandlers.QueryHandlers;
 
 public class GetAllBooksQueryHandler : BaseQueryHandler<GelAllBooksDetailsQuery, Result<IQueryable<BookDetailsViewModel>>>
 {

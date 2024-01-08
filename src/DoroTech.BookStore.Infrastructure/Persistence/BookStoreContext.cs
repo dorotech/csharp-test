@@ -1,8 +1,3 @@
-using DoroTech.BookStore.Domain;
-using DoroTech.BookStore.Domain.Aggregates;
-using DoroTech.BookStore.Infrastructure.Extensions;
-using Microsoft.EntityFrameworkCore;
-
 namespace DoroTech.BookStore.Infrastructure.Persistence;
 
 public class BookStoreContext : DbContext

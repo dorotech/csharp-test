@@ -1,8 +1,4 @@
-﻿using DoroTech.BookStore.Application.Exceptions;
-using Mapster;
-using Microsoft.AspNetCore.Mvc;
-
-namespace DoroTech.BookStore.Api.Mappings;
+﻿namespace DoroTech.BookStore.Api.Mappings;
 
 public class ProblemDetailsMappingConfig : IRegister
 {

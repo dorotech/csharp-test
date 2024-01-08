@@ -1,7 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common;
-using ILogger = Serilog.ILogger;
-
-namespace DoroTech.BookStore.Infrastructure.Persistence.Seeds;
+﻿namespace DoroTech.BookStore.Infrastructure.Persistence.Seeds;
 
 public class SeedGenerationService : IDisposable, IAsyncDisposable
 {
@@ -14,9 +11,9 @@ public class SeedGenerationService : IDisposable, IAsyncDisposable
 
     public SeedGenerationService(IPasswordEncrypter passwordEncrypter, BookStoreContext context, ILogger logger)
     {
+        _passwordEncrypter = passwordEncrypter;
         _context = context;
         _logger = logger;
-        _passwordEncrypter = passwordEncrypter;
     }
 
     public void Dispose()
@@ -39,7 +36,7 @@ public class SeedGenerationService : IDisposable, IAsyncDisposable
         {
             await UserSeed.Generate(_context, _passwordEncrypter);
             await BookSeed.Generate(_context);
-            _logger.Information("Successfully added data");
+            _logger.Information("Successfully added data by seed generation service");
         }
         catch (Exception ex)
         {

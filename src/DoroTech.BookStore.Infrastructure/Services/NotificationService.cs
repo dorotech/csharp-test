@@ -1,10 +1,7 @@
-﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
-using DoroTech.BookStore.Contracts.Responses;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using ValidationFailure = FluentValidation.Results.ValidationFailure;
 
 namespace DoroTech.BookStore.Infrastructure.Services;
+
 public class NotificationService : INotificationService
 {
     private readonly List<ValidationFailure> _notifications;

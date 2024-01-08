@@ -1,13 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using DoroTech.BookStore.Application.Common;
-using DoroTech.BookStore.Application.Common.Interfaces.Services;
-using DoroTech.BookStore.Domain.Aggregates;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-
-namespace DoroTech.BookStore.Infrastructure.Authentication;
+﻿namespace DoroTech.BookStore.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {

@@ -1,7 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using System.Text.Json;
-
-namespace DoroTech.BookStore.Api.Infra;
+﻿namespace DoroTech.BookStore.Api.Infra;
 
 public sealed class DateOnlyJsonConverter : JsonConverter<DateOnly>
 {

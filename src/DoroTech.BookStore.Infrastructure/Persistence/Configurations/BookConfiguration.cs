@@ -1,8 +1,4 @@
-﻿using DoroTech.BookStore.Domain.Aggregates;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
+﻿namespace DoroTech.BookStore.Infrastructure.Persistence.Configurations;
 
 public class BookConfiguration : IEntityTypeConfiguration<Book>
 {

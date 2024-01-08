@@ -1,6 +1,4 @@
-﻿using DoroTech.BookStore.Domain.Aggregates;
-
-namespace DoroTech.BookStore.Application.Common;
+﻿namespace DoroTech.BookStore.Application.Common;
 
 public interface IJwtTokenGenerator
 {

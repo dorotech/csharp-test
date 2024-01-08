@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace DoroTech.BookStore.Application.Exceptions;
+﻿namespace DoroTech.BookStore.Application.Exceptions;
 
 public class BookStoreException : Exception
 {

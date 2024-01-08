@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace DoroTech.BookStore.Application.RequestHandlers;
+﻿namespace DoroTech.BookStore.Application.RequestHandlers;
 
 public abstract class BaseRequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

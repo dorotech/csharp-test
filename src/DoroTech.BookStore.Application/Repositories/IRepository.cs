@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using DoroTech.BookStore.Domain;
-
-namespace DoroTech.BookStore.Application.Repositories;
+﻿namespace DoroTech.BookStore.Application.Repositories;
 
 public interface IRepository<TEntity>
     where TEntity : Entity

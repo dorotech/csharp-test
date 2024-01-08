@@ -1,12 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
-using DoroTech.BookStore.Contracts.Authentication;
-using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-using DoroTech.BookStore.Contracts.Responses.Auth;
-using MapsterMapper;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using ILogger = Serilog.ILogger;
+﻿
 
 namespace DoroTech.BookStore.Api.Controllers;
 

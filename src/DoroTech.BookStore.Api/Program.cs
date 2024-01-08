@@ -1,11 +1,3 @@
-using DoroTech.BookStore.Api;
-using DoroTech.BookStore.Infrastructure;
-using DoroTech.BookStore.Application;
-using Serilog;
-using DoroTech.BookStore.Infrastructure.Persistence;
-using DoroTech.BookStore.Infrastructure.Persistence.Seeds;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;

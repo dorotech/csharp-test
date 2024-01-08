@@ -1,7 +1,5 @@
-﻿using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-using FluentValidation;
+﻿namespace DoroTech.BookStore.Application.RequestHandlers.Validators;
 
-namespace DoroTech.BookStore.Application.RequestHandlers.Validators;
 public class CredentialRequestValidator : AbstractValidator<LoginQuery>
 {
     public CredentialRequestValidator()

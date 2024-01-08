@@ -1,11 +1,4 @@
-﻿using DoroTech.BookStore.Api.Infra;
-using Mapster;
-using MapsterMapper;
-using Microsoft.AspNetCore.OData;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-
-namespace DoroTech.BookStore.Api;
+﻿namespace DoroTech.BookStore.Api;
 
 public static class DependencyInjection
 {

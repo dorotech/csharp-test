@@ -1,6 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common;
-
-namespace DoroTech.BookStore.Infrastructure.Authentication;
+﻿namespace DoroTech.BookStore.Infrastructure.Authentication;
 
 public class PasswordEncrypter : IPasswordEncrypter
 {

@@ -1,10 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.OData.Query;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
-
-namespace DoroTech.BookStore.Api.Infra;
+﻿namespace DoroTech.BookStore.Api.Infra;
 
 public class SwaggerAddODataField : IOperationFilter
 {
@@ -22,11 +16,11 @@ public class SwaggerAddODataField : IOperationFilter
 
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        if (context.MethodInfo.GetCustomAttribute<EnableQueryAttribute>() == null) return;
+        if (context.MethodInfo.GetCustomAttribute<EnableQueryAttribute>() is null) return;
 
         operation.Description = OPERATION_DESCRIPTION;
 
-        if (operation.Parameters == null)
+        if (operation.Parameters is null)
             operation.Parameters = new List<OpenApiParameter>(_oDataParameters);
         else
             foreach (var parameter in _oDataParameters)
@@ -34,7 +28,7 @@ public class SwaggerAddODataField : IOperationFilter
     }
 
     private static OpenApiParameter CreateODataParameter(string type, string name, string description, string example)
-        => new OpenApiParameter
+        => new()
         {
             Schema = new OpenApiSchema() { Type = type },
             Name = name,

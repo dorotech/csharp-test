@@ -1,11 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common;
-using DoroTech.BookStore.Application.Repositories;
-using DoroTech.BookStore.Contracts.Requests.Commands.Auth;
-using DoroTech.BookStore.Contracts.Responses.Auth;
-using DoroTech.BookStore.Domain.Aggregates;
-using OperationResult;
-
-namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
+﻿namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
 public class RegisterCommandHandler : BaseCommandHandler<RegisterCommand, Result<AuthenticationResponse>>
 {

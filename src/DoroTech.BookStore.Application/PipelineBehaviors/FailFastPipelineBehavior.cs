@@ -1,8 +1,4 @@
-﻿using DoroTech.BookStore.Application.Common.Interfaces.Services;
-using FluentValidation;
-using MediatR;
-
-namespace DoroTech.BookStore.Application.PipelineBehaviors;
+﻿namespace DoroTech.BookStore.Application.PipelineBehaviors;
 
 public sealed partial class FailFastRequestPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
