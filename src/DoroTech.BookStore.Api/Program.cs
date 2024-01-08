@@ -27,7 +27,6 @@ try
     await using var dbContext = serviceScope.ServiceProvider.GetRequiredService<BookStoreContext>();
     await dbContext.Database.EnsureDeletedAsync();
     await dbContext.Database.MigrateAsync();
-    //await dbContext.Database.EnsureCreatedAsync();
 
     await using var seedService = serviceScope.ServiceProvider.GetRequiredService<SeedGenerationService>();
     await seedService.InsertInitialData();
@@ -36,6 +35,8 @@ catch (Exception ex)
 {
     Log.Error(ex.Message);
 }
+
+app.UseMiddleware<LoggingPipelineMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

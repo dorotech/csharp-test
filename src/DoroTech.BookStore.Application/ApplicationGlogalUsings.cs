@@ -18,6 +18,7 @@ global using System.Reflection;
 global using FluentValidation;
 global using MediatR;
 global using Microsoft.Extensions.DependencyInjection;
+global using ILogger = Serilog.ILogger;
 global using FluentValidation.Results;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Http;

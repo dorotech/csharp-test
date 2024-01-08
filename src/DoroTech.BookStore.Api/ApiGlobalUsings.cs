@@ -23,6 +23,7 @@ global using Microsoft.OpenApi.Models;
 global using Microsoft.EntityFrameworkCore;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
+
 global using OperationResult;
 global using ILogger = Serilog.ILogger;
 global using Microsoft.AspNetCore.Authorization;
