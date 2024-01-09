@@ -1,0 +1,31 @@
+﻿global using DoroTech.BookStore.Application.Common;
+global using DoroTech.BookStore.Application.Common.Interfaces.Services;
+global using DoroTech.BookStore.Application.Repositories;
+global using DoroTech.BookStore.Contracts.Responses;
+global using DoroTech.BookStore.Domain;
+global using DoroTech.BookStore.Infrastructure.Authentication;
+global using DoroTech.BookStore.Infrastructure.Persistence;
+global using DoroTech.BookStore.Infrastructure.Persistence.Repositories;
+global using DoroTech.BookStore.Infrastructure.Persistence.Seeds;
+global using DoroTech.BookStore.Infrastructure.Services;
+global using DoroTech.BookStore.Infrastructure.Extensions;
+global using ILogger = Serilog.ILogger;
+
+
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Options;
+global using Microsoft.IdentityModel.Tokens;
+global using FluentValidation.Results;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Linq.Expressions;
+global using System.Security.Claims;
+global using System.Text;
+global using Mapster;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;

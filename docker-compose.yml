@@ -1,0 +1,17 @@
+services:
+  sqlexpress:
+    user: root
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_USER=SA
+      - MSSQL_SA_PASSWORD=Bookstore@123
+      - MSSQL_AGENT_ENABLED=true
+    ports: 
+      - "1433:1433"
+    container_name: mssql
+    volumes:
+        - sqlexpress-data:/var/opt/mssql/data
+
+volumes:
+    sqlexpress-data:
