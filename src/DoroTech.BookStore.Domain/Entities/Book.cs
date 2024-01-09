@@ -63,7 +63,6 @@ public class Book : Entity
     public bool ItIsFromDonation { get; private set; }
     public decimal Price { get; private set; }
     public string Isbn { get; private set; }
-    public int CurrentInventory { get; private set; }
     public int? Pages { get; private set; }
 
     public static Book Create(

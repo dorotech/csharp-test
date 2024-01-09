@@ -25,6 +25,7 @@ try
 {
     await using var serviceScope = app.Services.CreateAsyncScope();
     await using var dbContext = serviceScope.ServiceProvider.GetRequiredService<BookStoreContext>();
+    await dbContext.Database.EnsureDeletedAsync();
     await dbContext.Database.MigrateAsync();
 
     await using var seedService = serviceScope.ServiceProvider.GetRequiredService<SeedGenerationService>();
