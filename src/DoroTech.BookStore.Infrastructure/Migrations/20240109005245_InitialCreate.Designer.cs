@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoroTech.BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    [Migration("20240108231519_InitialCreate")]
+    [Migration("20240109005245_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,9 +41,6 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("CurrentInventory")
-                        .HasColumnType("int");
 
                     b.Property<decimal?>("Cust")
                         .HasPrecision(18, 2)

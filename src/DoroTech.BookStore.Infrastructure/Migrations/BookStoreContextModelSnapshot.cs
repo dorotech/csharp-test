@@ -39,9 +39,6 @@ namespace DoroTech.BookStore.Infrastructure.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("CurrentInventory")
-                        .HasColumnType("int");
-
                     b.Property<decimal?>("Cust")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
