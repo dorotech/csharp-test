@@ -22,6 +22,7 @@ public class DeleteBookCommandHandlerTests
             .GetById(bookId)
             .Returns(Book.Create(
                 "Title",
+                "Mrs Nobody",
                 1,
                 "Language",
                 1,

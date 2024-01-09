@@ -1,4 +1,5 @@
-﻿using DoroTech.BookStore.Domain.Entities;
+﻿using DoroTech.BookStore.Contracts.Responses.Book;
+using DoroTech.BookStore.Domain.Entities;
 
 namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Commands;
 
@@ -57,6 +58,7 @@ public class CreateNewBookCommandHandlerTests : MapperServiceFactory
         var command = new CreateNewBookCommand
         {
             Title = "Test",
+            Author = "Barry Allen",
             Description = "New Book Test",
             Edition = 1,
             Price = 10,
@@ -70,6 +72,7 @@ public class CreateNewBookCommandHandlerTests : MapperServiceFactory
 
         var book = Book.Create(
             command.Title,
+            command.Author,
             command.Edition,
             command.Language,
             command.Cust,

@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
+﻿using DoroTech.BookStore.Contracts.Responses.Book;
+
+namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 
 public class UpdateBookCommandHandler : BaseCommandHandler<UpdateBookCommand, Result<BookDetailsViewModel>>
 {

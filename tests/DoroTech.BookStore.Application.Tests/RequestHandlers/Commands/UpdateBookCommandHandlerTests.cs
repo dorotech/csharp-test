@@ -1,4 +1,5 @@
-﻿using DoroTech.BookStore.Domain.Entities;
+﻿using DoroTech.BookStore.Contracts.Responses.Book;
+using DoroTech.BookStore.Domain.Entities;
 
 namespace DoroTech.BookStore.Application.Tests.RequestHandlers.Commands;
 
@@ -20,6 +21,7 @@ public class UpdateBookCommandHandlerTests : MapperServiceFactory
         var bookToUpdateDto = new UpdateBookDto
         {
             Title = "New Title",
+            Author = "Mario",
             Price = 10,
             ItIsFromDonation = true,
         };
@@ -28,7 +30,7 @@ public class UpdateBookCommandHandlerTests : MapperServiceFactory
             Id = 1, 
             BookDetails = bookToUpdateDto
         };
-        var book = Book.Create("Title", 1, "Language", 1, 1, new DateOnly(1970, 1, 10), "Isbn", false);
+        var book = Book.Create("Title", "Jose", 1, "Language", 1, 1, new DateOnly(1970, 1, 10), "Isbn", false);
         _bookRepository
             .Get(Arg.Any<Expression<Func<Book, bool>>>(), asNoTracking: true)
             .Returns(default(Book));
@@ -60,7 +62,7 @@ public class UpdateBookCommandHandlerTests : MapperServiceFactory
             Id = 1,
             BookDetails = bookToUpdateDto
         };
-        var book = Book.Create("New Title", 1, "Language", 1, 1, new DateOnly(1970, 1, 10), "Isbn", false);
+        var book = Book.Create("New Title", "Jose", 1, "Language", 1, 1, new DateOnly(1970, 1, 10), "Isbn", false);
         _bookRepository
             .Get(Arg.Any<Expression<Func<Book, bool>>>(), asNoTracking: true)
             .Returns(book);
@@ -82,6 +84,7 @@ public class UpdateBookCommandHandlerTests : MapperServiceFactory
         var bookToUpdateDto = new UpdateBookDto
         {
             Title = "New Title",
+            Author = "Joao",
             Price = 10,
             ItIsFromDonation = true,
         };
@@ -90,7 +93,7 @@ public class UpdateBookCommandHandlerTests : MapperServiceFactory
             Id = 1,
             BookDetails = bookToUpdateDto
         };
-        var book = Book.Create("New Title", 1, "Language", 1, 1, new DateOnly(1970, 1, 10), "Isbn", false);
+        var book = Book.Create("New Title", "Davi", 1, "Language", 1, 1, new DateOnly(1970, 1, 10), "Isbn", false);
         _bookRepository
             .Get(Arg.Any<Expression<Func<Book, bool>>>(), asNoTracking: true)
             .Returns(default(Book));

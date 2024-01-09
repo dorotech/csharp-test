@@ -10,8 +10,8 @@ public class SwaggerAddODataField : IOperationFilter
 
     private static readonly OpenApiParameter _topParameter = CreateODataParameter("number", "$top", "OData: Field that allow you to set how many registers will be returned(max 10)", "10");
     private static readonly OpenApiParameter _skipParameter = CreateODataParameter("number", "$skip", "OData: Field that allow to skip registers", "0");
-    private static readonly OpenApiParameter _orderByParameter = CreateODataParameter("string", "$orderBy", "OData: Field that allow to order data", "fieldName desc, fieldName2 asc");
-    private static readonly OpenApiParameter _filterParameter = CreateODataParameter("string", "$filter", "OData: Field that allow to filter data", "fieldName eq 'Some string' and intField eq 2");
+    private static readonly OpenApiParameter _orderByParameter = CreateODataParameter("string", "$orderBy", "OData: Field that allow to order data", "title asc");
+    private static readonly OpenApiParameter _filterParameter = CreateODataParameter("string", "$filter", "OData: Field that allow to filter data", "");
     private static readonly OpenApiParameter[] _oDataParameters = [_filterParameter, _orderByParameter, _skipParameter, _topParameter];
 
     public void Apply(OpenApiOperation operation, OperationFilterContext context)

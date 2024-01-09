@@ -33,7 +33,7 @@ public static class InfraDependencyInjection
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = false,
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuers = new[] { JwtSettings.Issuer },
                 ValidAudience = JwtSettings.Audience,

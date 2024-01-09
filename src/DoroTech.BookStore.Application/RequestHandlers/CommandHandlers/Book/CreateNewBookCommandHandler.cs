@@ -1,4 +1,5 @@
-﻿using DoroTech.BookStore.Domain.Entities;
+﻿using DoroTech.BookStore.Contracts.Responses.Book;
+using DoroTech.BookStore.Domain.Entities;
 
 namespace DoroTech.BookStore.Application.RequestHandlers.CommandHandlers;
 

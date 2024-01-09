@@ -1,4 +1,6 @@
-﻿namespace DoroTech.BookStore.Api.Controllers;
+﻿using DoroTech.BookStore.Contracts.Responses.Book;
+
+namespace DoroTech.BookStore.Api.Controllers;
 
 [Route("api/[controller]")]
 [Authorize]

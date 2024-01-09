@@ -1,4 +1,4 @@
-﻿namespace DoroTech.BookStore.Contracts;
+﻿namespace DoroTech.BookStore.Contracts.Responses.Book;
 
 public record struct BookDetailsViewModel
 {
